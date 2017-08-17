@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="base">
+      <UniqueIdentifier>{8a45ef7a-9f3a-4e6a-83ea-a2a04f5d89bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="device">
+      <UniqueIdentifier>{745e6992-6edf-4e8c-b2a3-553860744771}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="channel">
+      <UniqueIdentifier>{2d8952b6-8e0c-44ed-b3fb-2700654c038c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="stream">
+      <UniqueIdentifier>{bc4ffce8-00bc-4329-891e-56e6edecffc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{acad02c0-d440-4117-a926-87bdb467e6ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="misc">
+      <UniqueIdentifier>{a3f5b615-5b83-48c7-a81c-38f855a9dc29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty">
+      <UniqueIdentifier>{db802c08-0979-420b-83b0-46dab634357e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="server">
+      <UniqueIdentifier>{97c22fec-9ff4-484f-b5dc-bbcc4c232080}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\base\Config.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\base\Log.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\base\Signal.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\channel\Capture.cpp">
+      <Filter>channel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\channel\Channel.cpp">
+      <Filter>channel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\channel\ChannelManager.cpp">
+      <Filter>channel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\channel\MediaSource.cpp">
+      <Filter>channel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\device\DeviceManager.cpp">
+      <Filter>device</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\device\Ethernet.cpp">
+      <Filter>device</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\device\SerialPort.cpp">
+      <Filter>device</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\device\Storage.cpp">
+      <Filter>device</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\server\BaseServer.cpp">
+      <Filter>server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\server\HttpServer.cpp">
+      <Filter>server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\server\RtmpServer.cpp">
+      <Filter>server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\server\RtspServer.cpp">
+      <Filter>server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\server\Session.cpp">
+      <Filter>server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\stream\Recorder.cpp">
+      <Filter>stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\stream\RtmpPusher.cpp">
+      <Filter>stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\stream\StreamConsumer.cpp">
+      <Filter>stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\server\ServerManager.cpp">
+      <Filter>server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\server\SessionManager.cpp">
+      <Filter>server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\channel\LocalChannel.cpp">
+      <Filter>channel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\3rdparty\cJSON.c">
+      <Filter>3rdparty</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\main.cpp" />
+    <ClCompile Include="..\..\..\source\base\Property.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\base\Variant.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\channel\MediaFrame.cpp">
+      <Filter>channel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\channel\MediaType.cpp">
+      <Filter>channel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\channel\MediaPacket.cpp">
+      <Filter>channel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\channel\MediaStream.cpp">
+      <Filter>channel</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\source\base\Config.hpp">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\base\Log.hpp">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\base\Signal.hpp">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\channel\Capture.hpp">
+      <Filter>channel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\channel\Channel.hpp">
+      <Filter>channel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\channel\ChannelManager.hpp">
+      <Filter>channel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\channel\MediaSource.hpp">
+      <Filter>channel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\device\DeviceManager.hpp">
+      <Filter>device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\device\Ethernet.hpp">
+      <Filter>device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\device\SerialPort.hpp">
+      <Filter>device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\device\Storage.hpp">
+      <Filter>device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\server\BaseServer.hpp">
+      <Filter>server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\server\HttpServer.hpp">
+      <Filter>server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\server\RtmpServer.hpp">
+      <Filter>server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\server\RtspServer.hpp">
+      <Filter>server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\server\Session.hpp">
+      <Filter>server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\stream\Recorder.hpp">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\stream\RtmpPusher.hpp">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\stream\StreamConsumer.hpp">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\server\ServerManager.hpp">
+      <Filter>server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\server\SessionManager.hpp">
+      <Filter>server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\channel\LocalChannel.hpp">
+      <Filter>channel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\3rdparty\cJSON.h">
+      <Filter>3rdparty</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\base\Property.hpp">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\base\Variant.hpp">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\channel\MediaFrame.hpp">
+      <Filter>channel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\channel\MediaType.hpp">
+      <Filter>channel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\channel\MediaPacket.hpp">
+      <Filter>channel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\channel\MediaStream.hpp">
+      <Filter>channel</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

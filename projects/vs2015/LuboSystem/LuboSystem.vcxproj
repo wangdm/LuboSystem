@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{24E1E25C-6A3A-4EBA-B51C-DD467E455045}</ProjectGuid>
+    <RootNamespace>LuboSystem</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)..\..\output\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)..\..\output\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)..\..\output\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)..\..\output\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\3rdparty\cJSON.c" />
+    <ClCompile Include="..\..\..\source\base\Config.cpp" />
+    <ClCompile Include="..\..\..\source\base\Log.cpp" />
+    <ClCompile Include="..\..\..\source\base\Property.cpp" />
+    <ClCompile Include="..\..\..\source\base\Signal.cpp" />
+    <ClCompile Include="..\..\..\source\base\Variant.cpp" />
+    <ClCompile Include="..\..\..\source\channel\Capture.cpp" />
+    <ClCompile Include="..\..\..\source\channel\Channel.cpp" />
+    <ClCompile Include="..\..\..\source\channel\ChannelManager.cpp" />
+    <ClCompile Include="..\..\..\source\channel\LocalChannel.cpp" />
+    <ClCompile Include="..\..\..\source\channel\MediaFrame.cpp" />
+    <ClCompile Include="..\..\..\source\channel\MediaSource.cpp" />
+    <ClCompile Include="..\..\..\source\channel\MediaPacket.cpp" />
+    <ClCompile Include="..\..\..\source\channel\MediaType.cpp" />
+    <ClCompile Include="..\..\..\source\channel\MediaStream.cpp" />
+    <ClCompile Include="..\..\..\source\device\DeviceManager.cpp" />
+    <ClCompile Include="..\..\..\source\device\Ethernet.cpp" />
+    <ClCompile Include="..\..\..\source\device\SerialPort.cpp" />
+    <ClCompile Include="..\..\..\source\device\Storage.cpp" />
+    <ClCompile Include="..\..\..\source\main.cpp" />
+    <ClCompile Include="..\..\..\source\server\BaseServer.cpp" />
+    <ClCompile Include="..\..\..\source\server\HttpServer.cpp" />
+    <ClCompile Include="..\..\..\source\server\RtmpServer.cpp" />
+    <ClCompile Include="..\..\..\source\server\RtspServer.cpp" />
+    <ClCompile Include="..\..\..\source\server\ServerManager.cpp" />
+    <ClCompile Include="..\..\..\source\server\Session.cpp" />
+    <ClCompile Include="..\..\..\source\server\SessionManager.cpp" />
+    <ClCompile Include="..\..\..\source\stream\Recorder.cpp" />
+    <ClCompile Include="..\..\..\source\stream\RtmpPusher.cpp" />
+    <ClCompile Include="..\..\..\source\stream\StreamConsumer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\source\3rdparty\cJSON.h" />
+    <ClInclude Include="..\..\..\source\base\Config.hpp" />
+    <ClInclude Include="..\..\..\source\base\Log.hpp" />
+    <ClInclude Include="..\..\..\source\base\Property.hpp" />
+    <ClInclude Include="..\..\..\source\base\Signal.hpp" />
+    <ClInclude Include="..\..\..\source\base\Variant.hpp" />
+    <ClInclude Include="..\..\..\source\channel\Capture.hpp" />
+    <ClInclude Include="..\..\..\source\channel\Channel.hpp" />
+    <ClInclude Include="..\..\..\source\channel\ChannelManager.hpp" />
+    <ClInclude Include="..\..\..\source\channel\LocalChannel.hpp" />
+    <ClInclude Include="..\..\..\source\channel\MediaFrame.hpp" />
+    <ClInclude Include="..\..\..\source\channel\MediaSource.hpp" />
+    <ClInclude Include="..\..\..\source\channel\MediaPacket.hpp" />
+    <ClInclude Include="..\..\..\source\channel\MediaType.hpp" />
+    <ClInclude Include="..\..\..\source\channel\MediaStream.hpp" />
+    <ClInclude Include="..\..\..\source\device\DeviceManager.hpp" />
+    <ClInclude Include="..\..\..\source\device\Ethernet.hpp" />
+    <ClInclude Include="..\..\..\source\device\SerialPort.hpp" />
+    <ClInclude Include="..\..\..\source\device\Storage.hpp" />
+    <ClInclude Include="..\..\..\source\server\BaseServer.hpp" />
+    <ClInclude Include="..\..\..\source\server\HttpServer.hpp" />
+    <ClInclude Include="..\..\..\source\server\RtmpServer.hpp" />
+    <ClInclude Include="..\..\..\source\server\RtspServer.hpp" />
+    <ClInclude Include="..\..\..\source\server\ServerManager.hpp" />
+    <ClInclude Include="..\..\..\source\server\Session.hpp" />
+    <ClInclude Include="..\..\..\source\server\SessionManager.hpp" />
+    <ClInclude Include="..\..\..\source\stream\Recorder.hpp" />
+    <ClInclude Include="..\..\..\source\stream\RtmpPusher.hpp" />
+    <ClInclude Include="..\..\..\source\stream\StreamConsumer.hpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

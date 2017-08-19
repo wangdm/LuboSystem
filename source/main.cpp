@@ -1,12 +1,20 @@
 #include "base/Log.hpp"
 #include "base/Config.hpp"
+#include "base/Mutex.hpp"
 
 using namespace wdm;
+
+void test()
+{
+    Mutex mtx;
+    _LOCK(&mtx);
+}
+
 
 int main(int argc, char* [])
 {
 	Logger::Initialize(std::string(""));
-
+    test();
 	DEBUG("gdfgsdgfdsf");
 
 	Config* config = new Config();

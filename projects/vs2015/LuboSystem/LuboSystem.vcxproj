@@ -138,8 +138,10 @@
     <ClCompile Include="..\..\..\source\3rdparty\cJSON.c" />
     <ClCompile Include="..\..\..\source\base\Config.cpp" />
     <ClCompile Include="..\..\..\source\base\Log.cpp" />
+    <ClCompile Include="..\..\..\source\base\Mutex.cpp" />
     <ClCompile Include="..\..\..\source\base\Property.cpp" />
     <ClCompile Include="..\..\..\source\base\Signal.cpp" />
+    <ClCompile Include="..\..\..\source\base\Thread.cpp" />
     <ClCompile Include="..\..\..\source\base\Variant.cpp" />
     <ClCompile Include="..\..\..\source\channel\Capture.cpp" />
     <ClCompile Include="..\..\..\source\channel\Channel.cpp" />
@@ -170,8 +172,10 @@
     <ClInclude Include="..\..\..\source\3rdparty\cJSON.h" />
     <ClInclude Include="..\..\..\source\base\Config.hpp" />
     <ClInclude Include="..\..\..\source\base\Log.hpp" />
+    <ClInclude Include="..\..\..\source\base\Mutex.hpp" />
     <ClInclude Include="..\..\..\source\base\Property.hpp" />
     <ClInclude Include="..\..\..\source\base\Signal.hpp" />
+    <ClInclude Include="..\..\..\source\base\Thread.hpp" />
     <ClInclude Include="..\..\..\source\base\Variant.hpp" />
     <ClInclude Include="..\..\..\source\channel\Capture.hpp" />
     <ClInclude Include="..\..\..\source\channel\Channel.hpp" />

@@ -30,3 +30,8 @@
 *.exe
 *.out
 *.app
+/projects/vs2015/LuboSystem/Debug
+/output
+/projects/vs2015/.vs/LuboSystem/v14
+/projects/vs2015/LuboSystem.VC.db
+/projects/vs2015/LuboSystem.VC.VC.opendb

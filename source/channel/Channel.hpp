@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "../base/Config.hpp"
+#include "../base/Thread.hpp"
 
 #include "MediaType.hpp"
 #include "MediaStream.hpp"
@@ -40,7 +41,7 @@ namespace wdm {
 	const std::string MINOR_STREAM = "minor";
 	const std::string AUDIO_STREAM = "audio";
 
-	class Channel
+	class Channel : public Thread
 	{
 	public:
 		Channel();
@@ -64,9 +65,6 @@ namespace wdm {
 
 		virtual bool Init() = 0;
 		virtual bool UnInit() = 0;
-
-		virtual bool Start() = 0;
-		virtual bool Stop() = 0;
 
 	protected:
 		virtual void OnSourceEvent(MediaType& type, SourceEvent& event, void* param);

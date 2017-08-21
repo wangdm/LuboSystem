@@ -13,4 +13,17 @@ namespace wdm
 	{
 	
 	}
+
+
+    bool LocalChannel::Start()
+    {
+        return Thread::Start();
+    }
+
+
+    bool LocalChannel::Stop(bool block)
+    {
+        return Thread::Stop(block);
+    }
+
 }

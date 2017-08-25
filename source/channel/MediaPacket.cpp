@@ -21,4 +21,8 @@ namespace wdm {
 		return type;
 	}
 
+    bool MediaPacket::IsKeyFrame()
+    {
+        return bKeyFrame;
+    }
 }

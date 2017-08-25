@@ -13,9 +13,11 @@ namespace wdm {
 		virtual ~MediaPacket();
 
 		MediaType GetPacketType();
+        virtual bool IsKeyFrame();
 
 	private:
 		MediaType type;
+        bool bKeyFrame;
 
 	};
 

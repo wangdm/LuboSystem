@@ -11,4 +11,10 @@ namespace wdm {
 	{
 	}
 
+
+    void StreamConsumer::OnStream(MediaPacket* packet)
+    {
+        queue.Push(packet);
+    }
+
 }

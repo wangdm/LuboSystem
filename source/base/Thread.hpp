@@ -2,6 +2,8 @@
 
 #include "Variant.hpp" 
 
+#include <pthread.h>
+
 
 namespace wdm
 {
@@ -18,9 +20,14 @@ namespace wdm
     protected:
         virtual void Run() = 0;
         virtual bool IsStopping() final { return stopping; };
+    private:
+        static void * Process(void *);
 
     private:
         bool stopping;
+
+		pthread_t thread;
+
     };
 
 }

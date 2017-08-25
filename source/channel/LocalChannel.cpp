@@ -15,6 +15,18 @@ namespace wdm
 	}
 
 
+    bool LocalChannel::Init()
+    {
+        return true;
+    }
+
+
+    bool LocalChannel::UnInit()
+    {
+        return true;
+    }
+
+
     bool LocalChannel::Start()
     {
         return Thread::Start();
@@ -24,6 +36,15 @@ namespace wdm
     bool LocalChannel::Stop(bool block)
     {
         return Thread::Stop(block);
+    }
+
+
+    void LocalChannel::Run()
+    {
+        while (!IsStopping())
+        {
+
+        }
     }
 
 }

@@ -2,6 +2,8 @@
 #include "base/Config.hpp"
 #include "base/Mutex.hpp"
 
+#include "channel/LocalChannel.hpp"
+
 using namespace wdm;
 
 void test()
@@ -32,6 +34,12 @@ int main(int argc, char* [])
 	std::string varKey;
 	config->GetValue("varKey", varKey);
 	DEBUG("this value of varKey is " + varKey);
+
+
+    LocalChannel chn;
+
+    chn.Start();
+    chn.Stop();
 
 
 	Logger::Uninitialize();

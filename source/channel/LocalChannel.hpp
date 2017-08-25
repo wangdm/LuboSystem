@@ -13,8 +13,14 @@ namespace wdm
 		LocalChannel();
 		virtual ~LocalChannel();
 
+        virtual bool Init() override;
+        virtual bool UnInit() override;
+
+
         virtual bool Start() override;
         virtual bool Stop(bool block = true) override;
+
+        virtual void Run() override;
 
 	private:
 		MediaSource* videoSource;

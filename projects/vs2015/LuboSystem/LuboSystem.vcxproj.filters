@@ -124,6 +124,9 @@
     <ClCompile Include="..\..\..\source\stream\PacketQueue.cpp">
       <Filter>stream</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\base\Event.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\base\Config.hpp">
@@ -221,6 +224,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\stream\PacketQueue.hpp">
       <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\base\Event.hpp">
+      <Filter>base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

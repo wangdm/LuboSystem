@@ -137,6 +137,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\source\3rdparty\cJSON.c" />
     <ClCompile Include="..\..\..\source\base\Config.cpp" />
+    <ClCompile Include="..\..\..\source\base\Event.cpp" />
     <ClCompile Include="..\..\..\source\base\Log.cpp" />
     <ClCompile Include="..\..\..\source\base\Mutex.cpp" />
     <ClCompile Include="..\..\..\source\base\Property.cpp" />
@@ -172,6 +173,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\source\3rdparty\cJSON.h" />
     <ClInclude Include="..\..\..\source\base\Config.hpp" />
+    <ClInclude Include="..\..\..\source\base\Event.hpp" />
     <ClInclude Include="..\..\..\source\base\Log.hpp" />
     <ClInclude Include="..\..\..\source\base\Mutex.hpp" />
     <ClInclude Include="..\..\..\source\base\Property.hpp" />

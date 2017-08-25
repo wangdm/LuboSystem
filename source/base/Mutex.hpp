@@ -1,5 +1,7 @@
 #pragma once
 
+#include <mutex>
+
 namespace wdm
 {
 
@@ -14,6 +16,7 @@ namespace wdm
         virtual void UnLock();
 
     private:
+        std::recursive_mutex mtx;
    
     };
 

@@ -121,6 +121,12 @@
     <ClCompile Include="..\..\..\source\base\Thread.cpp">
       <Filter>base</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\stream\PacketQueue.cpp">
+      <Filter>stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\base\Event.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\base\Config.hpp">
@@ -214,6 +220,12 @@
       <Filter>base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\source\base\Thread.hpp">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\stream\PacketQueue.hpp">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\base\Event.hpp">
       <Filter>base</Filter>
     </ClInclude>
   </ItemGroup>

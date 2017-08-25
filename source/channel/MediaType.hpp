@@ -2,6 +2,8 @@
 
 #include <stdint.h>
 
+#include <atomic>
+
 
 namespace wdm {
 
@@ -42,7 +44,7 @@ namespace wdm {
 		virtual uint32_t RefCount();
 
 	private:
-		uint32_t count;
+		std::atomic<uint32_t> count;
 
 	};
 

@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\source\3rdparty\cJSON.c" />
     <ClCompile Include="..\..\..\source\base\Config.cpp" />
+    <ClCompile Include="..\..\..\source\base\Event.cpp" />
     <ClCompile Include="..\..\..\source\base\Log.cpp" />
     <ClCompile Include="..\..\..\source\base\Mutex.cpp" />
     <ClCompile Include="..\..\..\source\base\Property.cpp" />
@@ -180,6 +181,7 @@
     <ClCompile Include="..\..\..\source\server\ServerManager.cpp" />
     <ClCompile Include="..\..\..\source\server\Session.cpp" />
     <ClCompile Include="..\..\..\source\server\SessionManager.cpp" />
+    <ClCompile Include="..\..\..\source\stream\PacketQueue.cpp" />
     <ClCompile Include="..\..\..\source\stream\Recorder.cpp" />
     <ClCompile Include="..\..\..\source\stream\RtmpPusher.cpp" />
     <ClCompile Include="..\..\..\source\stream\StreamConsumer.cpp" />
@@ -187,6 +189,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\source\3rdparty\cJSON.h" />
     <ClInclude Include="..\..\..\source\base\Config.hpp" />
+    <ClInclude Include="..\..\..\source\base\Event.hpp" />
     <ClInclude Include="..\..\..\source\base\Log.hpp" />
     <ClInclude Include="..\..\..\source\base\Mutex.hpp" />
     <ClInclude Include="..\..\..\source\base\Property.hpp" />
@@ -213,6 +216,7 @@
     <ClInclude Include="..\..\..\source\server\ServerManager.hpp" />
     <ClInclude Include="..\..\..\source\server\Session.hpp" />
     <ClInclude Include="..\..\..\source\server\SessionManager.hpp" />
+    <ClInclude Include="..\..\..\source\stream\PacketQueue.hpp" />
     <ClInclude Include="..\..\..\source\stream\Recorder.hpp" />
     <ClInclude Include="..\..\..\source\stream\RtmpPusher.hpp" />
     <ClInclude Include="..\..\..\source\stream\StreamConsumer.hpp" />

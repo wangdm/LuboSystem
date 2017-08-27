@@ -31,7 +31,7 @@ namespace wdm
         virtual void DelEvent(Event* e);
 
     protected:
-        virtual void Run() override;
+        virtual void OnLoop() override;
 
     private:
         virtual bool Listen();

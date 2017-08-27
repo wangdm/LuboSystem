@@ -48,7 +48,7 @@ namespace wdm
     }
 
 
-    void EventListener::Run()
+    void EventListener::OnLoop()
     {
         while (true)
         {
@@ -65,6 +65,7 @@ namespace wdm
 
     bool EventListener::Listen()
     {
+        return false;
     }
 
 }

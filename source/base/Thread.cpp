@@ -45,12 +45,24 @@ namespace wdm
     }
 
 
+    void Thread::OnStart()
+    {
+        std::cout << "thread start" << std::endl;
+    }
+
+
+    void Thread::OnStop()
+    {
+        std::cout << "thread stop" << std::endl;
+    }
+
+
     void* Thread::Process(void* arg)
     {
         Thread* t = (Thread*)arg;
-        std::cout << "thread start" << std::endl;
-        t->Run();
-        std::cout << "thread stop" << std::endl;
+        t->OnStart();
+        t->OnLoop();
+        t->OnStop();
         return NULL;
     }
 

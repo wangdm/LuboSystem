@@ -14,4 +14,23 @@ namespace wdm
     {
     }
 
+
+    void Recorder::OnLoop()
+    {
+        while (!IsStopping())
+        {
+
+        }
+    }
+
+
+    void Recorder::OnStart()
+    {
+    }
+
+
+    void Recorder::OnStop()
+    {
+    }
+
 }

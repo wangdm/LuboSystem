@@ -20,7 +20,7 @@ namespace wdm
         virtual bool Start() override;
         virtual bool Stop(bool block = true) override;
 
-        virtual void Run() override;
+        virtual void OnLoop() override;
 
 	private:
 		MediaSource* videoSource;

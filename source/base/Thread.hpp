@@ -18,7 +18,9 @@ namespace wdm
         virtual bool Stop(bool block = true);
 
     protected:
-        virtual void Run() = 0;
+        virtual void OnLoop() = 0;
+        virtual void OnStart();
+        virtual void OnStop();
         virtual bool IsStopping() final { return stopping; };
     private:
         static void * Process(void *);

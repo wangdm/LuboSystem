@@ -13,4 +13,24 @@ namespace wdm
     RtmpPusher::~RtmpPusher()
     {
     }
+
+
+    void RtmpPusher::OnLoop()
+    {
+        while (!IsStopping())
+        {
+
+        }
+    }
+
+
+    void RtmpPusher::OnStart()
+    {
+    }
+
+
+    void RtmpPusher::OnStop()
+    {
+    }
+
 }

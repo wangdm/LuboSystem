@@ -12,6 +12,11 @@ namespace wdm
         RtmpPusher();
         ~RtmpPusher();
 
+    protected:
+        virtual void OnLoop() override;
+        virtual void OnStart() override;
+        virtual void OnStop() override;
+
     private:
 
     };

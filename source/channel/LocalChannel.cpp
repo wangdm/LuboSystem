@@ -39,7 +39,7 @@ namespace wdm
     }
 
 
-    void LocalChannel::Run()
+    void LocalChannel::OnLoop()
     {
         while (!IsStopping())
         {

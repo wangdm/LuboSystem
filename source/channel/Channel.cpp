@@ -100,12 +100,6 @@ namespace wdm {
 	}
 
 
-	void Channel::OnStream(MediaPacket stream)
-	{
-
-	}
-
-
 	void Channel::OnFrame(MediaFrame frame)
 	{
 

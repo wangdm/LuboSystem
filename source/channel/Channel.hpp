@@ -68,7 +68,6 @@ namespace wdm {
 
 	protected:
 		virtual void OnSourceEvent(MediaType& type, SourceEvent& event, void* param);
-		virtual void OnStream(MediaPacket stream);
 		virtual void OnFrame(MediaFrame frame);
 
 	private:

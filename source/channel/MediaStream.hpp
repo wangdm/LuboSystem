@@ -14,6 +14,8 @@ namespace wdm {
 
 	};
 
+    class StreamConsumer;
+
 
 	class MediaStream
 	{

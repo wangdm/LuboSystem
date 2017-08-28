@@ -9,6 +9,8 @@
 
 namespace wdm {
 
+    class MediaStream;
+
 	class StreamConsumer : public Thread
 	{
 	public:

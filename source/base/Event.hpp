@@ -1,11 +1,21 @@
 #pragma once
 
 #include <vector>
+#include <string>
 
 #include "Thread.hpp"
 
 namespace wdm
 {
+
+    enum EventType
+    {
+        EVENT_TYPE_READ = 0,
+        EVENT_TYPE_WRITE,
+        EVENT_TYPE_EXCEPT,
+        EVENT_TYPE_TIMER
+    };
+
 
     class Event
     {
@@ -16,6 +26,8 @@ namespace wdm
         virtual void Post();
         virtual void Get();
 
+        virtual EventType GetEventType();
+
     private:
 
     };
@@ -24,11 +36,11 @@ namespace wdm
     class EventListener : public Thread
     {
     public:
-        EventListener();
-        virtual ~EventListener();
 
-        virtual void AddEvent(Event* e);
-        virtual void DelEvent(Event* e);
+        virtual void AddEvent(Event* e) = 0;
+        virtual void DelEvent(Event* e) = 0;
+
+        static EventListener* CreateEventListener(const std::string& type);
 
     protected:
         virtual void OnLoop() override;

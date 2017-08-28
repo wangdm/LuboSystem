@@ -1,4 +1,6 @@
 
+#include <WinSock2.h>
+
 #include "Event.hpp"
 
 
@@ -25,30 +27,70 @@ namespace wdm
     }
 
 
+    EventType Event::GetEventType()
+    {
+    }
+
+
     //////////////////////////////////////////////////////////////////////////
-    //
+    // SelectEventListener
     //////////////////////////////////////////////////////////////////////////
-    EventListener::EventListener()
+
+    class SelectEventListener : public EventListener
+    {
+    public:
+        SelectEventListener();
+        virtual ~SelectEventListener();
+
+        virtual void AddEvent(Event* e);
+        virtual void DelEvent(Event* e);
+
+    protected:
+        virtual void OnLoop() override;
+
+    private:
+        virtual bool Listen();
+
+        std::vector<Event*> events;
+
+        fd_set readset;
+        fd_set writeset;
+        fd_set exceptset;
+
+    };
+
+
+    SelectEventListener::SelectEventListener()
+    {
+        FD_ZERO(&readset);
+        FD_ZERO(&writeset);
+        FD_ZERO(&exceptset);
+    }
+
+
+    SelectEventListener::~SelectEventListener()
     {
     }
 
 
-    EventListener::~EventListener()
+    void SelectEventListener::AddEvent(Event* e)
+    {
+        switch (e->GetEventType())
+        {
+        case EVENT_TYPE_READ:
+            break;
+        default:
+            break;
+        }
+    }
+
+
+    void SelectEventListener::DelEvent(Event* e)
     {
     }
 
 
-    void EventListener::AddEvent(Event* e)
-    {
-    }
-
-
-    void EventListener::DelEvent(Event* e)
-    {
-    }
-
-
-    void EventListener::OnLoop()
+    void SelectEventListener::OnLoop()
     {
         while (true)
         {
@@ -63,9 +105,18 @@ namespace wdm
     }
 
 
-    bool EventListener::Listen()
+    bool SelectEventListener::Listen()
     {
         return false;
+    }
+
+
+    //////////////////////////////////////////////////////////////////////////
+    // EventListener
+    //////////////////////////////////////////////////////////////////////////
+
+    static EventListener* CreateEventListener(const std::string& type)
+    {
     }
 
 }

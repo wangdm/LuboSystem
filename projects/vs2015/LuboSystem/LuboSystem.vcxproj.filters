@@ -25,6 +25,9 @@
     <Filter Include="server">
       <UniqueIdentifier>{97c22fec-9ff4-484f-b5dc-bbcc4c232080}</UniqueIdentifier>
     </Filter>
+    <Filter Include="media">
+      <UniqueIdentifier>{0b9f6172-2512-4add-b28a-13c6278842fb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\base\Config.cpp">
@@ -103,15 +106,6 @@
     <ClCompile Include="..\..\..\source\base\Variant.cpp">
       <Filter>base</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\channel\MediaFrame.cpp">
-      <Filter>channel</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\channel\MediaType.cpp">
-      <Filter>channel</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\channel\MediaPacket.cpp">
-      <Filter>channel</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\channel\MediaStream.cpp">
       <Filter>channel</Filter>
     </ClCompile>
@@ -121,11 +115,20 @@
     <ClCompile Include="..\..\..\source\base\Thread.cpp">
       <Filter>base</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\stream\PacketQueue.cpp">
-      <Filter>stream</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\base\Event.cpp">
       <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\media\MediaFrame.cpp">
+      <Filter>media</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\media\MediaPacket.cpp">
+      <Filter>media</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\media\MediaType.cpp">
+      <Filter>media</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\media\PacketQueue.cpp">
+      <Filter>media</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -204,15 +207,6 @@
     <ClInclude Include="..\..\..\source\base\Variant.hpp">
       <Filter>base</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\source\channel\MediaFrame.hpp">
-      <Filter>channel</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\channel\MediaType.hpp">
-      <Filter>channel</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\channel\MediaPacket.hpp">
-      <Filter>channel</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\source\channel\MediaStream.hpp">
       <Filter>channel</Filter>
     </ClInclude>
@@ -222,11 +216,20 @@
     <ClInclude Include="..\..\..\source\base\Thread.hpp">
       <Filter>base</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\source\stream\PacketQueue.hpp">
-      <Filter>stream</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\source\base\Event.hpp">
       <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\media\MediaFrame.hpp">
+      <Filter>media</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\media\MediaPacket.hpp">
+      <Filter>media</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\media\MediaType.hpp">
+      <Filter>media</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\media\PacketQueue.hpp">
+      <Filter>media</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -2,10 +2,11 @@
 
 
 #include "../base/Thread.hpp"
-#include "../channel/MediaPacket.hpp"
-#include "../channel/MediaStream.hpp"
 
-#include "PacketQueue.hpp"
+#include "../media/MediaPacket.hpp"
+#include "../media/PacketQueue.hpp"
+
+#include "../channel/MediaStream.hpp"
 
 namespace wdm {
 

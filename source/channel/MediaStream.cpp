@@ -1,5 +1,5 @@
 #include "MediaStream.hpp"
-#include "MediaPacket.hpp"
+#include "../media/MediaPacket.hpp"
 
 namespace wdm {
 

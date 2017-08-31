@@ -6,7 +6,7 @@
 
 #include "../base/Mutex.hpp"
 
-#include "../channel/MediaPacket.hpp"
+#include "../media/MediaPacket.hpp"
 
 namespace wdm
 {

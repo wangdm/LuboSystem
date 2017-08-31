@@ -6,11 +6,11 @@
 #include "../base/Config.hpp"
 #include "../base/Thread.hpp"
 
-#include "MediaType.hpp"
-#include "MediaStream.hpp"
-#include "MediaFrame.hpp"
-#include "MediaPacket.hpp"
+#include "../media/MediaType.hpp"
+#include "../media/MediaFrame.hpp"
+#include "../media/MediaPacket.hpp"
 
+#include "MediaStream.hpp"
 
 namespace wdm {
 

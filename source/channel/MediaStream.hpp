@@ -4,9 +4,9 @@
 
 #include "../base//Event.hpp"
 
-#include "../stream/StreamConsumer.hpp"
+#include "../media/MediaType.hpp"
 
-#include "MediaType.hpp"
+#include "../stream/StreamConsumer.hpp"
 
 
 namespace wdm {

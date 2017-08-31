@@ -95,6 +95,11 @@ namespace wdm {
 	/// protect method
 	//////////////////////////////////////////////////////////////////////////
 
+    void Channel::handleEvent(Event* e, EventFlag f)
+    {
+    }
+
+
 	void Channel::OnSourceEvent(MediaType& type, SourceEvent& event, void* param)
 	{
 	}

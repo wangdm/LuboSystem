@@ -11,16 +11,15 @@ namespace wdm
 
 	public:
 		LocalChannel();
+        LocalChannel(std::string& config);
 		virtual ~LocalChannel();
 
-        virtual bool Init() override;
+        virtual bool Init(std::string& config) override;
         virtual bool UnInit() override;
 
 
         virtual bool Start() override;
-        virtual bool Stop(bool block = true) override;
-
-        virtual void OnLoop() override;
+        virtual bool Stop() override;
 
 	private:
 		MediaSource* videoSource;

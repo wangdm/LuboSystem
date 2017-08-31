@@ -41,7 +41,7 @@ namespace wdm {
 	const std::string MINOR_STREAM = "minor";
 	const std::string AUDIO_STREAM = "audio";
 
-	class Channel : public Thread
+	class Channel : public EventHandler
 	{
 	public:
 		Channel();
@@ -63,10 +63,13 @@ namespace wdm {
 		virtual void SetFilterParam(FilterParam &param);
 		virtual void GetFilterParam(FilterParam &param);
 
-		virtual bool Init() = 0;
+		virtual bool Init(std::string& config) = 0;
 		virtual bool UnInit() = 0;
-
-	protected:
+        virtual bool Start() = 0;
+        virtual bool Stop() = 0;
+        
+    protected:
+        virtual void handleEvent(Event* e, EventFlag f) override;
 		virtual void OnSourceEvent(MediaType& type, SourceEvent& event, void* param);
 		virtual void OnFrame(MediaFrame frame);
 

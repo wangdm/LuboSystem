@@ -9,13 +9,18 @@ namespace wdm
 	}
 
 
+    LocalChannel::LocalChannel(std::string& config)
+    {
+    }
+
+
 	LocalChannel::~LocalChannel()
 	{
 	
 	}
 
 
-    bool LocalChannel::Init()
+    bool LocalChannel::Init(std::string& config)
     {
         return true;
     }
@@ -29,22 +34,13 @@ namespace wdm
 
     bool LocalChannel::Start()
     {
-        return Thread::Start();
+        return false;
     }
 
 
-    bool LocalChannel::Stop(bool block)
+    bool LocalChannel::Stop()
     {
-        return Thread::Stop(block);
-    }
-
-
-    void LocalChannel::OnLoop()
-    {
-        while (!IsStopping())
-        {
-
-        }
+        return false;
     }
 
 }

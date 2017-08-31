@@ -36,12 +36,63 @@ namespace wdm {
     }
 
 
-    void MediaStream::OnStream(MediaPacket* stream)
+    bool MediaStream::Init()
     {
+        return true;
+    }
+
+
+    bool MediaStream::UnInit()
+    {
+        return true;
+    }
+
+
+    bool MediaStream::Start()
+    {
+        return true;
+    }
+
+
+    bool MediaStream::Stop()
+    {
+        return true;
+    }
+
+
+    void MediaStream::handleEvent(Event* e, EventFlag f)
+    {
+        MediaPacket* packet = ReadPacket();
         for_each(consumers.begin(), consumers.end(), [&](StreamConsumer* consumer)
         {
-            consumer->OnStream(stream); 
+            consumer->OnStream(packet);
         });
+    }
+
+
+    MediaPacket* MediaStream::CreatePacket()
+    {
+        MediaPacket* packet = new MediaPacket(type);
+        if (type == MEDIA_TYPE_VIDEO)
+        {
+            packet->width = width;
+            packet->height = height;
+        }
+        else if (type == MEDIA_TYPE_AUDIO)
+        {
+            packet->samplesize = samplesize;
+            packet->samplerate = samplerate;
+            packet->samplebit = samplebit;
+            packet->channels = channels;
+        }
+        return packet;
+    }
+
+
+    MediaPacket* MediaStream::ReadPacket()
+    {
+        MediaPacket* packet = CreatePacket();
+        return packet;
     }
 
 }

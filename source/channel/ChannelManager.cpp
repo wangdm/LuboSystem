@@ -109,4 +109,28 @@ namespace wdm
 	
 	}
 
+
+    void ChannelManager::AddEvent(Event* e)
+    {
+        listener->AddEvent(e);
+    }
+
+
+    void ChannelManager::DelEvent(Event* e)
+    {
+        listener->DelEvent(e);
+    }
+
+
+    void ChannelManager::StartListenEvent()
+    {
+        listener->Start();
+    }
+
+
+    void ChannelManager::StopListenEvent()
+    {
+        listener->Stop();
+    }
+
 }

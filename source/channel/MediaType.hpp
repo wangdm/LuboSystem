@@ -9,7 +9,8 @@ namespace wdm {
 
 	enum MediaType
 	{
-		MEDIA_TYPE_VIDEO = 0,
+        MEDIA_TYPE_NONE = 0,
+		MEDIA_TYPE_VIDEO,
 		MEDIA_TYPE_AUDIO,
 		MEDIA_TYPE_DATA
 	};

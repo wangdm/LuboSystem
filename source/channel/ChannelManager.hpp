@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "../base/Config.hpp"
+#include "../base/Event.hpp"
 
 #include "Channel.hpp"
 
@@ -34,10 +35,16 @@ namespace wdm
 		void StartSourceMoniter();
 		void StopSourceMoniter();
 
+        void AddEvent(Event* e);
+        void DelEvent(Event* e);
+        void StartListenEvent();
+        void StopListenEvent();
+
 	private:
 		static ChannelManager* instance;
 
 		std::vector<Channel*> channels;
+        EventListener* listener;
 		Config* config;
 
 	};

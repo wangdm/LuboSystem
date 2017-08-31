@@ -2,8 +2,11 @@
 
 #include <vector>
 
-#include "MediaType.hpp"
+#include "../base//Event.hpp"
+
 #include "../stream/StreamConsumer.hpp"
+
+#include "MediaType.hpp"
 
 
 namespace wdm {
@@ -17,7 +20,7 @@ namespace wdm {
     class StreamConsumer;
 
 
-	class MediaStream
+	class MediaStream : public EventHandler
 	{
 	public:
 		MediaStream();
@@ -26,12 +29,34 @@ namespace wdm {
         virtual void AddConsumer(StreamConsumer* consumer);
         virtual void DelConsumer(StreamConsumer* consumer);
 
+        virtual bool Init();
+        virtual bool UnInit();
+        virtual bool Start();
+        virtual bool Stop();
+
     protected:
-        virtual void OnStream(MediaPacket* stream);
+        virtual void handleEvent(Event* e, EventFlag f) override;
+
+    private:
+        MediaPacket* CreatePacket();
+        MediaPacket* ReadPacket();
 
 	private:
-		MediaType type;
         std::vector<StreamConsumer*> consumers;
+        Event* event;
+
+        MediaType type;
+
+        //video property
+        uint32_t width;
+        uint32_t height;
+
+        //audio property
+        uint32_t samplesize;
+        uint32_t samplerate;
+        uint32_t samplebit;
+        uint32_t channels;
+
 
 	};
 

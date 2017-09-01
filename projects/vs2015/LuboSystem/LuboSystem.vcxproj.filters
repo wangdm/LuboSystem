@@ -48,9 +48,6 @@
     <ClCompile Include="..\..\..\source\channel\ChannelManager.cpp">
       <Filter>channel</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\channel\MediaSource.cpp">
-      <Filter>channel</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\device\DeviceManager.cpp">
       <Filter>device</Filter>
     </ClCompile>
@@ -130,6 +127,15 @@
     <ClCompile Include="..\..\..\source\media\PacketQueue.cpp">
       <Filter>media</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\media\Codec.cpp">
+      <Filter>media</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\media\MediaSink.cpp">
+      <Filter>media</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\media\MediaSource.cpp">
+      <Filter>media</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\base\Config.hpp">
@@ -148,9 +154,6 @@
       <Filter>channel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\source\channel\ChannelManager.hpp">
-      <Filter>channel</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\channel\MediaSource.hpp">
       <Filter>channel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\source\device\DeviceManager.hpp">
@@ -229,6 +232,15 @@
       <Filter>media</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\source\media\PacketQueue.hpp">
+      <Filter>media</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\media\Codec.hpp">
+      <Filter>media</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\media\MediaSink.hpp">
+      <Filter>media</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\media\MediaSource.hpp">
       <Filter>media</Filter>
     </ClInclude>
   </ItemGroup>

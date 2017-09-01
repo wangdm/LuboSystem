@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MediaSource.hpp"
+#include "../media/MediaSource.hpp"
 
 
 namespace wdm

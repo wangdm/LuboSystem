@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Channel.hpp"
-#include "MediaSource.hpp"
+#include "../media/MediaSource.hpp"
 
 
 namespace wdm 

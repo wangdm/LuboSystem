@@ -36,7 +36,7 @@ namespace wdm {
 
 	int Channel::GetStreamCnt()
 	{
-		return streams.size();
+		return (int)streams.size();
 	}
 
 
@@ -66,6 +66,36 @@ namespace wdm {
 	{
 		return GetStream(AUDIO_STREAM);
 	}
+
+
+    void Channel::AddStreamConsumer(StreamConsumer* consumer, const std::string& stream)
+    {
+        if (consumer==nullptr)
+        {
+            return;
+        }
+
+        MediaStream* pstream = GetStream(stream);
+        if (pstream!=nullptr)
+        {
+            consumer->SetMediaStream(pstream);
+        }
+    }
+
+
+    void Channel::DelStreamConsumer(StreamConsumer* consumer, const std::string& stream)
+    {
+        if (consumer == nullptr)
+        {
+            return;
+        }
+
+        MediaStream* pstream = GetStream(stream);
+        if (pstream != nullptr)
+        {
+            pstream->DelConsumer(consumer);
+        }
+    }
 
 
 	void Channel::SetColorParam(ColorParam &color)

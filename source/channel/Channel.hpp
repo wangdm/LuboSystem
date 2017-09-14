@@ -9,6 +9,7 @@
 #include "../media/MediaType.hpp"
 #include "../media/MediaFrame.hpp"
 #include "../media/MediaPacket.hpp"
+#include "../media/MediaSource.hpp"
 
 #include "MediaStream.hpp"
 
@@ -41,7 +42,7 @@ namespace wdm {
 	const std::string MINOR_STREAM = "minor";
 	const std::string AUDIO_STREAM = "audio";
 
-	class Channel : public EventHandler
+	class Channel : public EventHandler, public MediaSource
 	{
 	public:
 		Channel();
@@ -56,6 +57,9 @@ namespace wdm {
 		virtual MediaStream* GetMajorStream();
 		virtual MediaStream* GetMinorStream();
 		virtual MediaStream* GetAudioStream();
+
+        virtual void AddStreamConsumer(StreamConsumer* consumer, const std::string& stream);
+        virtual void DelStreamConsumer(StreamConsumer* consumer, const std::string& stream);
 
 		virtual void SetColorParam(ColorParam &param);
 		virtual void GetColorParam(ColorParam &param);
@@ -82,7 +86,7 @@ namespace wdm {
 		ChannelStatus channelStatus;
 
 		ColorParam colorInfo;
-		FilterParam filterParam;
+        FilterParam filterParam;
 
 	};
 

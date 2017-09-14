@@ -103,7 +103,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>mfplat.lib;mf.lib;mfreadwrite.lib;mfuuid.lib;shlwapi.lib;ws2_32.lib;pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -115,7 +115,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>mfplat.lib;mf.lib;mfreadwrite.lib;mfuuid.lib;shlwapi.lib;ws2_32.lib;pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -131,7 +131,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>mfplat.lib;mf.lib;mfreadwrite.lib;mfuuid.lib;shlwapi.lib;ws2_32.lib;pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -147,7 +147,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>mfplat.lib;mf.lib;mfreadwrite.lib;mfuuid.lib;shlwapi.lib;ws2_32.lib;pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -177,6 +177,10 @@
     <ClCompile Include="..\..\..\source\media\MediaSource.cpp" />
     <ClCompile Include="..\..\..\source\media\MediaType.cpp" />
     <ClCompile Include="..\..\..\source\media\PacketQueue.cpp" />
+    <ClCompile Include="..\..\..\source\platform\wmf\AudioCapture.cpp" />
+    <ClCompile Include="..\..\..\source\platform\wmf\MFMediaFrame.cpp" />
+    <ClCompile Include="..\..\..\source\platform\wmf\Platform.cpp" />
+    <ClCompile Include="..\..\..\source\platform\wmf\VideoCapture.cpp" />
     <ClCompile Include="..\..\..\source\server\BaseServer.cpp" />
     <ClCompile Include="..\..\..\source\server\HttpServer.cpp" />
     <ClCompile Include="..\..\..\source\server\RtmpServer.cpp" />
@@ -214,6 +218,11 @@
     <ClInclude Include="..\..\..\source\media\MediaSource.hpp" />
     <ClInclude Include="..\..\..\source\media\MediaType.hpp" />
     <ClInclude Include="..\..\..\source\media\PacketQueue.hpp" />
+    <ClInclude Include="..\..\..\source\platform\Platform.hpp" />
+    <ClInclude Include="..\..\..\source\platform\wmf\AudioCapture.h" />
+    <ClInclude Include="..\..\..\source\platform\wmf\MFMediaFrame.h" />
+    <ClInclude Include="..\..\..\source\platform\wmf\Platform.hpp" />
+    <ClInclude Include="..\..\..\source\platform\wmf\VideoCapture.h" />
     <ClInclude Include="..\..\..\source\server\BaseServer.hpp" />
     <ClInclude Include="..\..\..\source\server\HttpServer.hpp" />
     <ClInclude Include="..\..\..\source\server\RtmpServer.hpp" />

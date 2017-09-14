@@ -18,17 +18,25 @@ namespace wdm {
 	}
 
 
+    bool Property::SetProperty(const char* key, const Variant& val)
+    {
+        propertys[key] = val;
+        return true;
+    }
+
+
 	bool Property::SetProperty(const std::string& key, const Variant& val)
 	{
 		propertys[key] = val;
 		return true;
-	}
+    }
 
 
-	bool Property::GetProperty(const std::string& key, Variant& val)
+	bool Property::GetProperty(const std::string& key, Variant& val) const
 	{
-		if (propertys.find(key) != propertys.end()) {
-			val = propertys[key];
+        std::map<std::string, Variant>::const_iterator iter = propertys.find(key);
+		if (iter != propertys.end()) {
+			val = iter->second;
 			return true;
 		}
 
@@ -36,19 +44,7 @@ namespace wdm {
 	}
 
 
-	bool Property::GetProperty(const std::string& key, int& val)
-	{
-		Variant _val;
-		if (GetProperty(key, _val))
-		{
-			val = _val;
-			return true;
-		}
-		return false;
-	}
-
-
-	bool Property::GetProperty(const std::string& key, double& val)
+	bool Property::GetProperty(const std::string key, int& val) const
 	{
 		Variant _val;
 		if (GetProperty(key, _val))
@@ -60,7 +56,19 @@ namespace wdm {
 	}
 
 
-	bool Property::GetProperty(const std::string& key, std::string& val)
+	bool Property::GetProperty(const std::string& key, double& val) const
+	{
+		Variant _val;
+		if (GetProperty(key, _val))
+		{
+			val = _val;
+			return true;
+		}
+		return false;
+	}
+
+
+	bool Property::GetProperty(const std::string& key, std::string& val) const
 	{
 		Variant _val;
 		if (GetProperty(key, _val))

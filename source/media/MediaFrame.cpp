@@ -3,36 +3,32 @@
 namespace wdm {
 
 	//////////////////////////////////////////////////////////////////////////
-	//
+	// MediaFrame
 	//////////////////////////////////////////////////////////////////////////
 
-	MediaFrame::MediaFrame()
+	MediaFrame::MediaFrame(MediaType type, MediaFormat format)
+        :_type(type)
 	{
 	}
 
 
 	MediaFrame::~MediaFrame()
-	{
+    {
+        if (_data)
+        {
+            free(_data);
+        }
 	}
 
 
 	MediaType MediaFrame::GetFrameType()
 	{
-		return type;
+		return _type;
 	}
 
 
-	//////////////////////////////////////////////////////////////////////////
-	//
-	//////////////////////////////////////////////////////////////////////////
-
-	VideoFrame::VideoFrame()
-	{
-	}
-
-
-	VideoFrame::~VideoFrame()
-	{
-	}
-
+    MediaFormat MediaFrame::GetFrameFormat()
+    {
+        return format;
+    }
 }

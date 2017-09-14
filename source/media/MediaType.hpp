@@ -16,6 +16,16 @@ namespace wdm {
 	};
 
 
+    enum MediaFormat
+    {
+        //video
+        MEDIA_FORMAT_NV12 = 0,
+        MEDIA_FORMAT_I420
+
+        //audio
+    };
+
+
 	enum SourceEvent
 	{
 		SOURCE_EVENT_SIGNAL = 0,

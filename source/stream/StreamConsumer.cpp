@@ -17,6 +17,10 @@ namespace wdm {
 
 	StreamConsumer::~StreamConsumer()
 	{
+        if (stream!=nullptr)
+        {
+            stream->DelConsumer(this);
+        }
 	}
 
 

@@ -3,13 +3,5 @@
 
 namespace wdm
 {
-	
-	Capture::Capture()
-	{
-	}
 
-
-	Capture::~Capture()
-	{
-	}
 }

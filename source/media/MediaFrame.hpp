@@ -9,24 +9,34 @@ namespace wdm {
 	class MediaFrame : public MediaObject
 	{
 	public:
-		MediaFrame();
+		MediaFrame(MediaType type, MediaFormat format);
 		virtual ~MediaFrame();
 
-		MediaType GetFrameType();
+        MediaType GetFrameType();
+        MediaFormat GetFrameFormat();
 
-	private:
-		MediaType type;
+    private:
+        MediaType _type;
 
-	};
+    protected:
+        uint8_t* _data;
+        uint32_t _dataSize;
 
+    public:
+        //common
+        MediaFormat format;
+        uint64_t timestamp;
 
-	class VideoFrame : public MediaFrame
-	{
-	public:
-		VideoFrame();
-		~VideoFrame();
+        //video
+        int32_t stride;
+        uint32_t width;
+        uint32_t height;
 
-	private:
+        //audio
+        uint32_t samplesize;
+        uint32_t samplerate;
+        uint32_t samplebit;
+        uint32_t channels;
 
 	};
 

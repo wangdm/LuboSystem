@@ -20,10 +20,6 @@ namespace wdm
 
         virtual bool Start() override;
         virtual bool Stop() override;
-
-	private:
-		MediaSource* videoSource;
-		MediaSource* audioSource;
 	};
 
 }

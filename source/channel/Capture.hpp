@@ -1,16 +1,19 @@
 #pragma once
 
+#include "../base/Property.hpp"
 #include "../media/MediaSource.hpp"
 
 
 namespace wdm
 {
 
-	class Capture : MediaSource
+	class Capture : public MediaSource
 	{
 	public:
-		Capture();
-		virtual ~Capture();
+        virtual bool GetProperty(Property& prop) = 0;
+        virtual bool SetProperty(const Property& prop) = 0;
+
+        virtual bool IsPropertySupport(const Property& prop) = 0;
 
 	private:
 

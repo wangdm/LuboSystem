@@ -28,6 +28,12 @@
     <Filter Include="media">
       <UniqueIdentifier>{0b9f6172-2512-4add-b28a-13c6278842fb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="platform">
+      <UniqueIdentifier>{58a4d2f7-8cc9-4bad-8cfb-cc377843165c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="platform\wmf">
+      <UniqueIdentifier>{5d6aacf1-cc19-4455-adb1-835d93f9e996}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\base\Config.cpp">
@@ -136,6 +142,18 @@
     <ClCompile Include="..\..\..\source\media\MediaSource.cpp">
       <Filter>media</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\platform\wmf\AudioCapture.cpp">
+      <Filter>platform\wmf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\platform\wmf\VideoCapture.cpp">
+      <Filter>platform\wmf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\platform\wmf\MFMediaFrame.cpp">
+      <Filter>platform\wmf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\platform\wmf\Platform.cpp">
+      <Filter>platform\wmf</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\base\Config.hpp">
@@ -242,6 +260,21 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\media\MediaSource.hpp">
       <Filter>media</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\platform\wmf\AudioCapture.h">
+      <Filter>platform\wmf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\platform\wmf\VideoCapture.h">
+      <Filter>platform\wmf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\platform\wmf\MFMediaFrame.h">
+      <Filter>platform\wmf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\platform\wmf\Platform.hpp">
+      <Filter>platform\wmf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\platform\Platform.hpp">
+      <Filter>platform</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -24,8 +24,9 @@ namespace wdm {
 	};
 
 	enum ChannelType
-	{
-		CHANNEL_TYPE_LOCAL = 0,
+    {
+        CHANNEL_TYPE_UNKNOWN = 0,
+		CHANNEL_TYPE_LOCAL,
 		CHANNEL_TYPE_FILE,
 		CHANNEL_TYPE_REMOTE,
 		CHANNEL_TYPE_COM
@@ -42,10 +43,11 @@ namespace wdm {
 	const std::string MINOR_STREAM = "minor";
 	const std::string AUDIO_STREAM = "audio";
 
-	class Channel : public EventHandler, public MediaSource
+	class Channel : public EventHandler, public MediaSource, public MediaSink
 	{
 	public:
-		Channel();
+        Channel();
+        Channel(ChannelType type);
 		virtual ~Channel();
 
 		virtual std::string GetChannelName();
@@ -67,23 +69,24 @@ namespace wdm {
 		virtual void SetFilterParam(FilterParam &param);
 		virtual void GetFilterParam(FilterParam &param);
 
-		virtual bool Init(std::string& config) = 0;
-		virtual bool UnInit() = 0;
+		virtual bool Init(Config* config) = 0;
+		virtual bool Uninit() = 0;
         virtual bool Start() = 0;
         virtual bool Stop() = 0;
+
+        virtual void OnFrame(MediaFrame* frame);
         
     protected:
         virtual void handleEvent(Event* e, EventFlag f) override;
 		virtual void OnSourceEvent(MediaType& type, SourceEvent& event, void* param);
-		virtual void OnFrame(MediaFrame frame);
 
-	private:
 		std::map<std::string, MediaStream*> streams;
 		Config* config;
-
 		std::string channelName;
-		ChannelType channelType;
 		ChannelStatus channelStatus;
+
+    private:
+        const ChannelType channelType;
 
 		ColorParam colorInfo;
         FilterParam filterParam;

@@ -67,6 +67,9 @@ namespace wdm {
         HRESULT SetAttribute(AudioAttribute* pattr);
 
     public:
+        bool IsExistAudio() const override;
+        bool GetAudioAttribute(AudioAttribute& attr) const override;
+
         bool SetProperty(const Property& prop) override;
         bool GetProperty(Property& prop) override;
         bool IsPropertySupport(const Property& prop) override;

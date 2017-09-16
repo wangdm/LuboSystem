@@ -83,6 +83,8 @@ namespace wdm
     {
     public:
         CodecContext(Codec* codec) : codec(codec) {};
+        CodecContext(CodecType type, CodecID id);
+        CodecContext(CodecType type, std::string& name);
         ~CodecContext();
 
         virtual bool encode(MediaFrame* frame, MediaPacket* packet);

@@ -2,9 +2,11 @@
 
 #include <vector>
 
-#include "../base//Event.hpp"
+#include "../base/Event.hpp"
+#include "../base/Config.hpp"
 
 #include "../media/MediaType.hpp"
+#include "../media/MediaSink.hpp"
 
 #include "../stream/StreamConsumer.hpp"
 
@@ -20,19 +22,26 @@ namespace wdm {
     class StreamConsumer;
 
 
-	class MediaStream : public EventHandler
+	class MediaStream : public MediaSink, public EventHandler
 	{
-	public:
-		MediaStream();
-		virtual ~MediaStream();
+    public:
+        MediaStream();
+		MediaStream(Config* config);
+        virtual ~MediaStream();
+
+        virtual MediaType GetStreamType() { return type; };
+        virtual bool GetStreamAttribute(VideoStreamAttribute& attr);
+        virtual bool GetStreamAttribute(AudioStreamAttribute& attr);
 
         virtual void AddConsumer(StreamConsumer* consumer);
         virtual void DelConsumer(StreamConsumer* consumer);
 
-        virtual bool Init();
-        virtual bool UnInit();
+        virtual bool Init(Config* config);
+        virtual bool Uninit();
         virtual bool Start();
         virtual bool Stop();
+
+        virtual void OnFrame(MediaFrame* frame);
 
     protected:
         virtual void handleEvent(Event* e, EventFlag f) override;

@@ -14,7 +14,7 @@ namespace wdm {
     class Platform
     {
     public:
-        static bool Init();
+        static bool Init(const std::string& config);
         static void Uninit();
 
         static int32_t EnumCapture();

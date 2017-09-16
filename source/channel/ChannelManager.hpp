@@ -18,7 +18,7 @@ namespace wdm
 	public:
 		~ChannelManager();
 
-		static bool Initialize(std::string& cfilename);
+		static bool Initialize(const std::string& cfilename);
 		static void Uninitialize();
 		static ChannelManager* GetInstance();
 

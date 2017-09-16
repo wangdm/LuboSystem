@@ -5,15 +5,46 @@ namespace wdm {
 
 	//////////////////////////////////////////////////////////////////////////
 	//
-	//////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
 
-	MediaStream::MediaStream()
+    MediaStream::MediaStream()
+    {
+    }
+
+
+	MediaStream::MediaStream(Config* config)
 	{
+        Init(config);
 	}
 
 
 	MediaStream::~MediaStream()
 	{
+    }
+
+
+    bool MediaStream::GetStreamAttribute(VideoStreamAttribute& attr)
+    {
+        if (type==MEDIA_TYPE_VIDEO)
+        {
+            attr.width = width;
+            attr.height = height;
+            return true;
+        }
+        return false;
+    }
+
+
+    bool MediaStream::GetStreamAttribute(AudioStreamAttribute& attr)
+    {
+        if (type == MEDIA_TYPE_AUDIO)
+        {
+            attr.channel = channels;
+            attr.samplerate = samplerate;
+            attr.bitwide = samplebit;
+            return true;
+        }
+        return false;
     }
 
 
@@ -36,13 +67,14 @@ namespace wdm {
     }
 
 
-    bool MediaStream::Init()
+    bool MediaStream::Init(Config* config)
     {
+        config->Print();
         return true;
     }
 
 
-    bool MediaStream::UnInit()
+    bool MediaStream::Uninit()
     {
         return true;
     }
@@ -57,6 +89,12 @@ namespace wdm {
     bool MediaStream::Stop()
     {
         return true;
+    }
+
+
+    void MediaStream::OnFrame(MediaFrame* frame)
+    {
+
     }
 
 

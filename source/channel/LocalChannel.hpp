@@ -10,16 +10,22 @@ namespace wdm
 	class LocalChannel : public Channel {
 
 	public:
-		LocalChannel();
-        LocalChannel(std::string& config);
+        LocalChannel(MediaSource* videoSource, MediaSource* audioSource);
 		virtual ~LocalChannel();
 
-        virtual bool Init(std::string& config) override;
-        virtual bool UnInit() override;
+        virtual bool Init(Config* config) override;
+        virtual bool Uninit() override;
 
 
         virtual bool Start() override;
         virtual bool Stop() override;
+
+    private:
+        Config* GetDefaultConfig();
+
+    private:
+        MediaSource* _videoSource;
+        MediaSource* _audioSource;
 	};
 
 }

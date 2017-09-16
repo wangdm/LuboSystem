@@ -2,6 +2,8 @@
 
 #include <vector>
 
+#include "../base/Mutex.hpp"
+
 #include "MediaFrame.hpp"
 #include "MediaSink.hpp"
 
@@ -13,7 +15,13 @@ namespace wdm
 	{
 	public:
 		MediaSource();
-		virtual ~MediaSource();
+        virtual ~MediaSource();
+
+        virtual bool IsExistVideo() const;
+        virtual bool IsExistAudio() const;
+
+        virtual bool GetVideoAttribute(VideoAttribute& attr) const;
+        virtual bool GetAudioAttribute(AudioAttribute& attr) const;
 
         virtual void AddMediaSink(MediaSink* sink);
         virtual void DelMediaSink(MediaSink* sink);
@@ -27,6 +35,7 @@ namespace wdm
 
 	private:
         std::vector<MediaSink*> sinks;
+        Mutex sinkMtx;
 
 	};
 

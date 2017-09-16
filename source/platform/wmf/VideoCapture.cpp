@@ -24,22 +24,27 @@ namespace wdm {
         InitializeCriticalSection(&m_critsec);
         IMFActivate* pActivate = (IMFActivate*)priv;
 
-        WCHAR * str;
+        wchar_t* wcStr;
         char* mbStr;
 
-        hr = pActivate->GetAllocatedString(MF_DEVSOURCE_ATTRIBUTE_FRIENDLY_NAME, &str, NULL);
-        mbStr = new char[wcslen(str)];
-        wcstombs(mbStr, str, wcslen(str));
+        setlocale(LC_CTYPE, "");
+
+        hr = pActivate->GetAllocatedString(MF_DEVSOURCE_ATTRIBUTE_FRIENDLY_NAME, &wcStr, NULL);
+        int size = wcslen(wcStr)*2;
+        mbStr = new char[size];
+        memset(mbStr, 0, size);
+        wcstombs(mbStr,wcStr,size);
         m_CaptureName = mbStr;
         delete mbStr;
-        CoTaskMemFree(str);
+        CoTaskMemFree(wcStr);
 
-        hr = pActivate->GetAllocatedString(MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_SYMBOLIC_LINK, &str, NULL);
-        mbStr = new char[wcslen(str)];
-        wcstombs(mbStr, str, wcslen(str));
+        hr = pActivate->GetAllocatedString(MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_SYMBOLIC_LINK, &wcStr, NULL);
+        size = wcslen(wcStr) * 2;
+        mbStr = new char[size];
+        wcstombs(mbStr, wcStr, size);
         m_CaptureLink = mbStr;
         delete mbStr;
-        CoTaskMemFree(str);
+        CoTaskMemFree(wcStr);
 
         this->EnumAttribute(pActivate);
     }
@@ -124,7 +129,7 @@ namespace wdm {
                                 }
 
                                 VideoAttribute *attribute = new VideoAttribute();
-                                attribute->format = subType;
+                                GUIDToMediaFormat(subType, attribute->format);
                                 attribute->stride = lStride;
                                 attribute->width = uWidth;
                                 attribute->height = uHeight;
@@ -168,8 +173,10 @@ namespace wdm {
         }
 
         hr = MFCreateAttributes(&pAttributes, 2);
-        WCHAR* strLink = new WCHAR[m_CaptureLink.size()];
-        mbstowcs(strLink, m_CaptureLink.c_str(), m_CaptureLink.size());
+        setlocale(LC_CTYPE, "");
+        wchar_t* strLink = new wchar_t[m_CaptureLink.size()*2];
+        memset(strLink,0, m_CaptureLink.size()*2);
+        mbstowcs(strLink, m_CaptureLink.c_str(), m_CaptureLink.size()*2);
         pAttributes->SetString(MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_SYMBOLIC_LINK, strLink);
         pAttributes->SetGUID(MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE, MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_GUID);
         hr = MFCreateDeviceSource(pAttributes, &pSource);
@@ -225,7 +232,7 @@ namespace wdm {
                 hr = MFGetStrideForBitmapInfoHeader(subType.Data1, uWidth, &lStride);
             }
 
-            if (uWidth == pattr->width && uHeight == pattr->height && (uNummerator / uDenominator) == pattr->fps && subType == pattr->format)
+            if (uWidth == pattr->width && uHeight == pattr->height && (uNummerator / uDenominator) == pattr->fps && subType == MediaFormatToGUID(pattr->format))
             {
                 hr = m_pReader->SetCurrentMediaType(MF_SOURCE_READER_FIRST_VIDEO_STREAM, NULL, pMediaType);
                 if (SUCCEEDED(hr))
@@ -321,12 +328,10 @@ namespace wdm {
                 hr = pSample->GetBufferByIndex(0, &pBuffer);
                 if (SUCCEEDED(hr))
                 {
-                    MFMediaFrame frame(pBuffer, MEDIA_TYPE_VIDEO, m_pCurrentAttribute);
-                    frame.timestamp = llTimestamp / 10;
-
-                    if (SUCCEEDED(hr)) {
-                        SendFrame(&frame);
-                    }
+                    MFMediaFrame* frame = new MFMediaFrame(pBuffer, MEDIA_TYPE_VIDEO, m_pCurrentAttribute);
+                    frame->timestamp = llTimestamp / 10;
+                    SendFrame(frame);
+                    frame->Release();
                 }
             }
         }
@@ -388,6 +393,23 @@ namespace wdm {
     {
         PropertyFromAttribute(prop, m_pCurrentAttribute);
 
+        return true;
+    }
+
+
+    //////////////////////////////////////////////////////////////////////////
+    // MediaSource
+    //////////////////////////////////////////////////////////////////////////
+
+    bool VideoCapture::IsExistVideo() const
+    {
+        return true;
+    }
+
+
+    bool VideoCapture::GetVideoAttribute(VideoAttribute& attr) const
+    {
+        attr = *m_pCurrentAttribute;
         return true;
     }
 

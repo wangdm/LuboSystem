@@ -8,6 +8,8 @@ namespace wdm {
 	//
 	//////////////////////////////////////////////////////////////////////////
 
+    Variant Variant::nil;
+
 	Variant::Variant()
 	{
 		type = V_NULL;
@@ -44,11 +46,18 @@ namespace wdm {
 	};
 
 
-	Variant::Variant(void*& val) :Variant()
+	Variant::Variant(Object*& val) :Variant()
 	{
 		type = V_OBJECT;
 		ptrVal = val;
-	};
+    };
+
+
+    Variant::Variant(std::vector<Object*>& val)
+    {
+        type = V_ARRAY;
+        arrayVal = val;
+    }
 
 
 	Variant* Variant::operator=(const int val)
@@ -64,7 +73,15 @@ namespace wdm {
 		this->type = V_DOUBLE;
 		this->doubleVal = val;
 		return this;
-	}
+    }
+
+
+    Variant* Variant::operator=(const char* val)
+    {
+        this->type = V_STRING;
+        this->strVal = val;
+        return this;
+    }
 
 
 	Variant* Variant::operator=(const std::string val)
@@ -73,5 +90,21 @@ namespace wdm {
 		this->strVal = val;
 		return this;
 	}
+
+
+    Variant* Variant::operator=(Object* const val)
+    {
+        this->type = V_OBJECT;
+        this->ptrVal = val;
+        return this;
+    }
+
+
+    Variant* Variant::operator=(const std::vector<Object*> val)
+    {
+        this->type = V_ARRAY;
+        this->arrayVal = val;
+        return this;
+    }
 
 }

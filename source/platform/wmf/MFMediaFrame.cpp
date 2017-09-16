@@ -38,7 +38,7 @@ namespace wdm {
             memcpy(_data, pData, _dataSize);
             pBuffer->Unlock();
 
-            GUIDToMediaFormat(pattr->format,format);
+            format = pattr->format;
             width = pattr->width;
             height = pattr->height;
             if (lStride < 0) {
@@ -51,7 +51,7 @@ namespace wdm {
         }
         else if (GetFrameType() == MEDIA_TYPE_AUDIO) {
             AudioAttribute* pattr = (AudioAttribute*)attribute;
-            GUIDToMediaFormat(pattr->format, format);
+            format = pattr->format;
             samplerate = pattr->samplerate;
             channels = pattr->channel;
             samplebit = pattr->bitwide;

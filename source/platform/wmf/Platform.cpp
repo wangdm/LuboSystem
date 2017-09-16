@@ -14,7 +14,7 @@ namespace wdm {
     std::vector<Capture*> Platform::audioCaptures;
     std::vector<Capture*> Platform::videoCaptures;
 
-    bool Platform::Init()
+    bool Platform::Init(const std::string& config)
     {
         // 初始化Media Foundation
         HRESULT hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
@@ -29,6 +29,8 @@ namespace wdm {
             OutputDebugString(TEXT("Init Windows socket failed!\n"));
         }
 
+        EnumCapture();
+
         return true;
     }
 
@@ -36,6 +38,21 @@ namespace wdm {
     void Platform::Uninit()
     {
 
+        std::vector<Capture*>::iterator iter;
+        for (iter = videoCaptures.begin(); iter != videoCaptures.end();)
+        {
+            Capture* capture = *iter;
+            iter = videoCaptures.erase(iter);
+            delete capture;
+        }
+        for (iter = audioCaptures.begin(); iter != audioCaptures.end();)
+        {
+            Capture* capture = *iter;
+            iter = audioCaptures.erase(iter);
+            delete capture;
+        }
+
+        //Cleanup Windows Socket
         WSACleanup();
 
         // 反初始化 Media Foundation
@@ -128,9 +145,7 @@ namespace wdm {
         }
 
         prop.GetProperty("format", val);
-        MediaFormat format;
-        GUIDToMediaFormat(attribute->format, format);
-        if (format != (int)val)
+        if (attribute->format != (int)val)
         {
             return false;
         }
@@ -161,9 +176,7 @@ namespace wdm {
         }
 
         prop.GetProperty("format", val);
-        MediaFormat format;
-        GUIDToMediaFormat(attribute->format, format);
-        if (format != (int)val)
+        if (attribute->format != (int)val)
         {
             return false;
         }
@@ -179,11 +192,7 @@ namespace wdm {
         prop.SetProperty("height", attribute->height);
         prop.SetProperty("stride", attribute->stride);
         prop.SetProperty("fps", attribute->fps);
-        MediaFormat format;
-        if (GUIDToMediaFormat(attribute->format, format))
-        {
-            prop.SetProperty("format", format);
-        }
+        prop.SetProperty("format", attribute->format);
     }
 
 
@@ -213,7 +222,7 @@ namespace wdm {
 
         if (prop.GetProperty("format", val))
         {
-            MediaFormatToGUID((MediaFormat)val, attribute->format);
+            attribute->format = (MediaFormat)val;
         }
     }
 
@@ -223,11 +232,7 @@ namespace wdm {
         prop.SetProperty("samplerate", attribute->samplerate);
         prop.SetProperty("channel", attribute->channel);
         prop.SetProperty("bitwide", attribute->bitwide);
-        MediaFormat format;
-        if (GUIDToMediaFormat(attribute->format, format))
-        {
-            prop.SetProperty("format", format);
-        }
+        prop.SetProperty("format", attribute->format);
     }
 
 
@@ -252,7 +257,7 @@ namespace wdm {
 
         if (prop.GetProperty("format", val))
         {
-            MediaFormatToGUID((MediaFormat)val, attribute->format);
+            attribute->format = (MediaFormat)val;
         }
     }
 
@@ -266,6 +271,10 @@ namespace wdm {
             break;
         case MEDIA_FORMAT_I420:
             guid = MFVideoFormat_I420;
+            break;
+        case MEDIA_FORMAT_RGB24:
+            guid = MFVideoFormat_RGB24;
+            break;
         default:
             return false;
         }
@@ -283,12 +292,32 @@ namespace wdm {
         else if (guid == MFVideoFormat_I420)
         {
             format = MEDIA_FORMAT_I420;
-        } 
+        }
+        else if (guid == MFVideoFormat_RGB24)
+        {
+            format = MEDIA_FORMAT_RGB24;
+        }
         else
         {
             return false;
         }
         return true;
+    }
+
+
+    GUID MediaFormatToGUID(const MediaFormat& format)
+    {
+        GUID guid = {0};
+        MediaFormatToGUID(format, guid);
+        return guid;
+    }
+
+
+    MediaFormat GUIDToMediaFormat(const GUID& guid)
+    {
+        MediaFormat format = MEDIA_FORMAT_NONE;
+        GUIDToMediaFormat(guid,format);
+        return format;
     }
     
 }

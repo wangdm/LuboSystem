@@ -27,6 +27,33 @@ namespace wdm
     // CodecContext
     //////////////////////////////////////////////////////////////////////////
 
+    CodecContext::CodecContext(CodecType type, CodecID id)
+    {
+        if (type == CODEC_TYPE_ENCODER)
+        {
+            codec = CodecManager::GetInstance()->FindEncoder(id);
+        } 
+        else if (type == CODEC_TYPE_DECODER)
+        {
+            codec = CodecManager::GetInstance()->FindDecoder(id);
+        }
+    }
+
+
+    CodecContext::CodecContext(CodecType type, std::string& name)
+    {
+        if (type == CODEC_TYPE_ENCODER)
+        {
+            codec = CodecManager::GetInstance()->FindEncoder(name);
+        }
+        else if (type == CODEC_TYPE_DECODER)
+        {
+            codec = CodecManager::GetInstance()->FindDecoder(name);
+        }
+    
+    }
+
+
     CodecContext::~CodecContext()
     {
     }

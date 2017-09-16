@@ -23,23 +23,6 @@ namespace wdm {
     }
 
 
-    struct VideoAttribute {
-        GUID format;
-        int width;
-        int stride;
-        int height;
-        int fps;
-    };
-
-
-    struct AudioAttribute {
-        GUID format;
-        int channel;
-        int samplerate;
-        int bitwide;
-    };
-
-
     enum CAPTURE_STATUS_E
     {
         CAPTURE_STATUS_STOP = 0,
@@ -58,6 +41,9 @@ namespace wdm {
 
     bool MediaFormatToGUID(const MediaFormat& format, GUID& guid);
     bool GUIDToMediaFormat(const GUID& guid, MediaFormat& format);
+
+    GUID MediaFormatToGUID(const MediaFormat& format);
+    MediaFormat GUIDToMediaFormat(const GUID& guid);
 
 }
 

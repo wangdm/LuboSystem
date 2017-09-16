@@ -17,7 +17,6 @@ namespace wdm
 
     void Mutex::Lock()
     {
-        std::cout << "Lock" << std::endl;
         mtx.lock();
     }
 
@@ -31,7 +30,6 @@ namespace wdm
     void Mutex::UnLock()
     {
         mtx.unlock();
-        std::cout << "UnLock" << std::endl;
     }
 
 }

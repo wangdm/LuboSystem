@@ -6,13 +6,26 @@ namespace wdm {
 	//
 	//////////////////////////////////////////////////////////////////////////
 
-	Channel::Channel()
+    Channel::Channel()
+        : channelType(CHANNEL_TYPE_UNKNOWN)
+        , channelStatus(UNINITIALIZED)
 	{
-	}
+    }
+
+
+    Channel::Channel(ChannelType type)
+        : channelType(type)
+        , channelStatus(UNINITIALIZED)
+    {
+    }
 
 
 	Channel::~Channel()
-	{
+    {
+        if (config != nullptr)
+        {
+            delete config;
+        }
 	}
 
 
@@ -119,7 +132,19 @@ namespace wdm {
 	void Channel::GetFilterParam(FilterParam &param)
 	{
 	
-	}
+    }
+
+
+    //////////////////////////////////////////////////////////////////////////
+    /// MediaSink method
+    //////////////////////////////////////////////////////////////////////////
+
+    void Channel::OnFrame(MediaFrame* frame)
+    {
+        //frame->Reference();
+        SendFrame(frame);
+    }
+
 
 	//////////////////////////////////////////////////////////////////////////
 	/// protect method
@@ -134,9 +159,4 @@ namespace wdm {
 	{
 	}
 
-
-	void Channel::OnFrame(MediaFrame frame)
-	{
-
-	}
 }

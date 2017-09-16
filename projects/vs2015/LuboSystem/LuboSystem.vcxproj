@@ -156,6 +156,7 @@
     <ClCompile Include="..\..\..\source\base\Event.cpp" />
     <ClCompile Include="..\..\..\source\base\Log.cpp" />
     <ClCompile Include="..\..\..\source\base\Mutex.cpp" />
+    <ClCompile Include="..\..\..\source\base\Object.cpp" />
     <ClCompile Include="..\..\..\source\base\Property.cpp" />
     <ClCompile Include="..\..\..\source\base\Signal.cpp" />
     <ClCompile Include="..\..\..\source\base\Thread.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="..\..\..\source\base\Event.hpp" />
     <ClInclude Include="..\..\..\source\base\Log.hpp" />
     <ClInclude Include="..\..\..\source\base\Mutex.hpp" />
+    <ClInclude Include="..\..\..\source\base\Object.hpp" />
     <ClInclude Include="..\..\..\source\base\Property.hpp" />
     <ClInclude Include="..\..\..\source\base\Signal.hpp" />
     <ClInclude Include="..\..\..\source\base\Thread.hpp" />

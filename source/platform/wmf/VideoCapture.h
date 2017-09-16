@@ -63,6 +63,9 @@ namespace wdm {
         HRESULT SetAttribute(VideoAttribute* pattr);
 
     public:
+        bool IsExistVideo() const override;
+        bool GetVideoAttribute(VideoAttribute& attr) const override;
+
         bool SetProperty(const Property& prop) override;
         bool GetProperty(Property& prop) override;
         bool IsPropertySupport(const Property& prop) override;

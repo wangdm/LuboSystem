@@ -1,31 +1,48 @@
 #include "ChannelManager.hpp"
 
+#include "../platform/Platform.hpp"
+#include "LocalChannel.hpp"
+
 
 namespace wdm
 {
 
 	ChannelManager::ChannelManager()
-	{
+    {
+        for (Capture* capture : Platform::videoCaptures)
+        {
+            Channel* channel = new LocalChannel(capture, nullptr);
+            channel->Init(nullptr);
+            channels.push_back(channel);
+        }
 	}
 
 
 	ChannelManager::~ChannelManager()
-	{
+    {
+        std::vector<Channel*>::iterator iter;
+        for (iter = channels.begin(); iter != channels.end();)
+        {
+            Channel* channel = *iter;
+            iter = channels.erase(iter);
+            delete channel;
+        }
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 	// static method
 	//////////////////////////////////////////////////////////////////////////
 
-	bool ChannelManager::Initialize(std::string& cfilename)
+	bool ChannelManager::Initialize(const std::string& cfilename)
 	{
-		return false;
+        instance = new ChannelManager();
+        return true;
 	}
 
 
 	void ChannelManager::Uninitialize()
-	{
-
+    {
+        delete instance;
 	}
 
 

@@ -121,7 +121,7 @@ namespace wdm {
                                 hr = pMediaType->GetUINT32(MF_MT_AUDIO_BITS_PER_SAMPLE, &wBitsPerSample);
 
                                 AudioAttribute *attribute = new AudioAttribute();
-                                attribute->format = subType;
+                                attribute->format = GUIDToMediaFormat(subType);
                                 attribute->channel = uChannel;
                                 attribute->samplerate = nSamplesRate;
                                 attribute->bitwide = wBitsPerSample;
@@ -211,7 +211,7 @@ namespace wdm {
             hr = pMediaType->GetUINT32(MF_MT_AUDIO_SAMPLES_PER_SECOND, &nSamplesRate);
             hr = pMediaType->GetUINT32(MF_MT_AUDIO_BITS_PER_SAMPLE, &wBitsPerSample);
 
-            if (uChannel == pattr->channel && nSamplesRate == pattr->samplerate && wBitsPerSample == pattr->bitwide && subType == pattr->format)
+            if (uChannel == pattr->channel && nSamplesRate == pattr->samplerate && wBitsPerSample == pattr->bitwide && subType == MediaFormatToGUID(pattr->format))
             {
                 hr = m_pReader->SetCurrentMediaType(MF_SOURCE_READER_FIRST_AUDIO_STREAM, NULL, pMediaType);
                 if (SUCCEEDED(hr))
@@ -381,6 +381,23 @@ namespace wdm {
     {
         PropertyFromAttribute(prop, m_pCurrentAttribute);
 
+        return true;
+    }
+
+
+    //////////////////////////////////////////////////////////////////////////
+    // MediaSource
+    //////////////////////////////////////////////////////////////////////////
+
+    bool AudioCapture::IsExistAudio() const
+    {
+        return true;
+    }
+
+
+    bool AudioCapture::GetAudioAttribute(AudioAttribute& attr) const
+    {
+        attr = *m_pCurrentAttribute;
         return true;
     }
 

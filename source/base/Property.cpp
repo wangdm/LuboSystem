@@ -7,7 +7,7 @@ namespace wdm {
 	//
 	//////////////////////////////////////////////////////////////////////////
 
-	Property::Property::Property()
+	Property::Property()
 	{
 	}
 
@@ -20,23 +20,27 @@ namespace wdm {
 
     bool Property::SetProperty(const char* key, const Variant& val)
     {
-        propertys[key] = val;
+        Variant* p = new Variant();
+        *p = val;
+        propertys[key] = p;
         return true;
     }
 
 
 	bool Property::SetProperty(const std::string& key, const Variant& val)
-	{
-		propertys[key] = val;
+    {
+        Variant* p = new Variant();
+        *p = val;
+        propertys[key] = p;
 		return true;
     }
 
 
 	bool Property::GetProperty(const std::string& key, Variant& val) const
 	{
-        std::map<std::string, Variant>::const_iterator iter = propertys.find(key);
+        std::map<std::string, Variant*>::const_iterator iter = propertys.find(key);
 		if (iter != propertys.end()) {
-			val = iter->second;
+			val = *(iter->second);
 			return true;
 		}
 

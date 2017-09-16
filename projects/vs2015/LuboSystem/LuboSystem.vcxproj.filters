@@ -154,6 +154,9 @@
     <ClCompile Include="..\..\..\source\platform\wmf\Platform.cpp">
       <Filter>platform\wmf</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\base\Object.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\base\Config.hpp">
@@ -275,6 +278,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\platform\Platform.hpp">
       <Filter>platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\base\Object.hpp">
+      <Filter>base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

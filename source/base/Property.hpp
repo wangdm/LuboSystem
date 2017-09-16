@@ -24,7 +24,7 @@ namespace wdm {
 		virtual bool RemoveProperty(const std::string& key);
 
 	private:
-		std::map<std::string, Variant> propertys;
+		std::map<std::string, Variant*> propertys;
 
 	};
 

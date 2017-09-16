@@ -18,9 +18,13 @@ namespace wdm {
 
     enum MediaFormat
     {
+        MEDIA_FORMAT_NONE = 0,
+
         //video
-        MEDIA_FORMAT_NV12 = 0,
-        MEDIA_FORMAT_I420
+        MEDIA_FORMAT_NV12,
+        MEDIA_FORMAT_I420,
+        MEDIA_FORMAT_RGB24
+
 
         //audio
     };
@@ -34,14 +38,51 @@ namespace wdm {
 	};
 
 
-	typedef struct VideoStreamInfo
-	{
-	}VideoStreamInfo;
+    struct VideoAttribute 
+    {
+        MediaFormat format;
+        int stride;
+        int width;
+        int height;
+        int fps;
+    };
 
 
-	typedef struct AudioStreamInfo 
+    struct AudioAttribute
+    {
+        MediaFormat format;
+        int channel;
+        int samplerate;
+        int bitwide;
+    };
+
+
+	struct VideoStreamAttribute
 	{
-	}AudioStreamInfo;
+        VideoStreamAttribute(VideoAttribute attr) {
+            width = attr.width;
+            height = attr.height;
+            fps = attr.fps;
+        }
+
+        int width;
+        int height;
+        int fps;
+	};
+
+
+	struct AudioStreamAttribute
+    {
+        AudioStreamAttribute(AudioAttribute attr) {
+            channel = attr.channel;
+            samplerate = attr.samplerate;
+            bitwide = attr.bitwide;
+        }
+
+        int channel;
+        int samplerate;
+        int bitwide;
+	};
 
 
 	class MediaObject

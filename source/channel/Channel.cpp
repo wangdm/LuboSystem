@@ -1,3 +1,4 @@
+#include "../base/Log.hpp"
 #include "Channel.hpp"
 
 
@@ -9,6 +10,7 @@ namespace wdm {
     Channel::Channel()
         : channelType(CHANNEL_TYPE_UNKNOWN)
         , channelStatus(UNINITIALIZED)
+        , config(nullptr)
 	{
     }
 
@@ -16,6 +18,7 @@ namespace wdm {
     Channel::Channel(ChannelType type)
         : channelType(type)
         , channelStatus(UNINITIALIZED)
+        , config(nullptr)
     {
     }
 
@@ -141,6 +144,7 @@ namespace wdm {
 
     void Channel::OnFrame(MediaFrame* frame)
     {
+        DEBUG("Channel Get Frame...");
         //frame->Reference();
         SendFrame(frame);
     }

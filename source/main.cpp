@@ -27,11 +27,22 @@ void test()
 
 }
 
+void test_wchar()
+{
+    setlocale(LC_CTYPE, "");
+    wchar_t* wStr = L"aaaaaaaaa";
+    size_t len = wcslen(wStr)+1;
+    char* mStr = new char[len];
+    size_t s = wcstombs(mStr, wStr, len);
+
+}
+
 
 int g_Quit = false;
 
 int main(int argc, char* [])
 {
+    test_wchar();
 	Logger::Initialize(std::string(""));
     Platform::Init("platform.conf");
     ChannelManager::Initialize("");

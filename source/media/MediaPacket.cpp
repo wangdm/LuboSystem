@@ -15,7 +15,7 @@ namespace wdm {
 
 
     MediaPacket::MediaPacket(const MediaType type, const uint8_t* data, const uint32_t size)
-        :_type(MEDIA_TYPE_NONE)
+        :_type(type)
         , _data(nullptr)
         , _dataSize(0)
     {
@@ -45,8 +45,9 @@ namespace wdm {
 
     bool MediaPacket::IsKeyFrame() const
     {
-        return bKeyFrame;
+        return keyframe;
     }
+
 
     uint32_t MediaPacket::Copy(const MediaPacket* packet)
     {
@@ -66,8 +67,8 @@ namespace wdm {
             memcpy(_data, packet->_data, _dataSize);
 
             _type = packet->_type;
-            bKeyFrame = packet->bKeyFrame;
 
+            keyframe = packet->keyframe;
             width = packet->width;
             height = packet->height;
 

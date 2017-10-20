@@ -20,7 +20,7 @@ namespace wdm
 
     bool LocalChannel::Init(Config* config_)
     {
-        if (config==nullptr)
+        if (config_ ==nullptr)
         {
             config = GetDefaultConfig();
         }
@@ -37,7 +37,7 @@ namespace wdm
                 Config* streamConfig = dynamic_cast<Config*>(obj);
                 if (streamConfig!=nullptr)
                 {
-                    MediaStream* stream = new MediaStream();
+                    MediaStream* stream = new MediaStream(this);
                     stream->Init(streamConfig);
                     streams[(*streamConfig)["name"]] = stream;
                 }
@@ -72,6 +72,18 @@ namespace wdm
     }
 
 
+    bool LocalChannel::GetVideoAttribute(VideoAttribute& attr) const
+    {
+        return _videoSource->GetVideoAttribute(attr);
+    }
+
+
+    bool LocalChannel::GetAudioAttribute(AudioAttribute& attr) const
+    {
+        return _audioSource->GetAudioAttribute(attr);
+    }
+
+
     bool LocalChannel::Start()
     {
         std::map<std::string, MediaStream*>::iterator iter;
@@ -86,6 +98,7 @@ namespace wdm
             {
                 _audioSource->AddMediaSink(stream);
             }
+            stream->Start();
         }
         if (_videoSource != nullptr)
         {
@@ -137,6 +150,7 @@ namespace wdm
         for (iter = streams.begin(); iter != streams.end(); iter++)
         {
             MediaStream* stream = iter->second;
+            stream->Stop();
             if (_videoSource != nullptr && stream->GetStreamType() == MEDIA_TYPE_VIDEO)
             {
                 _videoSource->DelMediaSink(stream);

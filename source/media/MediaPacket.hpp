@@ -14,7 +14,7 @@ namespace wdm {
 		virtual ~MediaPacket();
 
 		MediaType GetPacketType() const;
-        virtual bool IsKeyFrame() const;
+        bool IsKeyFrame() const;
 
         uint32_t Copy(const MediaPacket* packet);
         uint32_t Copy(const uint8_t* data, const uint32_t size);
@@ -22,13 +22,15 @@ namespace wdm {
 
 	private:
 		MediaType _type;
-        bool bKeyFrame;
 
         uint8_t* _data;
         uint32_t _dataSize;
 
     public:
+        uint64_t timestamp;
+
         //video
+        bool keyframe;
         uint32_t width;
         uint32_t height;
 

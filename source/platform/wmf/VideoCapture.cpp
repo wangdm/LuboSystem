@@ -30,10 +30,10 @@ namespace wdm {
         setlocale(LC_CTYPE, "");
 
         hr = pActivate->GetAllocatedString(MF_DEVSOURCE_ATTRIBUTE_FRIENDLY_NAME, &wcStr, NULL);
-        int size = wcslen(wcStr)*2;
+        size_t size = wcslen(wcStr)*2;
         mbStr = new char[size];
         memset(mbStr, 0, size);
-        wcstombs(mbStr,wcStr,size);
+        size = wcstombs(mbStr,wcStr,size);
         m_CaptureName = mbStr;
         delete mbStr;
         CoTaskMemFree(wcStr);
@@ -41,7 +41,7 @@ namespace wdm {
         hr = pActivate->GetAllocatedString(MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_SYMBOLIC_LINK, &wcStr, NULL);
         size = wcslen(wcStr) * 2;
         mbStr = new char[size];
-        wcstombs(mbStr, wcStr, size);
+        size = wcstombs(mbStr, wcStr, size);
         m_CaptureLink = mbStr;
         delete mbStr;
         CoTaskMemFree(wcStr);
@@ -409,7 +409,14 @@ namespace wdm {
 
     bool VideoCapture::GetVideoAttribute(VideoAttribute& attr) const
     {
-        attr = *m_pCurrentAttribute;
+        if (m_pCurrentAttribute)
+        {
+            attr = *m_pCurrentAttribute;
+        }
+        else
+        {
+            attr = *m_pBestAttribute;
+        }
         return true;
     }
 

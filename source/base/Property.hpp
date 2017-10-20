@@ -21,7 +21,10 @@ namespace wdm {
 		virtual bool GetProperty(const std::string& key, double& val) const;
 		virtual bool GetProperty(const std::string& key, std::string& val) const;
 
-		virtual bool RemoveProperty(const std::string& key);
+        virtual Variant& operator[](const std::string& filename);
+        virtual const Variant& operator[](const std::string& filename) const;
+
+        virtual bool RemoveProperty(const std::string& key);
 
 	private:
 		std::map<std::string, Variant*> propertys;

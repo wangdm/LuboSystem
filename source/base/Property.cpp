@@ -81,7 +81,29 @@ namespace wdm {
 			return true;
 		}
 		return false;
-	}
+    }
+
+
+    Variant& Property::operator[](const std::string& key)
+    {
+        std::map<std::string, Variant*>::const_iterator iter = propertys.find(key);
+        if (iter != propertys.end()) {
+            return *(iter->second);
+        }
+        Variant* val = new Variant();
+        propertys[key] = val;
+        return *val;
+    }
+
+
+    const Variant& Property::operator[](const std::string& key) const
+    {
+        std::map<std::string, Variant*>::const_iterator iter = propertys.find(key);
+        if (iter != propertys.end()) {
+            return *(iter->second);
+        }
+        return Variant::nil;
+    }
 
 
 	bool Property::RemoveProperty(const std::string& key)

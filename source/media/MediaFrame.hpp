@@ -14,6 +14,7 @@ namespace wdm {
 
         MediaType GetFrameType();
         MediaFormat GetFrameFormat();
+        uint8_t* GetData();
 
     private:
         MediaType _type;

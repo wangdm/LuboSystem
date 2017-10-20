@@ -4,9 +4,11 @@
 
 #include "../base/Event.hpp"
 #include "../base/Config.hpp"
+#include "../base/Property.hpp"
 
 #include "../media/MediaType.hpp"
 #include "../media/MediaSink.hpp"
+#include "../media/Codec.hpp"
 
 #include "../stream/StreamConsumer.hpp"
 
@@ -19,14 +21,15 @@ namespace wdm {
 
 	};
 
+    class Channel;
     class StreamConsumer;
 
 
 	class MediaStream : public MediaSink, public EventHandler
 	{
     public:
-        MediaStream();
-		MediaStream(Config* config);
+        MediaStream(Channel* channel);
+		MediaStream(Channel* channel, Config* config);
         virtual ~MediaStream();
 
         virtual MediaType GetStreamType() { return type; };
@@ -52,6 +55,9 @@ namespace wdm {
 
 	private:
         std::vector<StreamConsumer*> consumers;
+        Channel* channel;
+        CodecContext* codec;
+        Property prop;
         Event* event;
 
         MediaType type;

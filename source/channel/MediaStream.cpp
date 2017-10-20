@@ -1,5 +1,9 @@
-#include "MediaStream.hpp"
+#include "../base/Log.hpp"
 #include "../media/MediaPacket.hpp"
+#include "../channel/Channel.hpp"
+
+#include "MediaStream.hpp"
+
 
 namespace wdm {
 
@@ -7,12 +11,16 @@ namespace wdm {
 	//
     //////////////////////////////////////////////////////////////////////////
 
-    MediaStream::MediaStream()
+    MediaStream::MediaStream(Channel* channel)
+        : channel(channel)
+        , codec(nullptr)
     {
     }
 
 
-	MediaStream::MediaStream(Config* config)
+    MediaStream::MediaStream(Channel* channel, Config* config)
+        : channel(channel)
+        , codec(nullptr)
 	{
         Init(config);
 	}
@@ -70,6 +78,36 @@ namespace wdm {
     bool MediaStream::Init(Config* config)
     {
         config->Print();
+
+        prop["name"] = (*config)["name"];
+        std::string stream_type = (*config)["type"];
+        if (stream_type == "video")
+        {
+            type = MEDIA_TYPE_VIDEO;
+            prop["width"] = (*config)["width"];
+            prop["height"] = (*config)["height"];
+            prop["fps"] = (*config)["fps"];
+            prop["codec"] = (*config)["codec"];
+            prop["profile"] = (*config)["profile"];
+            prop["bitrate"] = (*config)["bitrate"];
+            prop["gop"] = (*config)["gop"];
+        }
+        else if (stream_type == "audio")
+        {
+            type = MEDIA_TYPE_AUDIO;
+            prop["channel"] = (*config)["channel"];
+            prop["samplerate"] = (*config)["samplerate"];
+            prop["bitwide"] = (*config)["bitwide"];
+            prop["codec"] = (*config)["codec"];
+            prop["profile"] = (*config)["profile"];
+            prop["bitrate"] = (*config)["bitrate"];
+        }
+        else
+        {
+            ERROR("Unkonwn media type " + stream_type);
+            return false;
+        }
+
         return true;
     }
 
@@ -82,19 +120,45 @@ namespace wdm {
 
     bool MediaStream::Start()
     {
+        if (type == MEDIA_TYPE_VIDEO)
+        {
+            codec = new CodecContext(CODEC_TYPE_ENCODER, CODEC_ID_H264);
+            VideoAttribute attribute;
+
+            if (channel->GetVideoAttribute(attribute))
+            {
+                codec->SetVideoAttribute(attribute);
+            }
+            codec->Config(prop);
+        }
+
         return true;
     }
 
 
     bool MediaStream::Stop()
     {
+        if (codec)
+        {
+            delete codec;
+            codec = nullptr;
+        }
         return true;
     }
 
 
     void MediaStream::OnFrame(MediaFrame* frame)
     {
-
+        if (codec)
+        {
+            MediaPacket* packet = nullptr;
+            codec->encode(frame, &packet);
+            if (packet)
+            {
+                packet->Release();
+            }
+        }
+        DEBUG("Get Frame...");
     }
 
 

@@ -13,6 +13,30 @@ namespace wdm
     }
 
 
+    void Codec::SetPrivateContext(CodecContext* context, void* priv)
+    {
+        context->context = priv;
+    }
+
+
+    void Codec::GetPrivateContext(CodecContext* context, void** priv)
+    {
+        *priv = context->context;
+    }
+
+
+    void Codec::SetPrivateConverter(CodecContext* context, void* priv)
+    {
+        context->converter = priv;
+    }
+
+
+    void Codec::GetPrivateConverter(CodecContext* context, void** priv)
+    {
+        *priv = context->converter;
+    }
+
+
     CodecManager::CodecManager()
     {
     }
@@ -27,7 +51,16 @@ namespace wdm
     // CodecContext
     //////////////////////////////////////////////////////////////////////////
 
+    CodecContext::CodecContext()
+        : codec(nullptr)
+        , context(nullptr)
+        , converter(nullptr)
+    {
+    }
+
+
     CodecContext::CodecContext(CodecType type, CodecID id)
+        : CodecContext()
     {
         if (type == CODEC_TYPE_ENCODER)
         {
@@ -41,6 +74,7 @@ namespace wdm
 
 
     CodecContext::CodecContext(CodecType type, std::string& name)
+        :CodecContext()
     {
         if (type == CODEC_TYPE_ENCODER)
         {
@@ -56,17 +90,32 @@ namespace wdm
 
     CodecContext::~CodecContext()
     {
+        codec->FreePrivate(this);
     }
 
 
-    bool CodecContext::encode(MediaFrame* frame, MediaPacket* packet)
+    bool CodecContext::Config(Property& config)
     {
-        if (codec->GetCodecType() == CODEC_TYPE_ENCODER)
+        if (codec!=nullptr)
+        {
+            codec->Config(this, config);
+            if (context!=nullptr)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    bool CodecContext::encode(MediaFrame* frame, MediaPacket** packet)
+    {
+        if (codec != nullptr && codec->GetCodecType() == CODEC_TYPE_ENCODER)
         {
             Encoder* encoder = dynamic_cast<Encoder*>(codec);
             if (encoder != nullptr)
             {
-                return encoder->encode(this, frame, packet);
+                return encoder->Encode(this, frame, packet);
             }
         }
 
@@ -74,18 +123,42 @@ namespace wdm
     }
 
 
-    bool CodecContext::decode(MediaPacket* packet, MediaFrame* frame)
+    bool CodecContext::decode(MediaPacket* packet, MediaFrame** frame)
     {
-        if (codec->GetCodecType() == CODEC_TYPE_DECODER)
+        if (codec != nullptr && codec->GetCodecType() == CODEC_TYPE_DECODER)
         {
             Decoder* decoder = dynamic_cast<Decoder*>(codec);
             if (decoder != nullptr)
             {
-                return decoder->decode(this, packet, frame);
+                return decoder->Decode(this, packet, frame);
             }
         }
 
         return false;
+    }
+
+
+    void CodecContext::SetVideoAttribute(VideoAttribute& attribute)
+    {
+        v_attr = attribute;
+    }
+
+
+    void CodecContext::GetVideoAttribute(VideoAttribute& attribute)
+    {
+        attribute = v_attr;
+    }
+
+
+    void CodecContext::SetAudioAttribute(AudioAttribute& attribute)
+    {
+        a_attr = attribute;
+    }
+
+
+    void CodecContext::GetAudioAttribute(AudioAttribute& attribute)
+    {
+        attribute = a_attr;
     }
 
 
@@ -180,7 +253,7 @@ namespace wdm
 
     bool CodecManager::RegisterEncoder(Encoder* codec)
     {
-        if (encoders.count(codec->GetCodecName())>0)
+        if (encoders.count(codec->GetCodecName())<=0)
         {
             encoders[codec->GetCodecName()] = codec;
             return true;
@@ -191,7 +264,7 @@ namespace wdm
 
     bool CodecManager::RegisterDecoder(Decoder* codec)
     {
-        if (decoders.count(codec->GetCodecName())>0)
+        if (decoders.count(codec->GetCodecName())<=0)
         {
             decoders[codec->GetCodecName()] = codec;
             return true;

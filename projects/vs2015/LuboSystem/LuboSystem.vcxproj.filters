@@ -34,6 +34,12 @@
     <Filter Include="platform\wmf">
       <UniqueIdentifier>{5d6aacf1-cc19-4455-adb1-835d93f9e996}</UniqueIdentifier>
     </Filter>
+    <Filter Include="codec">
+      <UniqueIdentifier>{9514084d-c8ad-4bc8-838e-18e647283be5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="platform\hisilicon">
+      <UniqueIdentifier>{fc717173-0023-4a9c-a88e-b168095fbc52}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\base\Config.cpp">
@@ -156,6 +162,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\base\Object.cpp">
       <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\codec\FfmpegH264Encode.cpp">
+      <Filter>codec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\codec\FfmpegUtils.cpp">
+      <Filter>codec</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -281,6 +293,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\base\Object.hpp">
       <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\codec\FfmpegH264Encode.hpp">
+      <Filter>codec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\codec\FfmpegUtils.hpp">
+      <Filter>codec</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

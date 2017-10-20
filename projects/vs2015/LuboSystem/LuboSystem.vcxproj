@@ -98,24 +98,24 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>mfplat.lib;mf.lib;mfreadwrite.lib;mfuuid.lib;shlwapi.lib;ws2_32.lib;pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>mfplat.lib;mf.lib;mfreadwrite.lib;mfuuid.lib;shlwapi.lib;ws2_32.lib;pthreadVC2.lib;avutil.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;postproc.lib;swresample.lib;swscale.lib;librtmp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>mfplat.lib;mf.lib;mfreadwrite.lib;mfuuid.lib;shlwapi.lib;ws2_32.lib;pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>mfplat.lib;mf.lib;mfreadwrite.lib;mfuuid.lib;shlwapi.lib;ws2_32.lib;pthreadVC2.lib;avutil.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;postproc.lib;swresample.lib;swscale.lib;librtmp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -124,14 +124,14 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>mfplat.lib;mf.lib;mfreadwrite.lib;mfuuid.lib;shlwapi.lib;ws2_32.lib;pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>mfplat.lib;mf.lib;mfreadwrite.lib;mfuuid.lib;shlwapi.lib;ws2_32.lib;pthreadVC2.lib;avutil.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;postproc.lib;swresample.lib;swscale.lib;librtmp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -140,14 +140,14 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>mfplat.lib;mf.lib;mfreadwrite.lib;mfuuid.lib;shlwapi.lib;ws2_32.lib;pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>mfplat.lib;mf.lib;mfreadwrite.lib;mfuuid.lib;shlwapi.lib;ws2_32.lib;pthreadVC2.lib;avutil.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;postproc.lib;swresample.lib;swscale.lib;librtmp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -166,6 +166,8 @@
     <ClCompile Include="..\..\..\source\channel\ChannelManager.cpp" />
     <ClCompile Include="..\..\..\source\channel\LocalChannel.cpp" />
     <ClCompile Include="..\..\..\source\channel\MediaStream.cpp" />
+    <ClCompile Include="..\..\..\source\codec\FfmpegH264Encode.cpp" />
+    <ClCompile Include="..\..\..\source\codec\FfmpegUtils.cpp" />
     <ClCompile Include="..\..\..\source\device\DeviceManager.cpp" />
     <ClCompile Include="..\..\..\source\device\Ethernet.cpp" />
     <ClCompile Include="..\..\..\source\device\SerialPort.cpp" />
@@ -209,6 +211,8 @@
     <ClInclude Include="..\..\..\source\channel\ChannelManager.hpp" />
     <ClInclude Include="..\..\..\source\channel\LocalChannel.hpp" />
     <ClInclude Include="..\..\..\source\channel\MediaStream.hpp" />
+    <ClInclude Include="..\..\..\source\codec\FfmpegH264Encode.hpp" />
+    <ClInclude Include="..\..\..\source\codec\FfmpegUtils.hpp" />
     <ClInclude Include="..\..\..\source\device\DeviceManager.hpp" />
     <ClInclude Include="..\..\..\source\device\Ethernet.hpp" />
     <ClInclude Include="..\..\..\source\device\SerialPort.hpp" />

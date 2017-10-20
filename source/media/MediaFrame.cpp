@@ -31,4 +31,11 @@ namespace wdm {
     {
         return format;
     }
+
+
+    uint8_t* MediaFrame::GetData()
+    {
+        return _data;
+    }
+
 }

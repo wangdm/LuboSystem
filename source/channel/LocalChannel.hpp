@@ -16,6 +16,9 @@ namespace wdm
         virtual bool Init(Config* config) override;
         virtual bool Uninit() override;
 
+        virtual bool GetVideoAttribute(VideoAttribute& attr) const override;
+        virtual bool GetAudioAttribute(AudioAttribute& attr) const override;
+
 
         virtual bool Start() override;
         virtual bool Stop() override;

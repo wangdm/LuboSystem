@@ -75,6 +75,12 @@ namespace wdm {
         virtual bool Stop() = 0;
 
         virtual void OnFrame(MediaFrame* frame);
+
+    private:
+        const ChannelType channelType;
+
+		ColorParam colorInfo;
+        FilterParam filterParam;
         
     protected:
         virtual void handleEvent(Event* e, EventFlag f) override;
@@ -84,12 +90,6 @@ namespace wdm {
 		Config* config;
 		std::string channelName;
 		ChannelStatus channelStatus;
-
-    private:
-        const ChannelType channelType;
-
-		ColorParam colorInfo;
-        FilterParam filterParam;
 
 	};
 

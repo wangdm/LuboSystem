@@ -180,6 +180,9 @@
     <ClCompile Include="..\..\..\source\media\MediaSource.cpp" />
     <ClCompile Include="..\..\..\source\media\MediaType.cpp" />
     <ClCompile Include="..\..\..\source\media\PacketQueue.cpp" />
+    <ClCompile Include="..\..\..\source\platform\hisilicon\HisiError.cpp" />
+    <ClCompile Include="..\..\..\source\platform\hisilicon\Platform.cpp" />
+    <ClCompile Include="..\..\..\source\platform\hisilicon\VICapture.cpp" />
     <ClCompile Include="..\..\..\source\platform\wmf\AudioCapture.cpp" />
     <ClCompile Include="..\..\..\source\platform\wmf\MFMediaFrame.cpp" />
     <ClCompile Include="..\..\..\source\platform\wmf\Platform.cpp" />
@@ -224,6 +227,9 @@
     <ClInclude Include="..\..\..\source\media\MediaSource.hpp" />
     <ClInclude Include="..\..\..\source\media\MediaType.hpp" />
     <ClInclude Include="..\..\..\source\media\PacketQueue.hpp" />
+    <ClInclude Include="..\..\..\source\platform\hisilicon\HisiError.hpp" />
+    <ClInclude Include="..\..\..\source\platform\hisilicon\Platform.hpp" />
+    <ClInclude Include="..\..\..\source\platform\hisilicon\VICapture.hpp" />
     <ClInclude Include="..\..\..\source\platform\Platform.hpp" />
     <ClInclude Include="..\..\..\source\platform\wmf\AudioCapture.h" />
     <ClInclude Include="..\..\..\source\platform\wmf\MFMediaFrame.h" />
@@ -239,6 +245,9 @@
     <ClInclude Include="..\..\..\source\stream\Recorder.hpp" />
     <ClInclude Include="..\..\..\source\stream\RtmpPusher.hpp" />
     <ClInclude Include="..\..\..\source\stream\StreamConsumer.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\source\Makefile" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

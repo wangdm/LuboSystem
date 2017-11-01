@@ -169,6 +169,15 @@
     <ClCompile Include="..\..\..\source\codec\FfmpegUtils.cpp">
       <Filter>codec</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\platform\hisilicon\Platform.cpp">
+      <Filter>platform\hisilicon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\platform\hisilicon\VICapture.cpp">
+      <Filter>platform\hisilicon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\platform\hisilicon\HisiError.cpp">
+      <Filter>platform\hisilicon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\base\Config.hpp">
@@ -300,5 +309,17 @@
     <ClInclude Include="..\..\..\source\codec\FfmpegUtils.hpp">
       <Filter>codec</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\source\platform\hisilicon\Platform.hpp">
+      <Filter>platform\hisilicon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\platform\hisilicon\HisiError.hpp">
+      <Filter>platform\hisilicon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\platform\hisilicon\VICapture.hpp">
+      <Filter>platform\hisilicon</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\source\Makefile" />
   </ItemGroup>
 </Project>

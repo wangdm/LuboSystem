@@ -22,35 +22,35 @@ namespace wdm {
 	{
 		type = V_INTEGER;
 		intVal = val; 
-	};
+	}
 
 
 	Variant::Variant(const double val) :Variant()
 	{
 		type = V_DOUBLE;
 		doubleVal = val;
-	};
+	}
 
 
 	Variant::Variant(const char* val) :Variant()
 	{
 		type = V_STRING;
 		strVal = val;
-	};
+	}
 
 
 	Variant::Variant(const std::string val) :Variant()
 	{
 		type = V_STRING;
 		strVal = val;
-	};
+	}
 
 
 	Variant::Variant(Object*& val) :Variant()
 	{
 		type = V_OBJECT;
 		ptrVal = val;
-    };
+    }
 
 
     Variant::Variant(std::vector<Object*>& val)

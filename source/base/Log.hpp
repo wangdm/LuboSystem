@@ -11,13 +11,13 @@ namespace wdm {
 	public:
 		virtual ~Logger() {};
 
-		static void Initialize(std::string& cfilename);
+		static void Initialize(const std::string& cfilename);
 		static void Uninitialize();
 
 		static Logger* GetLogger();
 
 	public:
-		virtual void log(std::string level, std::string filename, std::string funcname, int linenum, std::string str);
+		virtual void log(const std::string level, const std::string filename, const std::string funcname,const int linenum, const std::string str);
 
 	private:
 		static Logger* instance;

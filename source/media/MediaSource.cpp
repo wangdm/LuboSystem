@@ -56,7 +56,7 @@ namespace wdm
         std::vector<MediaSink*>::iterator iter;
         for (iter = sinks.begin(); iter != sinks.end(); iter++)
         {
-            if (sink = *iter)
+            if (sink == *iter)
             {
                 sinks.erase(iter);
                 break;

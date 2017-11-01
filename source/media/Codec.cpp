@@ -4,7 +4,7 @@
 namespace wdm
 {
 
-    Codec::Codec(CodecType type, CodecID id, std::string& name)
+    Codec::Codec(CodecType type, CodecID id, const std::string& name)
         : type(type)
         , codecId(id)
         , name(name)

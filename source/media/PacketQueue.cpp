@@ -4,8 +4,8 @@ namespace wdm
 {
 
     PacketQueue::PacketQueue(uint32_t capacity, bool autoDiscard) :
-        nb_audio(0),
         nb_video(0),
+        nb_audio(0),
         capacity(capacity),
         autoDiscard(autoDiscard)
     {

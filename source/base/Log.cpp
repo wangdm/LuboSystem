@@ -18,7 +18,7 @@ namespace wdm {
 	}
 
 
-	void Logger::Initialize(std::string& cfilename)
+	void Logger::Initialize(const std::string& cfilename)
 	{
 		if (instance == nullptr)
 		{
@@ -37,7 +37,7 @@ namespace wdm {
 	}
 
 
-	void Logger::log(std::string level, std::string filename, std::string funcname, int linenum, std::string str)
+	void Logger::log(const std::string level, const std::string filename, const std::string funcname, const int linenum, const std::string str)
 	{
 		using namespace std::chrono;
 		std::stringstream ss;

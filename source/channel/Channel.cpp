@@ -9,16 +9,16 @@ namespace wdm {
 
     Channel::Channel()
         : channelType(CHANNEL_TYPE_UNKNOWN)
-        , channelStatus(UNINITIALIZED)
         , config(nullptr)
+        , channelStatus(UNINITIALIZED)
 	{
     }
 
 
     Channel::Channel(ChannelType type)
         : channelType(type)
-        , channelStatus(UNINITIALIZED)
         , config(nullptr)
+        , channelStatus(UNINITIALIZED)
     {
     }
 

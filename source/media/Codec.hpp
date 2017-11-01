@@ -34,7 +34,7 @@ namespace wdm
     {
     public:
         Codec() : type(CODEC_TYPE_UNKNOWN), codecId(CODEC_ID_UNKNOWN) {};
-        Codec(CodecType type, CodecID id, std::string& name);
+        Codec(CodecType type, CodecID id, const std::string& name);
         virtual ~Codec() {};
 
         virtual bool Config(CodecContext* context, Property& config) = 0;
@@ -63,7 +63,7 @@ namespace wdm
     {
     public:
         Encoder() : Codec(CODEC_TYPE_ENCODER, CODEC_ID_UNKNOWN, std::string("")) {};
-        Encoder(CodecID id, std::string& name) : Codec(CODEC_TYPE_ENCODER, id, name) {};
+        Encoder(CodecID id, const std::string& name) : Codec(CODEC_TYPE_ENCODER, id, name) {};
         virtual ~Encoder() {};
 
         virtual bool Encode(CodecContext* context, MediaFrame* frame, MediaPacket** packet) = 0;
@@ -77,7 +77,7 @@ namespace wdm
     {
     public:
         Decoder() : Codec(CODEC_TYPE_DECODER, CODEC_ID_UNKNOWN, std::string("")) {};
-        Decoder(CodecID id, std::string& name) : Codec(CODEC_TYPE_DECODER, id, name) {};
+        Decoder(CodecID id, const std::string& name) : Codec(CODEC_TYPE_DECODER, id, name) {};
         virtual ~Decoder() {};
 
         virtual bool Decode(CodecContext* context, MediaPacket* packet, MediaFrame** frame) = 0;
@@ -95,7 +95,7 @@ namespace wdm
         CodecContext(Codec* codec) : codec(codec) {};
         CodecContext(CodecType type, CodecID id);
         CodecContext(CodecType type, std::string& name);
-        ~CodecContext();
+        virtual ~CodecContext();
 
         virtual bool Config(Property& config);
         virtual bool encode(MediaFrame* frame, MediaPacket** packet);

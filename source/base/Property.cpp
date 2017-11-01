@@ -77,7 +77,7 @@ namespace wdm {
 		Variant _val;
 		if (GetProperty(key, _val))
 		{
-			val = _val;
+			val = (std::string)_val;
 			return true;
 		}
 		return false;

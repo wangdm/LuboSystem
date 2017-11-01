@@ -1,6 +1,5 @@
 #pragma once
 
-#include <iostream>
 #include <string>
 #include <vector>
 #include <map>
@@ -16,7 +15,7 @@ namespace wdm {
 
 	public:
 		Config() {};
-		Config(std::string& filename);
+		Config(const std::string& filename);
 		~Config();
 
 		virtual bool SetValue(const std::string& key, const Variant& val);

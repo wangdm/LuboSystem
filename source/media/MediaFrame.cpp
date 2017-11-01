@@ -16,7 +16,7 @@ namespace wdm {
     {
         if (_data)
         {
-            free(_data);
+            delete _data;
         }
 	}
 

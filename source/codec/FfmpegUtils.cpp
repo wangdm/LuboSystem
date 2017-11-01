@@ -9,7 +9,7 @@ namespace wdm
 
         av_register_all();
         avcodec_register_all();
-    };
+    }
 
     FfmpegContext* FfmpegContext::instance = nullptr;
     FfmpegContext* FfmpegContext::GetInstance()
@@ -36,9 +36,11 @@ namespace wdm
         case MEDIA_FORMAT_RGB24:
             pix_fmt = AV_PIX_FMT_RGB24;
             return true;
+        case MEDIA_FORMAT_NONE:
+            return false;
         }
 
-        return true;
+        return false;
     }
 
 
@@ -52,6 +54,8 @@ namespace wdm
             return AV_PIX_FMT_YUV410P;
         case MEDIA_FORMAT_RGB24:
             return AV_PIX_FMT_RGB24;
+        case MEDIA_FORMAT_NONE:
+            return AV_PIX_FMT_NONE;
         }
 
         return AV_PIX_FMT_NONE;

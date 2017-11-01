@@ -7,7 +7,7 @@ namespace wdm {
 	//
 	//////////////////////////////////////////////////////////////////////////
 
-	Config::Config::Config(std::string& filename)
+	Config::Config::Config(const std::string& filename)
 	{
 		Load(filename);
 	}
@@ -121,7 +121,7 @@ namespace wdm {
 		Variant _val;
 		if (GetValue(key, _val))
 		{
-			val = _val;
+			val = (std::string)_val;
 			return true;
 		}
 		return false;
@@ -202,6 +202,10 @@ namespace wdm {
             Variant* val = iter->second;
             switch (val->type)
             {
+            case V_NULL:
+                break;
+            case V_BOOL:
+                break;
             case V_INTEGER:
                 std::cout << (iter->first) << "\t" << "V_INTEGER" << "\t" << int(*val) << std::endl;
                 break;
@@ -214,6 +218,7 @@ namespace wdm {
             case V_OBJECT:
                 std::cout << (iter->first) << "\t" << "V_OBJECT" << "\t" << (void*)(*val) << std::endl;
                 break;
+            case V_ARRAY:
                 break;
             }
         }

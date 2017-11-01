@@ -165,7 +165,7 @@ namespace wdm {
     void MediaStream::handleEvent(Event* e, EventFlag f)
     {
         MediaPacket* packet = ReadPacket();
-        for_each(consumers.begin(), consumers.end(), [&](StreamConsumer* consumer)
+        std::for_each(consumers.begin(), consumers.end(), [&](StreamConsumer* consumer)
         {
             consumer->OnStream(packet);
         });

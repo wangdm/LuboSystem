@@ -72,7 +72,10 @@ namespace wdm
         std::vector<MediaSink*>::const_iterator iter;
         for (iter = sinks.begin(); iter != sinks.end(); iter++)
         {
-            (*iter)->OnFrame(frame);
+            if ((*iter)->GetSinkMethod()==SEND)
+            {
+                (*iter)->OnFrame(frame);
+            }
         }
     }
 }

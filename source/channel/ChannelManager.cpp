@@ -35,6 +35,7 @@ namespace wdm
 
 	bool ChannelManager::Initialize(const std::string& cfilename)
 	{
+        INFO("Init ChannelManager");
         instance = new ChannelManager();
         return true;
 	}
@@ -69,6 +70,7 @@ namespace wdm
 
 	void ChannelManager::StartLocalChannel()
 	{
+        INFO("Start all local channels ...");
 		std::vector<Channel*>::const_iterator iter = channels.begin();
 		for (; iter != channels.end(); iter++)
 		{
@@ -80,7 +82,8 @@ namespace wdm
 	}
 
 	void ChannelManager::StopLocalChannel()
-	{
+    {
+        INFO("Stop all local channels ...");
 		std::vector<Channel*>::const_iterator iter = channels.begin();
 		for (; iter != channels.end(); iter++)
 		{

@@ -6,7 +6,7 @@
 
 #include "../Platform.hpp"
 
-#ifdef PLATFORM_WMF
+#ifdef PLATFORM_HISI
 
 #include "Platform.hpp"
 #include "HisiError.hpp"
@@ -17,20 +17,37 @@ namespace wdm {
 
     VICapture::VICapture(void * priv)
     {
+        Config* pConfig = (Config*)priv;
+
         videv = 0;
         vichn = 0;
         vpss  = 0;
 
+        videv = (*pConfig)["videv"];
+        vichn = (*pConfig)["vichn"];
+
+        std::cout << "Create VICapture " << videv << std::endl;
+
+        memset(&stDevAttr, 0, sizeof(VI_DEV_ATTR_S));
         stDevAttr.enIntfMode = VI_MODE_BT1120_STANDARD;
         stDevAttr.enWorkMode = VI_WORK_MODE_1Multiplex;
-        stDevAttr.au32CompMask[0] = 0xFF000000;
-        stDevAttr.au32CompMask[1] = 0xFF0000;
+        if (videv % 2 == 0)
+        {
+            stDevAttr.au32CompMask[0] = 0xFF000000;
+            stDevAttr.au32CompMask[1] = 0xFF0000;
+        } 
+        else
+        {
+            stDevAttr.au32CompMask[0] = 0xFF0000;
+            stDevAttr.au32CompMask[1] = 0x00;
+        }
         stDevAttr.enClkEdge = VI_CLK_EDGE_SINGLE_UP;
         stDevAttr.s32AdChnId[0] = { -1 };
         stDevAttr.s32AdChnId[1] = { -1 };
         stDevAttr.s32AdChnId[2] = { -1 };
         stDevAttr.s32AdChnId[3] = { -1 };
-        
+
+        memset(&stChnAttr, 0, sizeof(VI_CHN_ATTR_S));
         stChnAttr.stCapRect = {0,0,1920,1080};
         stChnAttr.stDestSize = {1920, 1080};
         stChnAttr.enCapSel = VI_CAPSEL_E::VI_CAPSEL_BOTH;
@@ -41,7 +58,8 @@ namespace wdm {
         stChnAttr.s32DstFrameRate = -1;
         stChnAttr.s32SrcFrameRate = -1;
 
-        stVpssAttr.enPixFmt = PIXEL_FORMAT_E::PIXEL_FORMAT_YUV_PLANAR_422;
+        memset(&stVpssAttr, 0, sizeof(VPSS_GRP_ATTR_S));
+        stVpssAttr.enPixFmt = PIXEL_FORMAT_E::PIXEL_FORMAT_YUV_SEMIPLANAR_422;
         stVpssAttr.u32MaxW = 1920;
         stVpssAttr.u32MaxH = 1080;
         stVpssAttr.enDieMode = VPSS_DIE_MODE_E::VPSS_DIE_MODE_AUTO;
@@ -196,6 +214,13 @@ namespace wdm {
         do 
         {
             HI_S32 s32Ret = HI_SUCCESS;
+            vpss = HisiResource::GetInstance()->GetVPSS();
+            if (vpss < 0)
+            {
+                ERROR("HI_MPI_VPSS_CreateGrp failed with " + HiErr(s32Ret));
+                return HI_FAILURE;
+            }
+
             s32Ret = HI_MPI_VPSS_CreateGrp(vpss, &stVpssAttr);
             if (s32Ret != HI_SUCCESS)
             {
@@ -260,6 +285,20 @@ namespace wdm {
     }
 
 
+    HI_S32 VICapture::BindSink()
+    {
+        HI_S32 s32Ret = HI_SUCCESS;
+        return s32Ret;
+    }
+
+
+    HI_S32 VICapture::UnBindSink()
+    {
+        HI_S32 s32Ret = HI_SUCCESS;
+        return s32Ret;
+    }
+
+
     HI_S32 VICapture::StopVpss()
     {
         HI_S32 s32Ret = HI_SUCCESS;
@@ -285,6 +324,8 @@ namespace wdm {
         {
             //ERROR("HI_MPI_VPSS_DestroyGrp[" + vpss + "] failed with " + HiErr(s32Ret));
         }
+
+        HisiResource::GetInstance()->ReleaseVPSS(vpss);
     }
 
 

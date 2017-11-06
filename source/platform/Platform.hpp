@@ -5,9 +5,11 @@
 
 #include <vector>
 
+#include "../base/Config.hpp"
 #include "../channel/Capture.hpp"
 
-#define PLATFORM_WMF
+//#define PLATFORM_WMF
+#define PLATFORM_HISI
 
 namespace wdm {
 
@@ -22,6 +24,9 @@ namespace wdm {
     public:
         static std::vector<Capture*> audioCaptures;
         static std::vector<Capture*> videoCaptures;
+
+    private:
+        static Config* config;
 
     };
 

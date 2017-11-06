@@ -26,7 +26,7 @@ namespace wdm {
 		virtual bool GetValue(const std::string& key, std::string& val) const;
 
         virtual bool GetValue(const std::string& key, Config*& config) const;
-        virtual bool GetValue(const std::string& key, std::vector<Config*>*& configs) const;
+        virtual bool GetValue(const std::string& key, std::vector<Config*>& configs) const;
 
 		virtual bool RemoveKey(const std::string& key);
 

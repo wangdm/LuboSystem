@@ -1,7 +1,7 @@
 
 #include "../Platform.hpp"
 
-#ifdef PLATFORM_WMF
+#ifdef PLATFORM_HISI
 
 #include "Platform.hpp"
 #include "VICapture.hpp"
@@ -12,9 +12,74 @@ namespace wdm {
 
     std::vector<Capture*> Platform::audioCaptures;
     std::vector<Capture*> Platform::videoCaptures;
+    Config* Platform::config = nullptr;
 
-    bool Platform::Init(const std::string& config)
+    bool Platform::Init(const std::string& cfile)
     {
+        DEBUG("Init platform...");
+        HisiErrorInit();
+        config = new Config(cfile);
+
+        std::vector<Object*> vConfigs;
+        for (int i = 0; i < 8; i++)
+        {
+            Config* vConfig = new Config();
+            (*vConfig)["videv"] = i;
+            (*vConfig)["vichn"] = 4 * i;
+            vConfigs.push_back(vConfig);
+        }
+        config->SetValue("videoCapture", vConfigs);
+
+        HI_S32 s32Ret;
+        s32Ret = HI_MPI_SYS_Exit();
+        if (HI_SUCCESS != s32Ret)
+        {
+            ERROR("HI_MPI_SYS_Exit failed with " + HiErr(s32Ret));
+        }
+        s32Ret = HI_MPI_VB_Exit();
+        if (HI_SUCCESS != s32Ret)
+        {
+            ERROR("HI_MPI_VB_Exit failed with " + HiErr(s32Ret));
+        }
+
+        VB_CONF_S stVbConf;
+        MPP_SYS_CONF_S stSysConf;
+
+        memset(&stVbConf, 0, sizeof(VB_CONF_S));
+        stVbConf.u32MaxPoolCnt = 128;
+        stVbConf.astCommPool[0].u32BlkSize = 1920 * 1088 * 2;
+        stVbConf.astCommPool[0].u32BlkCnt = 40;
+        stVbConf.astCommPool[1].u32BlkSize = 960 * 576 * 2;
+        stVbConf.astCommPool[1].u32BlkCnt = 40;
+        s32Ret = HI_MPI_VB_SetConf(&stVbConf);
+        if (HI_SUCCESS != s32Ret)
+        {
+            ERROR("HI_MPI_VB_SetConf failed with " + HiErr(s32Ret));
+            return s32Ret;
+        }
+        s32Ret = HI_MPI_VB_Init();
+        if (HI_SUCCESS != s32Ret)
+        {
+            ERROR("HI_MPI_VB_Init failed with " + HiErr(s32Ret));
+            return s32Ret;
+        }
+
+        memset(&stSysConf, 0, sizeof(MPP_SYS_CONF_S));
+        stSysConf.u32AlignWidth = 16;
+        s32Ret = HI_MPI_SYS_SetConf(&stSysConf);
+        if (HI_SUCCESS != s32Ret)
+        {
+            ERROR("HI_MPI_SYS_SetConf failed with " + HiErr(s32Ret));
+            return s32Ret;
+        }
+        /* init system*/
+        s32Ret = HI_MPI_SYS_Init();
+        if (HI_SUCCESS != s32Ret)
+        {
+            ERROR("HI_MPI_SYS_Init failed with " + HiErr(s32Ret));
+            return s32Ret;
+        }
+
         EnumCapture();
 
         return true;
@@ -23,6 +88,18 @@ namespace wdm {
 
     void Platform::Uninit()
     {
+        /* exit system*/
+        HI_S32 s32Ret;
+        s32Ret = HI_MPI_SYS_Exit();
+        if (HI_SUCCESS != s32Ret)
+        {
+            ERROR("HI_MPI_SYS_Exit failed with " + HiErr(s32Ret));
+        }
+        s32Ret = HI_MPI_VB_Exit();
+        if (HI_SUCCESS != s32Ret)
+        {
+            ERROR("HI_MPI_VB_Exit failed with " + HiErr(s32Ret));
+        }
 
         std::vector<Capture*>::iterator iter;
         for (iter = videoCaptures.begin(); iter != videoCaptures.end();)
@@ -42,8 +119,20 @@ namespace wdm {
 
     int32_t Platform::EnumCapture()
     {
-
-        return 0;
+        DEBUG("Enum capture...");
+        uint32_t videoCapCnt = 0;
+        std::vector<Config*> vConfigs;
+        config->Print();
+        if (config->GetValue("videoCapture", vConfigs))
+        {
+            videoCapCnt = vConfigs.size();
+            std::cout << "Total video capture count " << videoCapCnt << std::endl;
+            std::for_each(vConfigs.begin(), vConfigs.end(), [](Config* pConfig) {
+                videoCaptures.push_back(new VICapture(pConfig));
+            });
+        }
+        std::cout << "Total capture count " << videoCapCnt << std::endl;
+        return videoCapCnt;
     }
 
 

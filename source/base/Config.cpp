@@ -144,17 +144,16 @@ namespace wdm {
     }
 
 
-    bool Config::GetValue(const std::string& key, std::vector<Config*>*& configs) const
+    bool Config::GetValue(const std::string& key, std::vector<Config*>& configs) const
     {
         Variant _val;
         if (GetValue(key, _val))
         {
-            void*p = _val;
-            configs = static_cast<std::vector<Config*>*>(p);
-            if (configs != nullptr)
-            {
-                return true;
-            }
+            std::vector<Object*> objects = _val;
+            std::for_each(objects.begin(), objects.end(), [&](Object* obj) {
+                configs.push_back((Config*)obj);
+            });
+            return true;
         }
         return false;
     }
@@ -203,8 +202,10 @@ namespace wdm {
             switch (val->type)
             {
             case V_NULL:
+                std::cout << (iter->first) << "\t" << "V_NULL" << "\t" << std::endl;
                 break;
             case V_BOOL:
+                std::cout << (iter->first) << "\t" << "V_BOOL" << "\t" << std::endl;
                 break;
             case V_INTEGER:
                 std::cout << (iter->first) << "\t" << "V_INTEGER" << "\t" << int(*val) << std::endl;
@@ -219,6 +220,7 @@ namespace wdm {
                 std::cout << (iter->first) << "\t" << "V_OBJECT" << "\t" << (void*)(*val) << std::endl;
                 break;
             case V_ARRAY:
+                std::cout << (iter->first) << "\t" << "V_ARRAY" << "\t" << std::endl;
                 break;
             }
         }

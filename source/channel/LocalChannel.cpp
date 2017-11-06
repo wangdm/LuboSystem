@@ -86,28 +86,29 @@ namespace wdm
 
     bool LocalChannel::Start()
     {
-        std::map<std::string, MediaStream*>::iterator iter;
-        for (iter = streams.begin(); iter != streams.end(); iter++)
-        {
-            MediaStream* stream = iter->second;
-            if (_videoSource!=nullptr && stream->GetStreamType()==MEDIA_TYPE_VIDEO)
-            {
-                _videoSource->AddMediaSink(stream);
-            }
-            else if (_audioSource != nullptr && stream->GetStreamType() == MEDIA_TYPE_AUDIO)
-            {
-                _audioSource->AddMediaSink(stream);
-            }
-            stream->Start();
-        }
-        if (_videoSource != nullptr)
-        {
-            _videoSource->AddMediaSink(this);
-        }
-        if (_audioSource != nullptr)
-        {
-            _audioSource->AddMediaSink(this);
-        }
+        INFO("Start local channel");
+//         std::map<std::string, MediaStream*>::iterator iter;
+//         for (iter = streams.begin(); iter != streams.end(); iter++)
+//         {
+//             MediaStream* stream = iter->second;
+//             if (_videoSource!=nullptr && stream->GetStreamType()==MEDIA_TYPE_VIDEO)
+//             {
+//                 _videoSource->AddMediaSink(stream);
+//             }
+//             else if (_audioSource != nullptr && stream->GetStreamType() == MEDIA_TYPE_AUDIO)
+//             {
+//                 _audioSource->AddMediaSink(stream);
+//             }
+//             stream->Start();
+//         }
+//         if (_videoSource != nullptr)
+//         {
+//             _videoSource->AddMediaSink(this);
+//         }
+//         if (_audioSource != nullptr)
+//         {
+//             _audioSource->AddMediaSink(this);
+//         }
 
 
         if (_videoSource != nullptr)
@@ -126,6 +127,7 @@ namespace wdm
 
     bool LocalChannel::Stop()
     {
+        INFO("Stop local channel");
 
         if (_videoSource != nullptr)
         {
@@ -137,29 +139,29 @@ namespace wdm
             _audioSource->Stop();
         }
 
-        if (_videoSource != nullptr)
-        {
-            _videoSource->DelMediaSink(this);
-        }
-        if (_audioSource != nullptr)
-        {
-            _audioSource->DelMediaSink(this);
-        }
-
-        std::map<std::string, MediaStream*>::iterator iter;
-        for (iter = streams.begin(); iter != streams.end(); iter++)
-        {
-            MediaStream* stream = iter->second;
-            stream->Stop();
-            if (_videoSource != nullptr && stream->GetStreamType() == MEDIA_TYPE_VIDEO)
-            {
-                _videoSource->DelMediaSink(stream);
-            }
-            else if (_audioSource != nullptr && stream->GetStreamType() == MEDIA_TYPE_AUDIO)
-            {
-                _audioSource->DelMediaSink(stream);
-            }
-        }
+//         if (_videoSource != nullptr)
+//         {
+//             _videoSource->DelMediaSink(this);
+//         }
+//         if (_audioSource != nullptr)
+//         {
+//             _audioSource->DelMediaSink(this);
+//         }
+// 
+//         std::map<std::string, MediaStream*>::iterator iter;
+//         for (iter = streams.begin(); iter != streams.end(); iter++)
+//         {
+//             MediaStream* stream = iter->second;
+//             stream->Stop();
+//             if (_videoSource != nullptr && stream->GetStreamType() == MEDIA_TYPE_VIDEO)
+//             {
+//                 _videoSource->DelMediaSink(stream);
+//             }
+//             else if (_audioSource != nullptr && stream->GetStreamType() == MEDIA_TYPE_AUDIO)
+//             {
+//                 _audioSource->DelMediaSink(stream);
+//             }
+//         }
 
         return false;
     }

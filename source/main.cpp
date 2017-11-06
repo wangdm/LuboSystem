@@ -48,8 +48,8 @@ int main(int argc, char* [])
     ChannelManager::Initialize("");
     ChannelManager::GetInstance()->StartLocalChannel();
 
-    int cnt = 30;
-    while (cnt--)
+    bool quit = false;
+    while (!quit)
     {
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }

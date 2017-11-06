@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 
+#include "../base/Log.hpp"
 #include "../base/Config.hpp"
 #include "../base/Event.hpp"
 

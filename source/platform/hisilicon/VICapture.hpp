@@ -4,7 +4,8 @@
 * QQÈº£º220954528
 */
 
-#pragma once
+#ifndef _VICAPTURE_H_
+#define _VICAPTURE_H_
 
 #include "../../channel/Capture.hpp"
 
@@ -44,6 +45,8 @@ namespace wdm {
         HI_S32 StartVi();
         HI_S32 StartVpss();
         HI_S32 BindViVpss();
+        HI_S32 BindSink();
+        HI_S32 UnBindSink();
         HI_S32 UnBindViVpss();
         HI_S32 StopVpss();
         HI_S32 StopVi();
@@ -61,3 +64,5 @@ namespace wdm {
     };
 
 }
+
+#endif

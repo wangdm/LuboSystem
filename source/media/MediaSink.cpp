@@ -12,4 +12,8 @@ namespace wdm
 	{
 	}
 
+    SinkMethod MediaSink::GetSinkMethod()
+    {
+        return SEND;
+    }
 }

@@ -33,7 +33,7 @@ namespace wdm
     protected:
         virtual void SendFrame(MediaFrame* frame);
 
-	private:
+    protected:
         std::vector<MediaSink*> sinks;
         Mutex sinkMtx;
 

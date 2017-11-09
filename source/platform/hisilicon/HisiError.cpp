@@ -1,3 +1,6 @@
+
+#ifdef PLATFORM_HISI
+
 #include "HisiError.hpp"
 
 namespace wdm {
@@ -41,3 +44,5 @@ namespace wdm {
         }
     }
 }
+
+#endif

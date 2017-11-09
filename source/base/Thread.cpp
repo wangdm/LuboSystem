@@ -57,6 +57,12 @@ namespace wdm
     }
 
 
+    void Thread::Sleep(uint64_t ms)
+    {
+        std::this_thread::sleep_for(std::chrono::milliseconds(ms));
+    }
+
+
     void* Thread::Process(void* arg)
     {
         Thread* t = (Thread*)arg;

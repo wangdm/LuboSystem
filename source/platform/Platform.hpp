@@ -7,9 +7,8 @@
 
 #include "../base/Config.hpp"
 #include "../channel/Capture.hpp"
+#include "../media/CodecContext.hpp"
 
-//#define PLATFORM_WMF
-#define PLATFORM_HISI
 
 namespace wdm {
 
@@ -20,6 +19,7 @@ namespace wdm {
         static void Uninit();
 
         static int32_t EnumCapture();
+        static CodecContext* CreateCondecContext();
 
     public:
         static std::vector<Capture*> audioCaptures;

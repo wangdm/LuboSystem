@@ -10,8 +10,10 @@
 #include "../media/MediaType.hpp"
 #include "../media/MediaSink.hpp"
 #include "../media/Codec.hpp"
+#include "../media/CodecContext.hpp"
 
 #include "../stream/StreamConsumer.hpp"
+#include "../stream/StreamProducer.hpp"
 
 
 namespace wdm {
@@ -26,7 +28,7 @@ namespace wdm {
     class StreamConsumer;
 
 
-	class MediaStream : public MediaSink, public EventHandler
+	class MediaStream : public EventHandler
 	{
     public:
         MediaStream(Channel* channel);
@@ -40,12 +42,13 @@ namespace wdm {
         virtual void AddConsumer(StreamConsumer* consumer);
         virtual void DelConsumer(StreamConsumer* consumer);
 
+        virtual void SetProducer(StreamProducer* producer);
+        virtual StreamProducer*  GetProducer();
+
         virtual bool Init(Config* config);
         virtual bool Uninit();
         virtual bool Start();
         virtual bool Stop();
-
-        virtual void OnFrame(MediaFrame* frame);
 
     protected:
         virtual void handleEvent(Event* e, EventFlag f) override;
@@ -54,10 +57,12 @@ namespace wdm {
         MediaPacket* CreatePacket();
         MediaPacket* ReadPacket();
 
-	private:
-        std::vector<StreamConsumer*> consumers;
+    private:
         Channel* channel;
-        CodecContext* codec;
+
+        StreamProducer* producer;
+        std::vector<StreamConsumer*> consumers;
+
         Property prop;
         Event* event;
 

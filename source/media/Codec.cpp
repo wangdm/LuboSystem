@@ -1,4 +1,5 @@
 #include "Codec.hpp"
+#include "CodecContext.hpp"
 
 
 namespace wdm
@@ -44,121 +45,6 @@ namespace wdm
 
     CodecManager::~CodecManager()
     {
-    }
-
-
-    //////////////////////////////////////////////////////////////////////////
-    // CodecContext
-    //////////////////////////////////////////////////////////////////////////
-
-    CodecContext::CodecContext()
-        : codec(nullptr)
-        , context(nullptr)
-        , converter(nullptr)
-    {
-    }
-
-
-    CodecContext::CodecContext(CodecType type, CodecID id)
-        : CodecContext()
-    {
-        if (type == CODEC_TYPE_ENCODER)
-        {
-            codec = CodecManager::GetInstance()->FindEncoder(id);
-        } 
-        else if (type == CODEC_TYPE_DECODER)
-        {
-            codec = CodecManager::GetInstance()->FindDecoder(id);
-        }
-    }
-
-
-    CodecContext::CodecContext(CodecType type, std::string& name)
-        :CodecContext()
-    {
-        if (type == CODEC_TYPE_ENCODER)
-        {
-            codec = CodecManager::GetInstance()->FindEncoder(name);
-        }
-        else if (type == CODEC_TYPE_DECODER)
-        {
-            codec = CodecManager::GetInstance()->FindDecoder(name);
-        }
-    
-    }
-
-
-    CodecContext::~CodecContext()
-    {
-        codec->FreePrivate(this);
-    }
-
-
-    bool CodecContext::Config(Property& config)
-    {
-        if (codec!=nullptr)
-        {
-            codec->Config(this, config);
-            if (context!=nullptr)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    bool CodecContext::encode(MediaFrame* frame, MediaPacket** packet)
-    {
-        if (codec != nullptr && codec->GetCodecType() == CODEC_TYPE_ENCODER)
-        {
-            Encoder* encoder = dynamic_cast<Encoder*>(codec);
-            if (encoder != nullptr)
-            {
-                return encoder->Encode(this, frame, packet);
-            }
-        }
-
-        return false;
-    }
-
-
-    bool CodecContext::decode(MediaPacket* packet, MediaFrame** frame)
-    {
-        if (codec != nullptr && codec->GetCodecType() == CODEC_TYPE_DECODER)
-        {
-            Decoder* decoder = dynamic_cast<Decoder*>(codec);
-            if (decoder != nullptr)
-            {
-                return decoder->Decode(this, packet, frame);
-            }
-        }
-
-        return false;
-    }
-
-
-    void CodecContext::SetVideoAttribute(VideoAttribute& attribute)
-    {
-        v_attr = attribute;
-    }
-
-
-    void CodecContext::GetVideoAttribute(VideoAttribute& attribute)
-    {
-        attribute = v_attr;
-    }
-
-
-    void CodecContext::SetAudioAttribute(AudioAttribute& attribute)
-    {
-        a_attr = attribute;
-    }
-
-
-    void CodecContext::GetAudioAttribute(AudioAttribute& attribute)
-    {
-        attribute = a_attr;
     }
 
 

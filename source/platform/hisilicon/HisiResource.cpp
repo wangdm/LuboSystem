@@ -1,3 +1,6 @@
+
+#ifdef PLATFORM_HISI
+
 #include "HisiResource.hpp"
 
 namespace wdm
@@ -67,10 +70,11 @@ namespace wdm
         {
             if (_venc[i] == false)
             {
+                _venc[i] = true;
                 return i;
             }
         }
-        return -1;
+        return HI_INVALID_CHN;
     }
 
 
@@ -79,7 +83,7 @@ namespace wdm
         std::lock_guard<std::recursive_mutex> lock(venc_mtx);
         if (venc >= 0 || venc < VENC_MAX_CHN_NUM)
         {
-            _venc[venc] = true;
+            _venc[venc] = false;
         }
     }
 
@@ -91,6 +95,7 @@ namespace wdm
         {
             if (_vdec[i] == false)
             {
+                _vdec[i] = true;
                 return i;
             }
         }
@@ -103,8 +108,9 @@ namespace wdm
         std::lock_guard<std::recursive_mutex> lock(venc_mtx);
         if (vdec >= 0 || vdec < VDEC_MAX_CHN_NUM)
         {
-            _venc[vdec] = true;
+            _venc[vdec] = false;
         }
     }
 }
 
+#endif

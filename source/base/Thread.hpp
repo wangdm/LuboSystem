@@ -4,6 +4,9 @@
 
 #include <pthread.h>
 
+#include <thread>
+#include <chrono>
+
 
 namespace wdm
 {
@@ -22,6 +25,7 @@ namespace wdm
         virtual void OnStart();
         virtual void OnStop();
         virtual bool IsStopping() final { return stopping; };
+        virtual void Sleep(uint64_t ms) final;
     private:
         static void * Process(void *);
 

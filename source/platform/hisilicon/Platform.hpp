@@ -14,10 +14,13 @@
 #include "hi3531a/mpi_vb.h"
 #include "hi3531a/mpi_vi.h"
 #include "hi3531a/mpi_vpss.h"
+#include "hi3531a/mpi_venc.h"
 
 #include "../../base/Property.hpp"
 #include "../../base/Log.hpp"
 #include "../../media/MediaType.hpp"
+
+#include "../Platform.hpp"
 
 #include "HisiError.hpp"
 #include "HisiResource.hpp"

@@ -9,6 +9,8 @@
 
 #include "../../channel/Capture.hpp"
 
+#include "Platform.hpp"
+
 namespace wdm {
 
     class VICapture :
@@ -33,7 +35,7 @@ namespace wdm {
         VI_DEV  videv;
         VI_CHN  vichn;
 
-        VPSS_GRP vpss;
+        VPSS_GRP VpssGrp;
 
         VI_DEV_ATTR_S stDevAttr;
         VI_CHN_ATTR_S stChnAttr;

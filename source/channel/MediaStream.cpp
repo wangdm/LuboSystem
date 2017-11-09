@@ -13,14 +13,14 @@ namespace wdm {
 
     MediaStream::MediaStream(Channel* channel)
         : channel(channel)
-        , codec(nullptr)
+        , producer(nullptr)
     {
     }
 
 
     MediaStream::MediaStream(Channel* channel, Config* config)
         : channel(channel)
-        , codec(nullptr)
+        , producer(nullptr)
 	{
         Init(config);
 	}
@@ -75,6 +75,21 @@ namespace wdm {
     }
 
 
+    void MediaStream::SetProducer(StreamProducer* producer)
+    {
+        if (producer!=nullptr)
+        {
+            this->producer = producer;
+        }
+    }
+
+
+    StreamProducer*  MediaStream::GetProducer()
+    {
+        return producer;
+    }
+
+
     bool MediaStream::Init(Config* config)
     {
         config->Print();
@@ -120,16 +135,11 @@ namespace wdm {
 
     bool MediaStream::Start()
     {
-        if (type == MEDIA_TYPE_VIDEO)
+        DEBUG("Start Media Stream...");
+        if (producer != nullptr)
         {
-            codec = new CodecContext(CODEC_TYPE_ENCODER, CODEC_ID_H264);
-            VideoAttribute attribute;
-
-            if (channel->GetVideoAttribute(attribute))
-            {
-                codec->SetVideoAttribute(attribute);
-            }
-            codec->Config(prop);
+            producer->Start();
+            return false;
         }
 
         return true;
@@ -138,27 +148,13 @@ namespace wdm {
 
     bool MediaStream::Stop()
     {
-        if (codec)
+        DEBUG("Stop Media Stream...");
+        if (producer != nullptr)
         {
-            delete codec;
-            codec = nullptr;
+            producer->Stop();
+            return false;
         }
         return true;
-    }
-
-
-    void MediaStream::OnFrame(MediaFrame* frame)
-    {
-        if (codec)
-        {
-            MediaPacket* packet = nullptr;
-            codec->encode(frame, &packet);
-            if (packet)
-            {
-                packet->Release();
-            }
-        }
-        DEBUG("Get Frame...");
     }
 
 

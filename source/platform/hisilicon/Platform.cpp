@@ -1,10 +1,10 @@
 
-#include "../Platform.hpp"
 
 #ifdef PLATFORM_HISI
 
 #include "Platform.hpp"
 #include "VICapture.hpp"
+#include "Hi264BindEncodec.hpp"
 
 //#pragma comment(lib,"ws2_32.lib")
 
@@ -133,6 +133,12 @@ namespace wdm {
         }
         std::cout << "Total capture count " << videoCapCnt << std::endl;
         return videoCapCnt;
+    }
+
+
+    CodecContext* Platform::CreateCondecContext()
+    {
+        return new Hi264BindEncode();
     }
 
 

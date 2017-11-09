@@ -11,6 +11,7 @@
 #include "Platform.hpp"
 #include "HisiError.hpp"
 #include "VICapture.hpp"
+#include "Hi264BindEncodec.hpp"
 
 
 namespace wdm {
@@ -21,7 +22,7 @@ namespace wdm {
 
         videv = 0;
         vichn = 0;
-        vpss  = 0;
+        VpssGrp = 0;
 
         videv = (*pConfig)["videv"];
         vichn = (*pConfig)["vichn"];
@@ -151,6 +152,7 @@ namespace wdm {
                 StartVi();
                 StartVpss();
                 BindViVpss();
+                BindSink();
             } while (0);
         }
 
@@ -162,6 +164,7 @@ namespace wdm {
     bool VICapture::Stop()
     {
         m_Status = CAPTURE_STATUS_STOP;
+        UnBindSink();
         UnBindViVpss();
         StopVpss();
         StartVi();
@@ -214,21 +217,21 @@ namespace wdm {
         do 
         {
             HI_S32 s32Ret = HI_SUCCESS;
-            vpss = HisiResource::GetInstance()->GetVPSS();
-            if (vpss < 0)
+            VpssGrp = HisiResource::GetInstance()->GetVPSS();
+            if (VpssGrp < 0)
             {
                 ERROR("HI_MPI_VPSS_CreateGrp failed with " + HiErr(s32Ret));
                 return HI_FAILURE;
             }
 
-            s32Ret = HI_MPI_VPSS_CreateGrp(vpss, &stVpssAttr);
+            s32Ret = HI_MPI_VPSS_CreateGrp(VpssGrp, &stVpssAttr);
             if (s32Ret != HI_SUCCESS)
             {
                 ERROR("HI_MPI_VPSS_CreateGrp failed with " + HiErr(s32Ret));
                 return s32Ret;
             }
 
-            s32Ret = HI_MPI_VPSS_StartGrp(vpss);
+            s32Ret = HI_MPI_VPSS_StartGrp(VpssGrp);
             if (s32Ret != HI_SUCCESS)
             {
                 ERROR("HI_MPI_VPSS_StartGrp failed with " + HiErr(s32Ret));
@@ -250,7 +253,7 @@ namespace wdm {
         stSrcChn.s32ChnId = vichn;
 
         stDestChn.enModId = HI_ID_VPSS;
-        stDestChn.s32DevId = vpss;
+        stDestChn.s32DevId = VpssGrp;
         stDestChn.s32ChnId = 0;
 
         s32Ret = HI_MPI_SYS_Bind(&stSrcChn, &stDestChn);
@@ -273,7 +276,7 @@ namespace wdm {
         stSrcChn.s32ChnId = vichn;
 
         stDestChn.enModId = HI_ID_VPSS;
-        stDestChn.s32DevId = vpss;
+        stDestChn.s32DevId = VpssGrp;
         stDestChn.s32ChnId = 0;
 
         s32Ret = HI_MPI_SYS_UnBind(&stSrcChn, &stDestChn);
@@ -288,6 +291,54 @@ namespace wdm {
     HI_S32 VICapture::BindSink()
     {
         HI_S32 s32Ret = HI_SUCCESS;
+        int vpssCnt = VPSS_MAX_PHY_CHN_NUM - 1;
+        int sinkSize = sinks.size();
+        int chnCnt = vpssCnt > sinkSize ? sinkSize : vpssCnt;
+        for (int i = 0; i < chnCnt; i++)
+        {
+
+            Hi264BindEncode* sink = dynamic_cast<Hi264BindEncode*>(sinks[i]);
+            if (sink != nullptr && sink->GetSinkMethod() == BIND)
+            {
+                VPSS_CHN VpssChn = i;
+                VPSS_CHN_ATTR_S stChnAttr;
+                stChnAttr.bSpEn = HI_FALSE;
+                stChnAttr.bUVInvert = HI_FALSE;
+                stChnAttr.bBorderEn = HI_FALSE;
+                s32Ret = HI_MPI_VPSS_SetChnAttr(VpssGrp, VpssChn, &stChnAttr);
+                if (s32Ret != HI_SUCCESS)
+                {
+                    ERROR("HI_MPI_VPSS_SetChnAttr failed with " + HiErr(s32Ret));
+                    return HI_FAILURE;
+                }
+
+                s32Ret = HI_MPI_VPSS_EnableChn(VpssGrp, VpssChn);
+                if (s32Ret != HI_SUCCESS)
+                {
+                    ERROR("HI_MPI_VPSS_EnableChn failed with " + HiErr(s32Ret));
+                    return HI_FAILURE;
+                }
+
+                MPP_CHN_S stSrcChn;
+                MPP_CHN_S stDestChn;
+
+                stSrcChn.enModId = HI_ID_VPSS;
+                stSrcChn.s32DevId = VpssGrp;
+                stSrcChn.s32ChnId = VpssChn;
+
+                if (sink->GetMppChn(stDestChn))
+                {
+                    s32Ret = HI_MPI_SYS_Bind(&stSrcChn, &stDestChn);
+                    if (s32Ret != HI_SUCCESS)
+                    {
+                        ERROR("HI_MPI_SYS_Bind failed with " + HiErr(s32Ret));
+                        return s32Ret;
+                    }
+                }
+
+            }
+        }
+
         return s32Ret;
     }
 
@@ -295,6 +346,42 @@ namespace wdm {
     HI_S32 VICapture::UnBindSink()
     {
         HI_S32 s32Ret = HI_SUCCESS;
+        int vpssCnt = VPSS_MAX_PHY_CHN_NUM - 1;
+        int sinkSize = sinks.size();
+        int chnCnt = vpssCnt > sinkSize ? sinkSize : vpssCnt;
+        for (int i = 0; i < chnCnt; i++)
+        {
+            VPSS_CHN VpssChn = i;
+
+            Hi264BindEncode* sink = dynamic_cast<Hi264BindEncode*>(sinks[i]);
+            if (sink != nullptr && sink->GetSinkMethod()==BIND)
+            {
+                MPP_CHN_S stSrcChn;
+                MPP_CHN_S stDestChn;
+
+                stSrcChn.enModId = HI_ID_VPSS;
+                stSrcChn.s32DevId = VpssGrp;
+                stSrcChn.s32ChnId = VpssChn;
+
+                if (sink->GetMppChn(stDestChn))
+                {
+                    s32Ret = HI_MPI_SYS_Bind(&stSrcChn, &stDestChn);
+                    if (s32Ret != HI_SUCCESS)
+                    {
+                        ERROR("HI_MPI_SYS_Bind failed with " + HiErr(s32Ret));
+                        return s32Ret;
+                    }
+                }
+
+                s32Ret = HI_MPI_VPSS_DisableChn(VpssGrp, VpssChn);
+                if (s32Ret != HI_SUCCESS)
+                {
+                    ERROR("HI_MPI_VPSS_DisableChn failed with " + HiErr(s32Ret));
+                    return HI_FAILURE;
+                }
+            }
+        }
+
         return s32Ret;
     }
 
@@ -303,7 +390,7 @@ namespace wdm {
     {
         HI_S32 s32Ret = HI_SUCCESS;
 
-        s32Ret = HI_MPI_VPSS_StopGrp(vpss);
+        s32Ret = HI_MPI_VPSS_StopGrp(VpssGrp);
         if (s32Ret != HI_SUCCESS)
         {
             ERROR("HI_MPI_VPSS_StopGrp failed with " + HiErr(s32Ret));
@@ -312,20 +399,20 @@ namespace wdm {
         for (int i = 0; i < VPSS_MAX_CHN_NUM; i++)
         {
             VPSS_CHN VpssChn = i;
-            s32Ret = HI_MPI_VPSS_DisableChn(vpss, VpssChn);
+            s32Ret = HI_MPI_VPSS_DisableChn(VpssGrp, VpssChn);
             if (s32Ret != HI_SUCCESS)
             {
                 ERROR("HI_MPI_VPSS_DisableChn failed with " + HiErr(s32Ret));
             }
         }
 
-        s32Ret = HI_MPI_VPSS_DestroyGrp(vpss);
+        s32Ret = HI_MPI_VPSS_DestroyGrp(VpssGrp);
         if (s32Ret != HI_SUCCESS)
         {
             //ERROR("HI_MPI_VPSS_DestroyGrp[" + vpss + "] failed with " + HiErr(s32Ret));
         }
 
-        HisiResource::GetInstance()->ReleaseVPSS(vpss);
+        HisiResource::GetInstance()->ReleaseVPSS(VpssGrp);
     }
 
 

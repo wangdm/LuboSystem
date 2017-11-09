@@ -1,5 +1,8 @@
 #include "StreamConsumer.hpp"
 
+#include "../channel/MediaStream.hpp"
+
+
 
 namespace wdm {
 

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _CODEC_H_
+#define _CODEC_H_
 
 #include "../base/Property.hpp"
 
@@ -87,42 +88,6 @@ namespace wdm
     };
 
 
-    class CodecContext
-    {
-    private:
-        CodecContext();
-    public:
-        CodecContext(Codec* codec) : codec(codec) {};
-        CodecContext(CodecType type, CodecID id);
-        CodecContext(CodecType type, std::string& name);
-        virtual ~CodecContext();
-
-        virtual bool Config(Property& config);
-        virtual bool encode(MediaFrame* frame, MediaPacket** packet);
-        virtual bool decode(MediaPacket* packet, MediaFrame** frame);
-
-        virtual void SetVideoAttribute(VideoAttribute& attribute);
-        virtual void GetVideoAttribute(VideoAttribute& attribute);
-        virtual void SetAudioAttribute(AudioAttribute& attribute);
-        virtual void GetAudioAttribute(AudioAttribute& attribute);
-
-
-
-        virtual void* GetContext() const { return context; };
-
-    private:
-        Codec* codec;
-        void* context;
-        void* converter;
-
-        VideoAttribute v_attr;
-        AudioAttribute a_attr;
-
-        friend class Codec;
-
-    };
-
-
     class CodecManager
     {
     private:
@@ -154,3 +119,5 @@ namespace wdm
     };
 
 }
+
+#endif // !_CODEC_H_

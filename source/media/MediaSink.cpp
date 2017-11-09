@@ -8,12 +8,26 @@ namespace wdm
 	{
 	}
 
+
     MediaSink::~MediaSink()
 	{
 	}
 
+
     SinkMethod MediaSink::GetSinkMethod()
     {
         return SEND;
+    }
+
+
+    bool MediaSink::IsSupportscale()
+    {
+        return false;
+    }
+
+
+    bool MediaSink::ISSupportCSC()
+    {
+        return false;
     }
 }

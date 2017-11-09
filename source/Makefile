@@ -6,7 +6,7 @@ CC  := $(CROSS_COMPILE)gcc
 CXX := $(CROSS_COMPILE)g++
 STRIP := $(CROSS_COMPILE)strip
 
-DEFINES  :=
+DEFINES  := PLATFORM_HISI
 INCLUDES := ../include ../include/hi3531a
 LIBRARYS := ../lib
 LDLIBS   := pthread mpi jpeg6b upvqe dnvqe VoiceEngine

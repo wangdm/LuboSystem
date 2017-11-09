@@ -21,6 +21,8 @@ namespace wdm
 
         virtual void OnFrame(MediaFrame* frame) = 0;
         virtual SinkMethod GetSinkMethod();
+        virtual bool IsSupportscale();
+        virtual bool ISSupportCSC();
 
 	private:
 

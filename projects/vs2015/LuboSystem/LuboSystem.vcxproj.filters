@@ -178,6 +178,18 @@
     <ClCompile Include="..\..\..\source\platform\hisilicon\HisiError.cpp">
       <Filter>platform\hisilicon</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\platform\hisilicon\HisiResource.cpp">
+      <Filter>platform\hisilicon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\media\CodecContext.cpp">
+      <Filter>media</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\stream\StreamProducer.cpp">
+      <Filter>stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\platform\hisilicon\Hi264BindEncodec.cpp">
+      <Filter>platform\hisilicon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\base\Config.hpp">
@@ -316,6 +328,18 @@
       <Filter>platform\hisilicon</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\source\platform\hisilicon\VICapture.hpp">
+      <Filter>platform\hisilicon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\platform\hisilicon\HisiResource.hpp">
+      <Filter>platform\hisilicon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\media\CodecContext.hpp">
+      <Filter>media</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\stream\StreamProducer.hpp">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\platform\hisilicon\Hi264BindEncodec.hpp">
       <Filter>platform\hisilicon</Filter>
     </ClInclude>
   </ItemGroup>

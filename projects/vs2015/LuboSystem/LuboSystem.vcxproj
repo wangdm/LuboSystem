@@ -99,7 +99,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;PLATFORM_WMF;PLATFORM_HISI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -111,7 +111,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;PLATFORM_WMF;PLATFORM_HISI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -125,7 +125,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;PLATFORM_WMF;PLATFORM_HISI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -141,7 +141,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;PLATFORM_WMF;PLATFORM_HISI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -174,13 +174,16 @@
     <ClCompile Include="..\..\..\source\device\Storage.cpp" />
     <ClCompile Include="..\..\..\source\main.cpp" />
     <ClCompile Include="..\..\..\source\media\Codec.cpp" />
+    <ClCompile Include="..\..\..\source\media\CodecContext.cpp" />
     <ClCompile Include="..\..\..\source\media\MediaFrame.cpp" />
     <ClCompile Include="..\..\..\source\media\MediaPacket.cpp" />
     <ClCompile Include="..\..\..\source\media\MediaSink.cpp" />
     <ClCompile Include="..\..\..\source\media\MediaSource.cpp" />
     <ClCompile Include="..\..\..\source\media\MediaType.cpp" />
     <ClCompile Include="..\..\..\source\media\PacketQueue.cpp" />
+    <ClCompile Include="..\..\..\source\platform\hisilicon\Hi264BindEncodec.cpp" />
     <ClCompile Include="..\..\..\source\platform\hisilicon\HisiError.cpp" />
+    <ClCompile Include="..\..\..\source\platform\hisilicon\HisiResource.cpp" />
     <ClCompile Include="..\..\..\source\platform\hisilicon\Platform.cpp" />
     <ClCompile Include="..\..\..\source\platform\hisilicon\VICapture.cpp" />
     <ClCompile Include="..\..\..\source\platform\wmf\AudioCapture.cpp" />
@@ -197,6 +200,7 @@
     <ClCompile Include="..\..\..\source\stream\Recorder.cpp" />
     <ClCompile Include="..\..\..\source\stream\RtmpPusher.cpp" />
     <ClCompile Include="..\..\..\source\stream\StreamConsumer.cpp" />
+    <ClCompile Include="..\..\..\source\stream\StreamProducer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\3rdparty\cJSON.h" />
@@ -221,13 +225,16 @@
     <ClInclude Include="..\..\..\source\device\SerialPort.hpp" />
     <ClInclude Include="..\..\..\source\device\Storage.hpp" />
     <ClInclude Include="..\..\..\source\media\Codec.hpp" />
+    <ClInclude Include="..\..\..\source\media\CodecContext.hpp" />
     <ClInclude Include="..\..\..\source\media\MediaFrame.hpp" />
     <ClInclude Include="..\..\..\source\media\MediaPacket.hpp" />
     <ClInclude Include="..\..\..\source\media\MediaSink.hpp" />
     <ClInclude Include="..\..\..\source\media\MediaSource.hpp" />
     <ClInclude Include="..\..\..\source\media\MediaType.hpp" />
     <ClInclude Include="..\..\..\source\media\PacketQueue.hpp" />
+    <ClInclude Include="..\..\..\source\platform\hisilicon\Hi264BindEncodec.hpp" />
     <ClInclude Include="..\..\..\source\platform\hisilicon\HisiError.hpp" />
+    <ClInclude Include="..\..\..\source\platform\hisilicon\HisiResource.hpp" />
     <ClInclude Include="..\..\..\source\platform\hisilicon\Platform.hpp" />
     <ClInclude Include="..\..\..\source\platform\hisilicon\VICapture.hpp" />
     <ClInclude Include="..\..\..\source\platform\Platform.hpp" />
@@ -245,6 +252,7 @@
     <ClInclude Include="..\..\..\source\stream\Recorder.hpp" />
     <ClInclude Include="..\..\..\source\stream\RtmpPusher.hpp" />
     <ClInclude Include="..\..\..\source\stream\StreamConsumer.hpp" />
+    <ClInclude Include="..\..\..\source\stream\StreamProducer.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\source\Makefile" />

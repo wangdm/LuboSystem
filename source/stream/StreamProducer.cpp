@@ -26,7 +26,6 @@ namespace wdm {
     void StreamProducer::SetMediaStream(MediaStream* stream)
     {
         this->stream = stream;
-        this->stream->SetProducer(this);
     }
 
 }

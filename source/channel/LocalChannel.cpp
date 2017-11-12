@@ -1,6 +1,7 @@
 
 #include "../platform/Platform.hpp"
 
+#include "ChannelManager.hpp"
 #include "LocalChannel.hpp"
 
 
@@ -43,7 +44,6 @@ namespace wdm
                     MediaStream* stream = new MediaStream(this);
                     CodecContext* codec = Platform::CreateCondecContext();
                     stream->Init(streamConfig);
-                    codec->SetMediaStream(stream);
                     stream->SetProducer(codec);
                     streams[(*streamConfig)["name"]] = stream;
                 }
@@ -97,31 +97,24 @@ namespace wdm
         for (iter = streams.begin(); iter != streams.end(); iter++)
         {
             MediaStream* stream = iter->second;
-            if (_videoSource!=nullptr && stream->GetStreamType()==MEDIA_TYPE_VIDEO)
+            CodecContext* codec = dynamic_cast<CodecContext*>(stream->GetProducer());
+            if (codec != nullptr)
             {
-                CodecContext* codec = dynamic_cast<CodecContext*>(stream->GetProducer());
-                if (codec != nullptr)
+                if (_videoSource != nullptr && stream->GetStreamType() == MEDIA_TYPE_VIDEO)
                 {
                     _videoSource->AddMediaSink(codec);
                 }
-                else
-                {
-                    ERROR("the Producer isn't a MediaSink instance");
-                }
-            }
-            else if (_audioSource != nullptr && stream->GetStreamType() == MEDIA_TYPE_AUDIO)
-            {
-                CodecContext* codec = dynamic_cast<CodecContext*>(stream->GetProducer());
-                if (codec != nullptr)
+                else if (_audioSource != nullptr && stream->GetStreamType() == MEDIA_TYPE_AUDIO)
                 {
                     _audioSource->AddMediaSink(codec);
                 }
-                else
-                {
-                    ERROR("the Producer isn't a MediaSink instance");
-                }
+            }
+            else
+            {
+                ERROR("the Producer isn't a MediaSink instance");
             }
             stream->Start();
+            ChannelManager::GetInstance()->AddEvent(stream->GetProducer());
         }
         if (_videoSource != nullptr)
         {
@@ -161,29 +154,38 @@ namespace wdm
             _audioSource->Stop();
         }
 
-//         if (_videoSource != nullptr)
-//         {
-//             _videoSource->DelMediaSink(this);
-//         }
-//         if (_audioSource != nullptr)
-//         {
-//             _audioSource->DelMediaSink(this);
-//         }
-// 
-//         std::map<std::string, MediaStream*>::iterator iter;
-//         for (iter = streams.begin(); iter != streams.end(); iter++)
-//         {
-//             MediaStream* stream = iter->second;
-//             stream->Stop();
-//             if (_videoSource != nullptr && stream->GetStreamType() == MEDIA_TYPE_VIDEO)
-//             {
-//                 _videoSource->DelMediaSink(stream);
-//             }
-//             else if (_audioSource != nullptr && stream->GetStreamType() == MEDIA_TYPE_AUDIO)
-//             {
-//                 _audioSource->DelMediaSink(stream);
-//             }
-//         }
+        if (_videoSource != nullptr)
+        {
+            _videoSource->DelMediaSink(this);
+        }
+        if (_audioSource != nullptr)
+        {
+            _audioSource->DelMediaSink(this);
+        }
+
+        std::map<std::string, MediaStream*>::iterator iter;
+        for (iter = streams.begin(); iter != streams.end(); iter++)
+        {
+            MediaStream* stream = iter->second;
+            ChannelManager::GetInstance()->DelEvent(stream->GetProducer());
+            stream->Stop();
+            CodecContext* codec = dynamic_cast<CodecContext*>(stream->GetProducer());
+            if (codec != nullptr)
+            {
+                if (_videoSource != nullptr && stream->GetStreamType() == MEDIA_TYPE_VIDEO)
+                {
+                    _videoSource->DelMediaSink(codec);
+                }
+                else if (_audioSource != nullptr && stream->GetStreamType() == MEDIA_TYPE_AUDIO)
+                {
+                    _audioSource->DelMediaSink(codec);
+                }
+            }
+            else
+            {
+                ERROR("the Producer isn't a MediaSink instance");
+            }
+        }
 
         return false;
     }

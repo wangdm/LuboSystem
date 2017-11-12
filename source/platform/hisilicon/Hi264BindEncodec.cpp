@@ -3,6 +3,7 @@
 
 #ifdef PLATFORM_HISI
 
+#include "../../channel/MediaStream.hpp"
 #include "Platform.hpp"
 #include "HisiError.hpp"
 #include "HisiResource.hpp"
@@ -15,6 +16,9 @@ namespace wdm {
     Hi264BindEncode::Hi264BindEncode()
     {
         VeChn = HI_INVALID_CHN;
+        VencFd = -1;
+
+        event = nullptr;
     }
 
 
@@ -37,6 +41,80 @@ namespace wdm {
 
     //////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////
+    MediaPacket* Hi264BindEncode::GetMedaiPacket()
+    {
+        HI_S32 s32Ret = HI_SUCCESS;
+        VENC_CHN_STAT_S stStat;
+        VENC_STREAM_S stStream;
+        MediaPacket* packet = nullptr;
+
+        memset(&stStream, 0, sizeof(stStream));
+        s32Ret = HI_MPI_VENC_Query(VeChn, &stStat);
+        if (HI_SUCCESS != s32Ret)
+        {
+            return nullptr;
+        }
+        if (stStat.u32CurPacks == 0)
+        {
+            return nullptr;
+        }
+
+        stStream.pstPack = new VENC_PACK_S[stStat.u32CurPacks];
+        if (stStream.pstPack == nullptr)
+        {
+            ERROR("Allocate stream pack memery failed");
+            return nullptr;
+        }
+        stStream.u32PackCount = stStat.u32CurPacks;
+        s32Ret = HI_MPI_VENC_GetStream(VeChn, &stStream, -1);
+        if (s32Ret != HI_SUCCESS)
+        {
+            std::cout << "HI_MPI_VENC_GetStream failed with " << std::hex << s32Ret << std::endl;
+        }
+        else
+        {
+            DEBUG("Get stream ...");
+            uint8_t* data = nullptr;
+            uint32_t size = 0;
+            for (int i = 0; i < stStream.u32PackCount; i++)
+            {
+                size += stStream.pstPack[i].u32Len - stStream.pstPack[i].u32Offset;
+            }
+            packet = new MediaPacket(MEDIA_TYPE_VIDEO, size);
+            data = packet->GetDataPtr();
+
+            uint32_t copysize = 0;
+            for (int i = 0; i < stStream.u32PackCount; i++)
+            {
+                uint32_t packsize = stStream.pstPack[i].u32Len - stStream.pstPack[i].u32Offset;
+                memcpy(data + copysize, stStream.pstPack[i].pu8Addr + stStream.pstPack[i].u32Offset, packsize);
+                copysize += packsize;
+            }
+
+            packet->width = 1920;
+            packet->height = 1080; 
+            packet->timestamp = stStream.pstPack->u64PTS;
+            if (stStream.pstPack->DataType.enH264EType == H264E_NALU_IPSLICE){
+                packet->keyframe = true;
+            }else{
+                packet->keyframe = false;
+            }
+            s32Ret = HI_MPI_VENC_ReleaseStream(VeChn, &stStream);
+        }
+
+        if (stStream.pstPack != nullptr)
+        {
+            delete[] stStream.pstPack;
+            stStream.pstPack = nullptr;
+        }
+
+        return packet;
+
+    }
+
+
+    //////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
     bool Hi264BindEncode::Start()
     {
         DEBUG("Start Hi264BindEncode...");
@@ -44,7 +122,6 @@ namespace wdm {
         {
             return false;
         }
-        Thread::Start();
         return true;
     }
 
@@ -52,7 +129,6 @@ namespace wdm {
     bool Hi264BindEncode::Stop()
     {
         DEBUG("Stop Hi264BindEncode...");
-        Thread::Stop();
         if (StopVenc() != HI_SUCCESS)
         {
             return false;
@@ -61,62 +137,13 @@ namespace wdm {
     }
 
 
-    void Hi264BindEncode::OnLoop()
+    int Hi264BindEncode::GetFD()
     {
-        HI_S32 s32Ret = HI_SUCCESS;
-        VENC_CHN_STAT_S stStat;
-        VENC_STREAM_S stStream;
-
-        while (!IsStopping())
+        if (VencFd < 0)
         {
-            memset(&stStream, 0, sizeof(stStream));
-            s32Ret = HI_MPI_VENC_Query(VeChn, &stStat);
-            if (HI_SUCCESS != s32Ret)
-            {
-                Sleep(10);
-                continue;
-            }
-            if (stStat.u32CurPacks==0)
-            {
-                Sleep(10);
-                continue;
-            }
-
-            std::cout << "u32LeftPics: " << stStat.u32LeftPics << std::endl;
-            std::cout << "u32LeftStreamBytes: " << stStat.u32LeftStreamBytes << std::endl;
-            std::cout << "u32LeftStreamFrames: " << stStat.u32LeftStreamFrames << std::endl;
-            std::cout << "u32CurPacks: " << stStat.u32CurPacks << std::endl;
-            std::cout << "u32LeftRecvPics: " << stStat.u32LeftRecvPics << std::endl;
-            std::cout << "u32LeftEncPics: " << stStat.u32LeftEncPics << std::endl;
-
-            stStream.pstPack = new VENC_PACK_S[stStat.u32CurPacks];
-            if (stStream.pstPack == nullptr)
-            {
-                ERROR("Allocate stream pack memery failed");
-                continue;
-            }
-            stStream.u32PackCount = stStat.u32CurPacks;
-            s32Ret = HI_MPI_VENC_GetStream(VeChn, &stStream, -1);
-            if (s32Ret!=HI_SUCCESS)
-            {
-                //ERROR("HI_MPI_VENC_GetStream failed with " + HiErr(s32Ret));
-                std::cout << "HI_MPI_VENC_GetStream failed with " << std::hex << s32Ret << std::endl;
-                continue;
-            }
-            else
-            {
-                DEBUG("Get Stream...");
-                s32Ret = HI_MPI_VENC_ReleaseStream(VeChn, &stStream);
-            }
-
-            if (stStream.pstPack != nullptr)
-            {
-                delete[] stStream.pstPack;
-                stStream.pstPack = nullptr;
-            }
-
+            return -1;
         }
-
+        return VencFd;
     }
 
 
@@ -166,6 +193,9 @@ namespace wdm {
                 ERROR("HI_MPI_VENC_StartRecvPic failed with " + HiErr(s32Ret));
                 return s32Ret;
             }
+
+            VencFd = HI_MPI_VENC_GetFd(VeChn);
+
             return HI_SUCCESS;
         }
         return HI_FAILURE;
@@ -193,6 +223,7 @@ namespace wdm {
 
             HisiResource::GetInstance()->ReleaseVenc(VeChn);
             VeChn = HI_INVALID_CHN;
+            VencFd = -1;
 
             return HI_SUCCESS;
         }

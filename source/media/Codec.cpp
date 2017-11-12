@@ -14,25 +14,25 @@ namespace wdm
     }
 
 
-    void Codec::SetPrivateContext(CodecContext* context, void* priv)
+    void Codec::SetPrivateContext(SampleCodecContext* context, void* priv)
     {
         context->context = priv;
     }
 
 
-    void Codec::GetPrivateContext(CodecContext* context, void** priv)
+    void Codec::GetPrivateContext(SampleCodecContext* context, void** priv)
     {
         *priv = context->context;
     }
 
 
-    void Codec::SetPrivateConverter(CodecContext* context, void* priv)
+    void Codec::SetPrivateConverter(SampleCodecContext* context, void* priv)
     {
         context->converter = priv;
     }
 
 
-    void Codec::GetPrivateConverter(CodecContext* context, void** priv)
+    void Codec::GetPrivateConverter(SampleCodecContext* context, void** priv)
     {
         *priv = context->converter;
     }

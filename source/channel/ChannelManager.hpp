@@ -36,8 +36,8 @@ namespace wdm
 		void StartSourceMoniter();
 		void StopSourceMoniter();
 
-        void AddEvent(Event* e);
-        void DelEvent(Event* e);
+        void AddEvent(EventSource* es);
+        void DelEvent(EventSource* es);
         void StartListenEvent();
         void StopListenEvent();
 

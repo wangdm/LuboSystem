@@ -50,8 +50,7 @@ namespace wdm {
         virtual bool Start();
         virtual bool Stop();
 
-    protected:
-        virtual void handleEvent(Event* e, EventFlag f) override;
+        virtual void handleEvent(Event* e) override;
 
     private:
         MediaPacket* CreatePacket();
@@ -64,7 +63,6 @@ namespace wdm {
         std::vector<StreamConsumer*> consumers;
 
         Property prop;
-        Event* event;
 
         MediaType type;
 
@@ -77,7 +75,6 @@ namespace wdm {
         uint32_t samplerate;
         uint32_t samplebit;
         uint32_t channels;
-
 
 	};
 

@@ -154,7 +154,7 @@ namespace wdm {
 	/// protect method
 	//////////////////////////////////////////////////////////////////////////
 
-    void Channel::handleEvent(Event* e, EventFlag f)
+    void Channel::handleEvent(Event* e)
     {
     }
 

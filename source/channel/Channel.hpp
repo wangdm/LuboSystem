@@ -83,7 +83,7 @@ namespace wdm {
         FilterParam filterParam;
         
     protected:
-        virtual void handleEvent(Event* e, EventFlag f) override;
+        virtual void handleEvent(Event* e) override;
 		virtual void OnSourceEvent(MediaType& type, SourceEvent& event, void* param);
 
 		std::map<std::string, MediaStream*> streams;

@@ -2,6 +2,7 @@
 
 
 #include "../base/Thread.hpp"
+#include "../base/Event.hpp"
 
 #include "../media/MediaPacket.hpp"
 
@@ -9,7 +10,7 @@ namespace wdm {
 
     class MediaStream;
 
-	class StreamProducer
+	class StreamProducer : public EventSource
 	{
 	public:
         StreamProducer();
@@ -17,6 +18,8 @@ namespace wdm {
 		virtual ~StreamProducer();
 
         virtual void SetMediaStream(MediaStream* stream);
+
+        virtual MediaPacket* GetMedaiPacket() = 0;
 
         virtual bool Start() = 0;
         virtual bool Stop() = 0;

@@ -9,7 +9,7 @@
 
 namespace wdm {
 
-    class Hi264BindEncode : public CodecContext, public Thread
+    class Hi264BindEncode : public CodecContext
     {
     public:
         Hi264BindEncode();
@@ -18,18 +18,22 @@ namespace wdm {
         virtual void OnFrame(MediaFrame* frame);
         virtual SinkMethod GetSinkMethod();
 
+        virtual MediaPacket* GetMedaiPacket();
+
         virtual bool Start();
         virtual bool Stop();
+
+        virtual int GetFD() override;
 
         HI_S32 StartVenc();
         HI_S32 StopVenc();
         HI_S32 GetMppChn(MPP_CHN_S& stMppChn);
 
-    protected:
-        virtual void OnLoop();
-
     private:
         VENC_CHN VeChn;
+        HI_S32 VencFd;
+
+        Event* event;
 
     };
 

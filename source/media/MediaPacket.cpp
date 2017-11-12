@@ -9,15 +9,29 @@ namespace wdm {
 	//////////////////////////////////////////////////////////////////////////
 
     MediaPacket::MediaPacket(const MediaType type)
-        :_type(type)
+        : _type(type)
         , _data(nullptr)
         , _dataSize(0)
     {
     }
 
 
+    MediaPacket::MediaPacket(const MediaType type, const uint32_t size)
+        : _type(type)
+        , _data(nullptr)
+        , _dataSize(size)
+    {
+        _data = new uint8_t[size];
+        if (_data != nullptr)
+        {
+            _dataSize = size;
+            memset(_data, 0, _dataSize);
+        }
+    }
+
+
     MediaPacket::MediaPacket(const MediaType type, const uint8_t* data, const uint32_t size)
-        :_type(type)
+        : _type(type)
         , _data(nullptr)
         , _dataSize(0)
     {
@@ -109,6 +123,12 @@ namespace wdm {
     uint32_t MediaPacket::GetPacketSize() const
     {
         return _dataSize;
+    }
+
+
+    uint8_t* MediaPacket::GetDataPtr() const
+    {
+        return _data;
     }
 
 }

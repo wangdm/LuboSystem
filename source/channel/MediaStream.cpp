@@ -80,6 +80,9 @@ namespace wdm {
         if (producer!=nullptr)
         {
             this->producer = producer;
+            producer->SetMediaStream(this);
+            producer->SetEventHandler(this);
+            producer->SetEventFlag(EVENT_FLAG_READ);
         }
     }
 
@@ -158,13 +161,17 @@ namespace wdm {
     }
 
 
-    void MediaStream::handleEvent(Event* e, EventFlag f)
+    void MediaStream::handleEvent(Event* e)
     {
-        MediaPacket* packet = ReadPacket();
-        std::for_each(consumers.begin(), consumers.end(), [&](StreamConsumer* consumer)
+        MediaPacket* packet = producer->GetMedaiPacket();
+        if (packet != nullptr)
         {
-            consumer->OnStream(packet);
-        });
+            std::for_each(consumers.begin(), consumers.end(), [&](StreamConsumer* consumer)
+            {
+                consumer->OnStream(packet);
+            });
+            packet->Release();
+        }
     }
 
 

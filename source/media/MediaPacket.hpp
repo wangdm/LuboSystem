@@ -10,6 +10,7 @@ namespace wdm {
 	{
 	public:
         MediaPacket(const MediaType type);
+        MediaPacket(const MediaType type, const uint32_t size);
         MediaPacket(const MediaType type, const uint8_t* data, const uint32_t size);
 		virtual ~MediaPacket();
 
@@ -19,6 +20,7 @@ namespace wdm {
         uint32_t Copy(const MediaPacket* packet);
         uint32_t Copy(const uint8_t* data, const uint32_t size);
         uint32_t GetPacketSize() const;
+        uint8_t* GetDataPtr() const;
 
 	private:
 		MediaType _type;

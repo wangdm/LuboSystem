@@ -7,7 +7,6 @@
 
 namespace wdm 
 {
-
 	class LocalChannel : public Channel {
 
 	public:

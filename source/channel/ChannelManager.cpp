@@ -15,6 +15,8 @@ namespace wdm
             channel->Init(nullptr);
             channels.push_back(channel);
         }
+
+        listener = EventListener::CreateEventListener("select");
 	}
 
 
@@ -26,6 +28,11 @@ namespace wdm
             Channel* channel = *iter;
             iter = channels.erase(iter);
             delete channel;
+        }
+
+        if (listener != nullptr)
+        {
+            delete listener;
         }
 	}
 
@@ -130,15 +137,15 @@ namespace wdm
 	}
 
 
-    void ChannelManager::AddEvent(Event* e)
+    void ChannelManager::AddEvent(EventSource* es)
     {
-        listener->AddEvent(e);
+        listener->AddEventSource(es);
     }
 
 
-    void ChannelManager::DelEvent(Event* e)
+    void ChannelManager::DelEvent(EventSource* es)
     {
-        listener->DelEvent(e);
+        listener->DelEventSource(es);
     }
 
 

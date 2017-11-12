@@ -29,7 +29,7 @@ namespace wdm
         CODEC_ID_OPUS
     };
 
-    class CodecContext;
+    class SampleCodecContext;
 
     class Codec
     {
@@ -38,18 +38,18 @@ namespace wdm
         Codec(CodecType type, CodecID id, const std::string& name);
         virtual ~Codec() {};
 
-        virtual bool Config(CodecContext* context, Property& config) = 0;
-        virtual void FreePrivate(CodecContext* context) = 0;
+        virtual bool Config(SampleCodecContext* context, Property& config) = 0;
+        virtual void FreePrivate(SampleCodecContext* context) = 0;
 
         virtual CodecType GetCodecType() const { return type; };
         virtual CodecID GetCodecID() const { return codecId; };
         virtual std::string GetCodecName() const { return name; };
 
     protected:
-        void SetPrivateContext(CodecContext* context, void* priv);
-        void GetPrivateContext(CodecContext* context, void** priv);
-        void SetPrivateConverter(CodecContext* context, void* priv);
-        void GetPrivateConverter(CodecContext* context, void** priv);
+        void SetPrivateContext(SampleCodecContext* context, void* priv);
+        void GetPrivateContext(SampleCodecContext* context, void** priv);
+        void SetPrivateConverter(SampleCodecContext* context, void* priv);
+        void GetPrivateConverter(SampleCodecContext* context, void** priv);
 
 
     protected:
@@ -67,7 +67,7 @@ namespace wdm
         Encoder(CodecID id, const std::string& name) : Codec(CODEC_TYPE_ENCODER, id, name) {};
         virtual ~Encoder() {};
 
-        virtual bool Encode(CodecContext* context, MediaFrame* frame, MediaPacket** packet) = 0;
+        virtual bool Encode(SampleCodecContext* context, MediaFrame* frame, MediaPacket** packet) = 0;
 
     private:
 
@@ -81,7 +81,7 @@ namespace wdm
         Decoder(CodecID id, const std::string& name) : Codec(CODEC_TYPE_DECODER, id, name) {};
         virtual ~Decoder() {};
 
-        virtual bool Decode(CodecContext* context, MediaPacket* packet, MediaFrame** frame) = 0;
+        virtual bool Decode(SampleCodecContext* context, MediaPacket* packet, MediaFrame** frame) = 0;
 
     private:
 

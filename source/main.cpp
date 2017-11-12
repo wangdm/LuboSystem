@@ -47,6 +47,7 @@ int main(int argc, char* [])
     Platform::Init("platform.conf");
     ChannelManager::Initialize("");
     ChannelManager::GetInstance()->StartLocalChannel();
+    ChannelManager::GetInstance()->StartListenEvent();
 
     bool quit = false;
     while (!quit)
@@ -54,7 +55,7 @@ int main(int argc, char* [])
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 
-
+    ChannelManager::GetInstance()->StopListenEvent();
     ChannelManager::GetInstance()->StopLocalChannel();
     ChannelManager::Uninitialize();
     Platform::Uninit();

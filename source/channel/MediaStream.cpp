@@ -1,4 +1,4 @@
-#include "../base/Log.hpp"
+#include "../core/Log.hpp"
 #include "../media/MediaPacket.hpp"
 #include "../channel/Channel.hpp"
 
@@ -58,12 +58,14 @@ namespace wdm {
 
     void MediaStream::AddConsumer(StreamConsumer* consumer)
     {
+        _LOCK(&consumerMtx);
         consumers.push_back(consumer);
     }
 
 
     void MediaStream::DelConsumer(StreamConsumer* consumer)
     {
+        _LOCK(&consumerMtx);
         std::vector<StreamConsumer*>::iterator iter = consumers.begin();
         for (; iter != consumers.end(); iter++)
         {
@@ -166,6 +168,8 @@ namespace wdm {
         MediaPacket* packet = producer->GetMedaiPacket();
         if (packet != nullptr)
         {
+            //std::cout << "consumers size is " << consumers.size() << std::endl;
+            _LOCK(&consumerMtx);
             std::for_each(consumers.begin(), consumers.end(), [&](StreamConsumer* consumer)
             {
                 consumer->OnStream(packet);

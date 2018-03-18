@@ -1,7 +1,7 @@
 #ifndef _CODEC_H_
 #define _CODEC_H_
 
-#include "../base/Property.hpp"
+#include "../core/Property.hpp"
 
 #include "MediaFrame.hpp"
 #include "MediaPacket.hpp"

@@ -117,6 +117,12 @@ namespace wdm {
     }
 
 
+    CodecContext* Platform::CreateCondecContext(CodecID id, const std::string& name)
+    {
+        return nullptr;
+    }
+
+
     bool IsPropertyMatch(const Property& prop, VideoAttribute* attribute)
     {
         int val;

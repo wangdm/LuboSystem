@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="base">
-      <UniqueIdentifier>{8a45ef7a-9f3a-4e6a-83ea-a2a04f5d89bf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="device">
       <UniqueIdentifier>{745e6992-6edf-4e8c-b2a3-553860744771}</UniqueIdentifier>
     </Filter>
@@ -40,17 +37,20 @@
     <Filter Include="platform\hisilicon">
       <UniqueIdentifier>{fc717173-0023-4a9c-a88e-b168095fbc52}</UniqueIdentifier>
     </Filter>
+    <Filter Include="net">
+      <UniqueIdentifier>{259e5f4d-f36a-4fe9-9f14-9c806b3c74ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="server\http">
+      <UniqueIdentifier>{d3d45443-bd56-43e5-bb88-a73153c080cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core">
+      <UniqueIdentifier>{8a45ef7a-9f3a-4e6a-83ea-a2a04f5d89bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\event">
+      <UniqueIdentifier>{0900add5-695e-49f2-96e0-d44b418a0af0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\source\base\Config.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\base\Log.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\base\Signal.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\channel\Capture.cpp">
       <Filter>channel</Filter>
     </ClCompile>
@@ -71,12 +71,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\device\Storage.cpp">
       <Filter>device</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\server\BaseServer.cpp">
-      <Filter>server</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\server\HttpServer.cpp">
-      <Filter>server</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\server\RtmpServer.cpp">
       <Filter>server</Filter>
@@ -109,23 +103,8 @@
       <Filter>3rdparty</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\main.cpp" />
-    <ClCompile Include="..\..\..\source\base\Property.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\base\Variant.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\channel\MediaStream.cpp">
       <Filter>channel</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\base\Mutex.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\base\Thread.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\base\Event.cpp">
-      <Filter>base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\media\MediaFrame.cpp">
       <Filter>media</Filter>
@@ -160,26 +139,11 @@
     <ClCompile Include="..\..\..\source\platform\wmf\Platform.cpp">
       <Filter>platform\wmf</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\base\Object.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\codec\FfmpegH264Encode.cpp">
       <Filter>codec</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\codec\FfmpegUtils.cpp">
       <Filter>codec</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\platform\hisilicon\Platform.cpp">
-      <Filter>platform\hisilicon</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\platform\hisilicon\VICapture.cpp">
-      <Filter>platform\hisilicon</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\platform\hisilicon\HisiError.cpp">
-      <Filter>platform\hisilicon</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\platform\hisilicon\HisiResource.cpp">
-      <Filter>platform\hisilicon</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\media\CodecContext.cpp">
       <Filter>media</Filter>
@@ -187,20 +151,95 @@
     <ClCompile Include="..\..\..\source\stream\StreamProducer.cpp">
       <Filter>stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\platform\hisilicon\Hi264BindEncodec.cpp">
-      <Filter>platform\hisilicon</Filter>
+    <ClCompile Include="..\..\..\source\net\Acceptor.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\net\Server.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\net\Address.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\net\BaseSocket.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\net\TcpSocket.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\net\UdpSocket.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\server\http\HttpServer.cpp">
+      <Filter>server\http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\server\http\HttpFilter.cpp">
+      <Filter>server\http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\server\http\HttpHandler.cpp">
+      <Filter>server\http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\server\http\HttpMapping.cpp">
+      <Filter>server\http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\server\http\HttpParser.cpp">
+      <Filter>server\http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\server\http\HttpRequest.cpp">
+      <Filter>server\http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\server\http\HttpResponse.cpp">
+      <Filter>server\http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\server\http\HttpSession.cpp">
+      <Filter>server\http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\server\http\HttpError.hpp">
+      <Filter>server\http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\core\event\EpollEventListener.cpp">
+      <Filter>core\event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\core\event\Event.cpp">
+      <Filter>core\event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\core\event\EventHandler.cpp">
+      <Filter>core\event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\core\event\EventListener.cpp">
+      <Filter>core\event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\core\event\EventSource.cpp">
+      <Filter>core\event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\core\event\SelectEventListener.cpp">
+      <Filter>core\event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\core\Config.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\core\Log.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\core\Mutex.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\core\Object.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\core\Property.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\core\Signal.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\core\Thread.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\core\Variant.cpp">
+      <Filter>core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\source\base\Config.hpp">
-      <Filter>base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\base\Log.hpp">
-      <Filter>base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\base\Signal.hpp">
-      <Filter>base</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\source\channel\Capture.hpp">
       <Filter>channel</Filter>
     </ClInclude>
@@ -221,12 +260,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\device\Storage.hpp">
       <Filter>device</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\server\BaseServer.hpp">
-      <Filter>server</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\server\HttpServer.hpp">
-      <Filter>server</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\source\server\RtmpServer.hpp">
       <Filter>server</Filter>
@@ -258,23 +291,8 @@
     <ClInclude Include="..\..\..\source\3rdparty\cJSON.h">
       <Filter>3rdparty</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\source\base\Property.hpp">
-      <Filter>base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\base\Variant.hpp">
-      <Filter>base</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\source\channel\MediaStream.hpp">
       <Filter>channel</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\base\Mutex.hpp">
-      <Filter>base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\base\Thread.hpp">
-      <Filter>base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\base\Event.hpp">
-      <Filter>base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\source\media\MediaFrame.hpp">
       <Filter>media</Filter>
@@ -312,26 +330,11 @@
     <ClInclude Include="..\..\..\source\platform\Platform.hpp">
       <Filter>platform</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\source\base\Object.hpp">
-      <Filter>base</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\source\codec\FfmpegH264Encode.hpp">
       <Filter>codec</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\source\codec\FfmpegUtils.hpp">
       <Filter>codec</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\platform\hisilicon\Platform.hpp">
-      <Filter>platform\hisilicon</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\platform\hisilicon\HisiError.hpp">
-      <Filter>platform\hisilicon</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\platform\hisilicon\VICapture.hpp">
-      <Filter>platform\hisilicon</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\source\platform\hisilicon\HisiResource.hpp">
-      <Filter>platform\hisilicon</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\source\media\CodecContext.hpp">
       <Filter>media</Filter>
@@ -339,8 +342,77 @@
     <ClInclude Include="..\..\..\source\stream\StreamProducer.hpp">
       <Filter>stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\source\platform\hisilicon\Hi264BindEncodec.hpp">
-      <Filter>platform\hisilicon</Filter>
+    <ClInclude Include="..\..\..\source\net\Acceptor.hpp">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\net\Server.hpp">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\net\Socket.hpp">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\net\Address.hpp">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\net\BaseSocket.hpp">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\server\http\HttpServer.hpp">
+      <Filter>server\http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\server\http\HttpFilter.hpp">
+      <Filter>server\http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\server\http\HttpHandler.hpp">
+      <Filter>server\http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\server\http\HttpMapping.hpp">
+      <Filter>server\http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\server\http\HttpParser.hpp">
+      <Filter>server\http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\server\http\HttpRequest.hpp">
+      <Filter>server\http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\server\http\HttpResponse.hpp">
+      <Filter>server\http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\server\http\HttpSession.hpp">
+      <Filter>server\http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\server\http\HttpCommon.hpp">
+      <Filter>server\http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\core\event\Event.hpp">
+      <Filter>core\event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\core\Config.hpp">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\core\Log.hpp">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\core\Mutex.hpp">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\core\Object.hpp">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\core\Platform.hpp">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\core\Property.hpp">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\core\Signal.hpp">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\core\Thread.hpp">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\core\Variant.hpp">
+      <Filter>core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

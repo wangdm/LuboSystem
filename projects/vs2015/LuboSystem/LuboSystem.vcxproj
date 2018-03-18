@@ -99,7 +99,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;PLATFORM_WMF;PLATFORM_HISI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;PLATFORM_WMF;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -111,7 +111,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;PLATFORM_WMF;PLATFORM_HISI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;PLATFORM_WMF;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -125,7 +125,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;PLATFORM_WMF;PLATFORM_HISI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;PLATFORM_WMF;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -141,7 +141,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;PLATFORM_WMF;PLATFORM_HISI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;PLATFORM_WMF;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -152,15 +152,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\3rdparty\cJSON.c" />
-    <ClCompile Include="..\..\..\source\base\Config.cpp" />
-    <ClCompile Include="..\..\..\source\base\Event.cpp" />
-    <ClCompile Include="..\..\..\source\base\Log.cpp" />
-    <ClCompile Include="..\..\..\source\base\Mutex.cpp" />
-    <ClCompile Include="..\..\..\source\base\Object.cpp" />
-    <ClCompile Include="..\..\..\source\base\Property.cpp" />
-    <ClCompile Include="..\..\..\source\base\Signal.cpp" />
-    <ClCompile Include="..\..\..\source\base\Thread.cpp" />
-    <ClCompile Include="..\..\..\source\base\Variant.cpp" />
     <ClCompile Include="..\..\..\source\channel\Capture.cpp" />
     <ClCompile Include="..\..\..\source\channel\Channel.cpp" />
     <ClCompile Include="..\..\..\source\channel\ChannelManager.cpp" />
@@ -168,6 +159,20 @@
     <ClCompile Include="..\..\..\source\channel\MediaStream.cpp" />
     <ClCompile Include="..\..\..\source\codec\FfmpegH264Encode.cpp" />
     <ClCompile Include="..\..\..\source\codec\FfmpegUtils.cpp" />
+    <ClCompile Include="..\..\..\source\core\Config.cpp" />
+    <ClCompile Include="..\..\..\source\core\event\EpollEventListener.cpp" />
+    <ClCompile Include="..\..\..\source\core\event\Event.cpp" />
+    <ClCompile Include="..\..\..\source\core\event\EventHandler.cpp" />
+    <ClCompile Include="..\..\..\source\core\event\EventListener.cpp" />
+    <ClCompile Include="..\..\..\source\core\event\EventSource.cpp" />
+    <ClCompile Include="..\..\..\source\core\event\SelectEventListener.cpp" />
+    <ClCompile Include="..\..\..\source\core\Log.cpp" />
+    <ClCompile Include="..\..\..\source\core\Mutex.cpp" />
+    <ClCompile Include="..\..\..\source\core\Object.cpp" />
+    <ClCompile Include="..\..\..\source\core\Property.cpp" />
+    <ClCompile Include="..\..\..\source\core\Signal.cpp" />
+    <ClCompile Include="..\..\..\source\core\Thread.cpp" />
+    <ClCompile Include="..\..\..\source\core\Variant.cpp" />
     <ClCompile Include="..\..\..\source\device\DeviceManager.cpp" />
     <ClCompile Include="..\..\..\source\device\Ethernet.cpp" />
     <ClCompile Include="..\..\..\source\device\SerialPort.cpp" />
@@ -181,17 +186,25 @@
     <ClCompile Include="..\..\..\source\media\MediaSource.cpp" />
     <ClCompile Include="..\..\..\source\media\MediaType.cpp" />
     <ClCompile Include="..\..\..\source\media\PacketQueue.cpp" />
-    <ClCompile Include="..\..\..\source\platform\hisilicon\Hi264BindEncodec.cpp" />
-    <ClCompile Include="..\..\..\source\platform\hisilicon\HisiError.cpp" />
-    <ClCompile Include="..\..\..\source\platform\hisilicon\HisiResource.cpp" />
-    <ClCompile Include="..\..\..\source\platform\hisilicon\Platform.cpp" />
-    <ClCompile Include="..\..\..\source\platform\hisilicon\VICapture.cpp" />
+    <ClCompile Include="..\..\..\source\net\Acceptor.cpp" />
+    <ClCompile Include="..\..\..\source\net\Address.cpp" />
+    <ClCompile Include="..\..\..\source\net\BaseSocket.cpp" />
+    <ClCompile Include="..\..\..\source\net\Server.cpp" />
+    <ClCompile Include="..\..\..\source\net\TcpSocket.cpp" />
+    <ClCompile Include="..\..\..\source\net\UdpSocket.cpp" />
     <ClCompile Include="..\..\..\source\platform\wmf\AudioCapture.cpp" />
     <ClCompile Include="..\..\..\source\platform\wmf\MFMediaFrame.cpp" />
     <ClCompile Include="..\..\..\source\platform\wmf\Platform.cpp" />
     <ClCompile Include="..\..\..\source\platform\wmf\VideoCapture.cpp" />
-    <ClCompile Include="..\..\..\source\server\BaseServer.cpp" />
-    <ClCompile Include="..\..\..\source\server\HttpServer.cpp" />
+    <ClCompile Include="..\..\..\source\server\http\HttpError.hpp" />
+    <ClCompile Include="..\..\..\source\server\http\HttpFilter.cpp" />
+    <ClCompile Include="..\..\..\source\server\http\HttpHandler.cpp" />
+    <ClCompile Include="..\..\..\source\server\http\HttpMapping.cpp" />
+    <ClCompile Include="..\..\..\source\server\http\HttpParser.cpp" />
+    <ClCompile Include="..\..\..\source\server\http\HttpRequest.cpp" />
+    <ClCompile Include="..\..\..\source\server\http\HttpResponse.cpp" />
+    <ClCompile Include="..\..\..\source\server\http\HttpServer.cpp" />
+    <ClCompile Include="..\..\..\source\server\http\HttpSession.cpp" />
     <ClCompile Include="..\..\..\source\server\RtmpServer.cpp" />
     <ClCompile Include="..\..\..\source\server\RtspServer.cpp" />
     <ClCompile Include="..\..\..\source\server\ServerManager.cpp" />
@@ -204,15 +217,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\3rdparty\cJSON.h" />
-    <ClInclude Include="..\..\..\source\base\Config.hpp" />
-    <ClInclude Include="..\..\..\source\base\Event.hpp" />
-    <ClInclude Include="..\..\..\source\base\Log.hpp" />
-    <ClInclude Include="..\..\..\source\base\Mutex.hpp" />
-    <ClInclude Include="..\..\..\source\base\Object.hpp" />
-    <ClInclude Include="..\..\..\source\base\Property.hpp" />
-    <ClInclude Include="..\..\..\source\base\Signal.hpp" />
-    <ClInclude Include="..\..\..\source\base\Thread.hpp" />
-    <ClInclude Include="..\..\..\source\base\Variant.hpp" />
     <ClInclude Include="..\..\..\source\channel\Capture.hpp" />
     <ClInclude Include="..\..\..\source\channel\Channel.hpp" />
     <ClInclude Include="..\..\..\source\channel\ChannelManager.hpp" />
@@ -220,6 +224,16 @@
     <ClInclude Include="..\..\..\source\channel\MediaStream.hpp" />
     <ClInclude Include="..\..\..\source\codec\FfmpegH264Encode.hpp" />
     <ClInclude Include="..\..\..\source\codec\FfmpegUtils.hpp" />
+    <ClInclude Include="..\..\..\source\core\Config.hpp" />
+    <ClInclude Include="..\..\..\source\core\event\Event.hpp" />
+    <ClInclude Include="..\..\..\source\core\Log.hpp" />
+    <ClInclude Include="..\..\..\source\core\Mutex.hpp" />
+    <ClInclude Include="..\..\..\source\core\Object.hpp" />
+    <ClInclude Include="..\..\..\source\core\Platform.hpp" />
+    <ClInclude Include="..\..\..\source\core\Property.hpp" />
+    <ClInclude Include="..\..\..\source\core\Signal.hpp" />
+    <ClInclude Include="..\..\..\source\core\Thread.hpp" />
+    <ClInclude Include="..\..\..\source\core\Variant.hpp" />
     <ClInclude Include="..\..\..\source\device\DeviceManager.hpp" />
     <ClInclude Include="..\..\..\source\device\Ethernet.hpp" />
     <ClInclude Include="..\..\..\source\device\SerialPort.hpp" />
@@ -232,18 +246,25 @@
     <ClInclude Include="..\..\..\source\media\MediaSource.hpp" />
     <ClInclude Include="..\..\..\source\media\MediaType.hpp" />
     <ClInclude Include="..\..\..\source\media\PacketQueue.hpp" />
-    <ClInclude Include="..\..\..\source\platform\hisilicon\Hi264BindEncodec.hpp" />
-    <ClInclude Include="..\..\..\source\platform\hisilicon\HisiError.hpp" />
-    <ClInclude Include="..\..\..\source\platform\hisilicon\HisiResource.hpp" />
-    <ClInclude Include="..\..\..\source\platform\hisilicon\Platform.hpp" />
-    <ClInclude Include="..\..\..\source\platform\hisilicon\VICapture.hpp" />
+    <ClInclude Include="..\..\..\source\net\Acceptor.hpp" />
+    <ClInclude Include="..\..\..\source\net\Address.hpp" />
+    <ClInclude Include="..\..\..\source\net\BaseSocket.hpp" />
+    <ClInclude Include="..\..\..\source\net\Server.hpp" />
+    <ClInclude Include="..\..\..\source\net\Socket.hpp" />
     <ClInclude Include="..\..\..\source\platform\Platform.hpp" />
     <ClInclude Include="..\..\..\source\platform\wmf\AudioCapture.h" />
     <ClInclude Include="..\..\..\source\platform\wmf\MFMediaFrame.h" />
     <ClInclude Include="..\..\..\source\platform\wmf\Platform.hpp" />
     <ClInclude Include="..\..\..\source\platform\wmf\VideoCapture.h" />
-    <ClInclude Include="..\..\..\source\server\BaseServer.hpp" />
-    <ClInclude Include="..\..\..\source\server\HttpServer.hpp" />
+    <ClInclude Include="..\..\..\source\server\http\HttpCommon.hpp" />
+    <ClInclude Include="..\..\..\source\server\http\HttpFilter.hpp" />
+    <ClInclude Include="..\..\..\source\server\http\HttpHandler.hpp" />
+    <ClInclude Include="..\..\..\source\server\http\HttpMapping.hpp" />
+    <ClInclude Include="..\..\..\source\server\http\HttpParser.hpp" />
+    <ClInclude Include="..\..\..\source\server\http\HttpRequest.hpp" />
+    <ClInclude Include="..\..\..\source\server\http\HttpResponse.hpp" />
+    <ClInclude Include="..\..\..\source\server\http\HttpServer.hpp" />
+    <ClInclude Include="..\..\..\source\server\http\HttpSession.hpp" />
     <ClInclude Include="..\..\..\source\server\RtmpServer.hpp" />
     <ClInclude Include="..\..\..\source\server\RtspServer.hpp" />
     <ClInclude Include="..\..\..\source\server\ServerManager.hpp" />

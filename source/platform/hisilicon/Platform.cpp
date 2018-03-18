@@ -21,11 +21,11 @@ namespace wdm {
         config = new Config(cfile);
 
         std::vector<Object*> vConfigs;
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 4; i++)
         {
             Config* vConfig = new Config();
-            (*vConfig)["videv"] = i;
-            (*vConfig)["vichn"] = 4 * i;
+            (*vConfig)["videv"] = i * 2 + 1;
+            (*vConfig)["vichn"] = i * 8 + 4;
             vConfigs.push_back(vConfig);
         }
         config->SetValue("videoCapture", vConfigs);
@@ -136,7 +136,7 @@ namespace wdm {
     }
 
 
-    CodecContext* Platform::CreateCondecContext()
+    CodecContext* Platform::CreateCondecContext(CodecID id, const std::string& name)
     {
         return new Hi264BindEncode();
     }

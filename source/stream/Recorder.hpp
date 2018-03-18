@@ -1,6 +1,10 @@
 #pragma once
 
-#include "../base/Thread.hpp"
+#include <fstream>
+#include <chrono>
+#include <ctime>
+
+#include "../core/Thread.hpp"
 
 #include "StreamConsumer.hpp"
 
@@ -20,6 +24,8 @@ namespace wdm
         virtual void OnStop() override;
 
     private:
+        std::ofstream recfile;
+        bool bneedkey;
 
     };
 }

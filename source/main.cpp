@@ -1,10 +1,13 @@
-#include "base/Log.hpp"
-#include "base/Config.hpp"
-#include "base/Mutex.hpp"
+#include "core/Log.hpp"
+#include "core/Config.hpp"
+#include "core/Mutex.hpp"
 
 #include "platform/Platform.hpp"
 #include "channel/ChannelManager.hpp"
 #include "channel/LocalChannel.hpp"
+
+#include "server/http/HttpServer.hpp"
+
 
 #include <iostream>
 
@@ -38,13 +41,26 @@ void test_wchar()
 }
 
 
-int g_Quit = false;
+void test_http()
+{
+    HttpServer* server = HttpServer::GetInstance();
+    server->AddAcceptor("127.0.0.1", "80");
 
-int main(int argc, char* [])
+    server->Start();
+
+    bool quit = false;
+    while (!quit)
+    {
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
+
+    server->Stop();
+}
+
+
+void test_channel()
 {
     test_wchar();
-	Logger::Initialize(std::string(""));
-    Platform::Init("platform.conf");
     ChannelManager::Initialize("");
     ChannelManager::GetInstance()->StartLocalChannel();
     ChannelManager::GetInstance()->StartListenEvent();
@@ -58,7 +74,17 @@ int main(int argc, char* [])
     ChannelManager::GetInstance()->StopListenEvent();
     ChannelManager::GetInstance()->StopLocalChannel();
     ChannelManager::Uninitialize();
+}
+
+
+int g_Quit = false;
+
+int main(int argc, char* [])
+{
+    Logger::Initialize(std::string(""));
+    Platform::Init("platform.conf");
+    test_http();
     Platform::Uninit();
-	Logger::Uninitialize();
+    Logger::Uninitialize();
 	return 0;
 }

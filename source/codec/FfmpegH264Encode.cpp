@@ -20,7 +20,7 @@ namespace wdm
     }
 
 
-    bool FfmpegH264Encode::Config(CodecContext* context, Property& config)
+    bool FfmpegH264Encode::Config(SampleCodecContext* context, Property& config)
     {
         AVCodecContext* codecCtx = nullptr;
         AVCodec* codec = nullptr;
@@ -84,7 +84,7 @@ namespace wdm
     }
 
 
-    bool FfmpegH264Encode::Encode(CodecContext* context, MediaFrame* frame, MediaPacket** ppacket)
+    bool FfmpegH264Encode::Encode(SampleCodecContext* context, MediaFrame* frame, MediaPacket** ppacket)
     {
         AVCodecContext* codecCtx = nullptr;
         SwsContext* swsCtx = nullptr;
@@ -145,7 +145,7 @@ namespace wdm
     }
 
 
-    void FfmpegH264Encode::FreePrivate(CodecContext* context)
+    void FfmpegH264Encode::FreePrivate(SampleCodecContext* context)
     {
         AVCodecContext* codecCtx = nullptr;
         SwsContext* swsCtx = nullptr;

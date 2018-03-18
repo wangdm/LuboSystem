@@ -10,12 +10,13 @@
 #include <string>
 #include <sstream>
 
+extern "C" {
 #include "hi3531a/mpi_sys.h"
 #include "hi3531a/mpi_vb.h"
 #include "hi3531a/mpi_vi.h"
 #include "hi3531a/mpi_vpss.h"
 #include "hi3531a/mpi_venc.h"
-
+}
 #include "../../base/Property.hpp"
 #include "../../base/Log.hpp"
 #include "../../media/MediaType.hpp"

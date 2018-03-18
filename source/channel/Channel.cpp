@@ -1,4 +1,4 @@
-#include "../base/Log.hpp"
+#include "../core/Log.hpp"
 #include "Channel.hpp"
 
 
@@ -95,6 +95,10 @@ namespace wdm {
         if (pstream!=nullptr)
         {
             consumer->SetMediaStream(pstream);
+        }
+        else
+        {
+            WARN("No MediaStream named " + stream);
         }
     }
 

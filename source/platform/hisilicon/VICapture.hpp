@@ -41,7 +41,7 @@ namespace wdm {
         VI_CHN_ATTR_S stChnAttr;
 
         VPSS_GRP_ATTR_S stVpssAttr;
-        VPSS_GRP_PARAM_S stVpssPara;
+        VPSS_GRP_PARAM_S stVpssParam;
 
     private:
         HI_S32 StartVi();

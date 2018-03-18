@@ -32,17 +32,10 @@ namespace wdm {
         memset(&stDevAttr, 0, sizeof(VI_DEV_ATTR_S));
         stDevAttr.enIntfMode = VI_MODE_BT1120_STANDARD;
         stDevAttr.enWorkMode = VI_WORK_MODE_1Multiplex;
-        if (videv % 2 == 0)
-        {
-            stDevAttr.au32CompMask[0] = 0xFF000000;
-            stDevAttr.au32CompMask[1] = 0xFF0000;
-        } 
-        else
-        {
-            stDevAttr.au32CompMask[0] = 0xFF0000;
-            stDevAttr.au32CompMask[1] = 0x00;
-        }
+        stDevAttr.au32CompMask[0] = 0xFF000000;
+        stDevAttr.au32CompMask[1] = 0xFF0000;
         stDevAttr.enClkEdge = VI_CLK_EDGE_SINGLE_UP;
+        stDevAttr.enDataSeq = VI_INPUT_DATA_UVUV;
         stDevAttr.s32AdChnId[0] = { -1 };
         stDevAttr.s32AdChnId[1] = { -1 };
         stDevAttr.s32AdChnId[2] = { -1 };
@@ -56,19 +49,19 @@ namespace wdm {
         stChnAttr.enPixFormat = PIXEL_FORMAT_E::PIXEL_FORMAT_YUV_SEMIPLANAR_422;
         stChnAttr.bFlip = HI_FALSE;
         stChnAttr.bMirror = HI_FALSE;
-        stChnAttr.s32DstFrameRate = -1;
-        stChnAttr.s32SrcFrameRate = -1;
+        stChnAttr.s32SrcFrameRate = 60;
+        stChnAttr.s32DstFrameRate = 30;
 
         memset(&stVpssAttr, 0, sizeof(VPSS_GRP_ATTR_S));
         stVpssAttr.enPixFmt = PIXEL_FORMAT_E::PIXEL_FORMAT_YUV_SEMIPLANAR_422;
         stVpssAttr.u32MaxW = 1920;
         stVpssAttr.u32MaxH = 1080;
-        stVpssAttr.enDieMode = VPSS_DIE_MODE_E::VPSS_DIE_MODE_AUTO;
+        stVpssAttr.enDieMode = VPSS_DIE_MODE_NODIE;
         stVpssAttr.bDciEn = HI_FALSE;
-        stVpssAttr.bHistEn = HI_FALSE;
-        stVpssAttr.bEsEn = HI_FALSE;
         stVpssAttr.bIeEn = HI_FALSE;
         stVpssAttr.bNrEn = HI_FALSE;
+        stVpssAttr.bHistEn = HI_FALSE;
+        stVpssAttr.bEsEn = HI_FALSE;
     }
 
 
@@ -229,6 +222,22 @@ namespace wdm {
             {
                 ERROR("HI_MPI_VPSS_CreateGrp failed with " + HiErr(s32Ret));
                 return s32Ret;
+            }
+            
+            s32Ret = HI_MPI_VPSS_GetGrpParam(VpssGrp, &stVpssParam);
+            if (s32Ret != HI_SUCCESS)
+            {
+                ERROR("HI_MPI_VPSS_GetGrpParam failed with " + HiErr(s32Ret));
+                return HI_FAILURE;
+            }
+
+            stVpssParam.u32Contrast = 32;
+            stVpssParam.u32IeStrength = 8;
+            s32Ret = HI_MPI_VPSS_SetGrpParam(VpssGrp, &stVpssParam);
+            if (s32Ret != HI_SUCCESS)
+            {
+                ERROR("HI_MPI_VPSS_SetGrpParam failed with " + HiErr(s32Ret));
+                return HI_FAILURE;
             }
 
             s32Ret = HI_MPI_VPSS_StartGrp(VpssGrp);

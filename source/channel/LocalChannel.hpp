@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Channel.hpp"
-#include "../base/Log.hpp"
+#include "../core/Log.hpp"
 #include "../media/MediaSource.hpp"
 
 

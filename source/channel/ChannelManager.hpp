@@ -3,9 +3,9 @@
 #include <string>
 #include <vector>
 
-#include "../base/Log.hpp"
-#include "../base/Config.hpp"
-#include "../base/Event.hpp"
+#include "../core/Log.hpp"
+#include "../core/Config.hpp"
+#include "../core/event/Event.hpp"
 
 #include "Channel.hpp"
 

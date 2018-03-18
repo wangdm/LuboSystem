@@ -1,8 +1,8 @@
 #pragma once
 
 
-#include "../base/Thread.hpp"
-#include "../base/Event.hpp"
+#include "../core/Thread.hpp"
+#include "../core/event/Event.hpp"
 
 #include "../media/MediaPacket.hpp"
 

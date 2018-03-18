@@ -3,9 +3,9 @@
 #include <algorithm>
 #include <vector>
 
-#include "../base/Event.hpp"
-#include "../base/Config.hpp"
-#include "../base/Property.hpp"
+#include "../core/event/Event.hpp"
+#include "../core/Config.hpp"
+#include "../core/Property.hpp"
 
 #include "../media/MediaType.hpp"
 #include "../media/MediaSink.hpp"
@@ -61,6 +61,8 @@ namespace wdm {
 
         StreamProducer* producer;
         std::vector<StreamConsumer*> consumers;
+
+        Mutex consumerMtx;
 
         Property prop;
 

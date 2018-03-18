@@ -3,8 +3,8 @@
 #include <string>
 #include <vector>
 
-#include "../base/Config.hpp"
-#include "../base/Thread.hpp"
+#include "../core/Config.hpp"
+#include "../core/Thread.hpp"
 
 #include "../media/MediaType.hpp"
 #include "../media/MediaFrame.hpp"

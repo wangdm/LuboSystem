@@ -36,6 +36,7 @@ namespace wdm {
 
     void StreamConsumer::OnStream(MediaPacket* packet)
     {
+        packet->Reference();
         queue.Push(packet);
     }
 

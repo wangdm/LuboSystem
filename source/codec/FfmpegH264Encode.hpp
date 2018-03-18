@@ -2,6 +2,7 @@
 #define _FFMPEG_H264_ENCODE_
 
 #include "../media/Codec.hpp"
+#include "../media/CodecContext.hpp"
 
 #ifdef __cplusplus
 extern "C" {
@@ -23,9 +24,9 @@ namespace wdm
         FfmpegH264Encode();
         ~FfmpegH264Encode();
 
-        virtual bool Config(CodecContext* context, Property& config) override;
-        virtual bool Encode(CodecContext* context, MediaFrame* frame, MediaPacket** packet) override;
-        virtual void FreePrivate(CodecContext* context) override;
+        virtual bool Config(SampleCodecContext* context, Property& config) override;
+        virtual bool Encode(SampleCodecContext* context, MediaFrame* frame, MediaPacket** packet) override;
+        virtual void FreePrivate(SampleCodecContext* context) override;
 
     private:
 

@@ -41,9 +41,8 @@ namespace wdm
                 Config* streamConfig = dynamic_cast<Config*>(obj);
                 if (streamConfig!=nullptr)
                 {
-                    MediaStream* stream = new MediaStream(this);
-                    CodecContext* codec = Platform::CreateCondecContext();
-                    stream->Init(streamConfig);
+                    MediaStream* stream = new MediaStream(this, streamConfig);
+                    CodecContext* codec = Platform::CreateCondecContext(CODEC_ID_UNKNOWN, (*streamConfig)["codec"]);
                     stream->SetProducer(codec);
                     streams[(*streamConfig)["name"]] = stream;
                 }

@@ -73,7 +73,6 @@ namespace wdm {
         }
         else
         {
-            DEBUG("Get stream ...");
             uint8_t* data = nullptr;
             uint32_t size = 0;
             for (int i = 0; i < stStream.u32PackCount; i++)
@@ -94,7 +93,7 @@ namespace wdm {
             packet->width = 1920;
             packet->height = 1080; 
             packet->timestamp = stStream.pstPack->u64PTS;
-            if (stStream.pstPack->DataType.enH264EType == H264E_NALU_IPSLICE){
+            if (stStream.stH264Info.enRefType == BASE_IDRSLICE){
                 packet->keyframe = true;
             }else{
                 packet->keyframe = false;

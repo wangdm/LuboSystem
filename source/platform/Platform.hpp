@@ -5,7 +5,7 @@
 
 #include <vector>
 
-#include "../base/Config.hpp"
+#include "../core/Config.hpp"
 #include "../channel/Capture.hpp"
 #include "../media/CodecContext.hpp"
 
@@ -19,7 +19,7 @@ namespace wdm {
         static void Uninit();
 
         static int32_t EnumCapture();
-        static CodecContext* CreateCondecContext();
+        static CodecContext* CreateCondecContext(CodecID id, const std::string& name);
 
     public:
         static std::vector<Capture*> audioCaptures;

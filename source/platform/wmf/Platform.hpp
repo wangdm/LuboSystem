@@ -7,7 +7,7 @@
 #include <mferror.h>
 #include <shlwapi.h>
 
-#include "../../base/Property.hpp"
+#include "../../core/Property.hpp"
 #include "../../media/MediaType.hpp"
 
 

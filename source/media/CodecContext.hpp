@@ -1,7 +1,7 @@
 #ifndef _CODECCONTEXT_H_
 #define _CODECCONTEXT_H_
 
-#include "../base/Property.hpp"
+#include "../core/Property.hpp"
 
 #include "../stream/StreamProducer.hpp"
 

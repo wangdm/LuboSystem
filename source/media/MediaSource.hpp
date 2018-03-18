@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include "../base/Mutex.hpp"
+#include "../core/Mutex.hpp"
 
 #include "MediaFrame.hpp"
 #include "MediaSink.hpp"

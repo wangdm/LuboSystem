@@ -1,7 +1,7 @@
 #include "Codec.hpp"
 #include "CodecContext.hpp"
 
-#include "../base/Log.hpp"
+#include "../core/Log.hpp"
 
 
 namespace wdm

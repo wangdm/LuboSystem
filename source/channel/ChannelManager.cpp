@@ -1,6 +1,7 @@
 #include "ChannelManager.hpp"
 
 #include "../platform/Platform.hpp"
+#include "../stream/Recorder.hpp"
 #include "LocalChannel.hpp"
 
 
@@ -84,6 +85,9 @@ namespace wdm
 			if ((*iter)->GetChannelType() == CHANNEL_TYPE_LOCAL)
 			{
 				(*iter)->Start();
+                Recorder* recorder = new Recorder();
+                (*iter)->AddStreamConsumer(recorder, "major");
+                recorder->Start();
 			}
 		}
 	}

@@ -25,6 +25,11 @@ namespace wdm {
 	};
 
 
+#define TRACE(str) do \
+{ \
+	Logger::GetLogger()->log("TRACE",__FILE__,__FUNCTION__,__LINE__,str); \
+} while (0)
+
 #define DEBUG(str) do \
 { \
 	Logger::GetLogger()->log("DEBUG",__FILE__,__FUNCTION__,__LINE__,str); \

@@ -1,21 +1,17 @@
 #ifndef _EVENT_H_
 #define _EVENT_H_
 
-#include <map>
-#include <string>
 
-#ifdef _WIN32
-#include <WinSock2.h>
-#else
-#include <sys/select.h>
-#endif
+#include "../Platform.hpp"
+#include "../Log.hpp"
 
-#include "Mutex.hpp"
-#include "Thread.hpp"
+#include "../Mutex.hpp"
+#include "../Thread.hpp"
 
 namespace wdm
 {
     class EventHandler;
+    class EventSource;
 
     enum EventFlag
     {
@@ -29,15 +25,17 @@ namespace wdm
     class Event
     {
     public:
-        Event();
-        Event(uint32_t eventFlag);
+        Event(EventSource* source);
+        Event(EventSource* source, uint32_t eventFlag);
         virtual ~Event();
 
         virtual void SetEventFlag(uint32_t eventFlag);
         virtual bool haveEventFlag(EventFlag flag);
+        virtual EventSource* GetEventSource() const;
 
     private:
         uint32_t _eventFlag;
+        EventSource* _source;
 
     };
 
@@ -55,16 +53,24 @@ namespace wdm
     public:
         EventSource();
         virtual ~EventSource() {};
+
     public:
+        virtual void SetEventData(void* const data);
+        virtual void* GetEventData() const;
+
         virtual void SetEventHandler(EventHandler* handler);
+
         virtual void SetEventFlag(uint32_t eventFlag);
         virtual bool haveEventFlag(EventFlag flag);
+
         virtual void OnEvent(Event* e);
-        virtual int GetFD() = 0;
+        virtual int GetFd() const = 0;
 
     private:
         EventHandler* _hanedler;
         uint32_t _eventFlag;
+
+        void* _data;
 
     };
 
@@ -72,6 +78,7 @@ namespace wdm
     class EventListener : public Thread
     {
     public:
+        virtual ~EventListener() {};
 
         virtual void AddEventSource(EventSource* e) = 0;
         virtual void DelEventSource(EventSource* e) = 0;
@@ -86,7 +93,7 @@ namespace wdm
     {
     public:
         SelectEventListener();
-        ~SelectEventListener();
+        virtual ~SelectEventListener();
 
         virtual void AddEventSource(EventSource* e) override;
         virtual void DelEventSource(EventSource* e) override;
@@ -105,6 +112,32 @@ namespace wdm
         uint64_t timeout;
 
     };
+
+#ifdef LINUX
+    class EpollEventListener : public EventListener
+    {
+    public:
+        EpollEventListener();
+        virtual ~EpollEventListener();
+
+        virtual void AddEventSource(EventSource* e) override;
+        virtual void DelEventSource(EventSource* e) override;
+        virtual void SetTimeout(uint64_t millisecond) override;
+
+        virtual void OnLoop() override;
+
+    private:
+        std::map<int, EventSource*> eventSource;
+        Mutex sourceMtx;
+
+        fd_set read_fds;
+        fd_set write_fds;
+        fd_set except_fds;
+
+        uint64_t timeout;
+
+    };
+#endif
 
 }
 

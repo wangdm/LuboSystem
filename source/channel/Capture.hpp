@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../base/Property.hpp"
+#include "../core/Property.hpp"
 #include "../media/MediaSource.hpp"
 
 

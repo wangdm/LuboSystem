@@ -4,7 +4,7 @@
 
 #include <queue>
 
-#include "../base/Mutex.hpp"
+#include "../core/Mutex.hpp"
 
 #include "../media/MediaPacket.hpp"
 
